@@ -142,6 +142,32 @@ export const projects = [
     ],
     tech: ["React.js", "Material UI", "Axios"],
   },
+  {
+    name: "Animated Carousel",
+    subtitle: "React Animation Component",
+    period: "Personal project",
+    description:
+      "An advanced, customizable, and animated carousel component for React applications with touch support and accessibility features.",
+    bullets: [],
+    tech: ["React", "Tailwind CSS", "Framer Motion"],
+    github: "https://github.com/kiranrega/animate-carousel",
+    live: "https://animated-carousel1.netlify.app/",
+    image: "/project/animated-carousel.png",
+    isWorking: true,
+  },
+  {
+    name: "ASCII Art Image Generator",
+    subtitle: "Image Conversion Tool",
+    period: "Personal project",
+    description:
+      "A web-based tool that converts images into ASCII art with adjustable output width, real-time preview, and copy-to-clipboard functionality.",
+    bullets: [],
+    tech: ["React", "Tailwind CSS", "Netlify"],
+    github: "https://github.com/kiranrega/ascii-art-image-generator",
+    live: "https://ascii-art-image-generaator.netlify.app/",
+    image: "/project/ascii-art-generator.png",
+    isWorking: true,
+  },
 ];
 
 export const education = [
