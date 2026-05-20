@@ -1,6 +1,6 @@
 # Kiran Kumar Rega Portfolio
 
-Portfolio rebuilt around the compact profile-document style of `chanhdai.com`, using Kiran Kumar Rega's resume data.
+Portfolio rebuilt around the compact profile-document style
 
 ## Direction
 
@@ -20,25 +20,6 @@ The site intentionally follows a narrow, resume-first portfolio format:
 - contact actions
 
 The requested exclusions are not included: components, blocks, blog, sponsors, bookmarks, and certifications.
-
-## Data Source
-
-Content was extracted from:
-
-`C:\Users\kiran\Downloads\Kiran_Kumar_Rega.pdf`
-
-Included resume details:
-
-- Kiran Kumar Rega
-- Full-Stack Software Engineer
-- React, Next.js, TypeScript, Redux, Node.js, Express, REST APIs, MongoDB, MySQL
-- IntouchCX experience
-- Extended Web AppTech experience
-- Lancerscape, Catapult, and Extended Asset Management System projects
-- Top Performer - Q3 2024 recognition
-- NxtWave and M.Tech education
-- phone, email, GitHub, LinkedIn, and portfolio website
-
 ## Tech Stack
 
 - Next.js App Router
