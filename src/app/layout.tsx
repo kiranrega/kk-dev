@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -13,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kiranrega.netlify.app"),
+  metadataBase: new URL("https://kiranrega.is-a.dev"),
   title: {
     default: "Kiran Kumar Rega | Full-Stack Software Engineer",
     template: "%s | Kiran Kumar Rega",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     title: "Kiran Kumar Rega | Full-Stack Software Engineer",
     description:
       "React, TypeScript, Next.js, and Node.js portfolio focused on measurable frontend and full-stack engineering impact.",
-    url: "https://kiranrega.netlify.app",
+    url: "https://kiranrega.is-a.dev",
     siteName: "Kiran Kumar Rega Portfolio",
     locale: "en_US",
     type: "website",
@@ -50,6 +51,8 @@ export const metadata: Metadata = {
   },
 };
 
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;var r=t==='light'||t==='dark'?t:(d?'dark':'light');document.documentElement.classList.toggle('dark',r==='dark');document.documentElement.style.colorScheme=r;}catch(_){}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -58,9 +61,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <head>
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

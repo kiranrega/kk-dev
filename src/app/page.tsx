@@ -18,6 +18,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { CommandMenu } from "@/components/command-menu";
 import { GridBackground } from "@/components/grid-background";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   about,
   education,
@@ -28,6 +29,7 @@ import {
   projects,
   stackGroups,
 } from "@/data/portfolio";
+import { SkillPill, TechChip } from "@/components/skill-icons";
 
 function Section({
   id,
@@ -106,7 +108,10 @@ export default function Home() {
                 </Link>
               ))}
             </nav>
-            <CommandMenu />
+            <div className="flex items-center gap-2">
+              <CommandMenu />
+              <ThemeToggle />
+            </div>
           </div>
         </header>
 
@@ -204,7 +209,7 @@ export default function Home() {
                       </h3>
                       <div className="mt-3 flex flex-wrap gap-2">
                         {group.items.map((item) => (
-                          <Chip key={item}>{item}</Chip>
+                          <SkillPill key={item} name={item} />
                         ))}
                       </div>
                     </div>
@@ -261,7 +266,7 @@ export default function Home() {
                       </ul>
                       <div className="mt-4 flex flex-wrap gap-2">
                         {job.tech.map((item) => (
-                          <Chip key={item}>{item}</Chip>
+                          <TechChip key={item} name={item} />
                         ))}
                       </div>
                     </div>
@@ -306,9 +311,37 @@ export default function Home() {
                       </ul>
                       <div className="mt-4 flex flex-wrap gap-2">
                         {project.tech.map((item) => (
-                          <Chip key={item}>{item}</Chip>
+                          <TechChip key={item} name={item} />
                         ))}
                       </div>
+                      {project.githubUrl || project.liveUrl ? (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {project.liveUrl ? (
+                            <Link
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus-visible:outline-zinc-50"
+                            >
+                              <Globe size={14} aria-hidden="true" />
+                              Live
+                              <ExternalLink size={13} aria-hidden="true" />
+                            </Link>
+                          ) : null}
+                          {project.githubUrl ? (
+                            <Link
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus-visible:outline-zinc-50"
+                            >
+                              <GitPullRequest size={14} aria-hidden="true" />
+                              GitHub
+                              <ExternalLink size={13} aria-hidden="true" />
+                            </Link>
+                          ) : null}
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                 </Card>

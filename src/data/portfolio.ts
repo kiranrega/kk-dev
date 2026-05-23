@@ -98,9 +98,9 @@ export const experience = [
       "Boosted frontend performance by 30% by reducing bundle size from about 980 kB to about 420 kB with React.memo, lazy loading, and Webpack splitting.",
       "Grew test coverage from near-zero to 80%+ using Jest and React Testing Library, reducing regression bugs by an estimated 40%.",
       "Cleared a 60-issue SonarQube backlog in one sprint; technical-debt ratio dropped from 8.2% to 1.4%.",
-      "Eliminated redundant API calls with React Query caching, cutting network overhead by about 35% on data-heavy views.",
+      "Eliminated redundant API calls, cutting network overhead by about 35% on data-heavy views.",
     ],
-    tech: ["React", "Redux", "Webpack", "Jest", "RTL", "SonarQube", "React Query"],
+    tech: ["React", "Redux", "Webpack", "Jest", "RTL", "SonarQube",],
   },
 ];
 
@@ -109,6 +109,8 @@ export const projects = [
     name: "Lancerscape",
     subtitle: "Sponsor Management Platform",
     period: "Production project",
+    githubUrl: "",
+    liveUrl: "",
     description:
       "React and TypeScript sponsor-management platform with performance-focused rendering and high-coverage test workflows.",
     bullets: [
@@ -122,6 +124,8 @@ export const projects = [
     name: "Catapult",
     subtitle: "Workforce Management System",
     period: "Enterprise product",
+    githubUrl: "",
+    liveUrl: "",
     description:
       "Roster Preview module for workforce operations that replaced manual spreadsheet workflows.",
     bullets: [
@@ -134,6 +138,8 @@ export const projects = [
     name: "Extended Asset Management System",
     subtitle: "Asset Operations Dashboard",
     period: "Internal platform",
+    githubUrl: "",
+    liveUrl: "",
     description:
       "Dashboard for managing 3,000+ assets with fast search and a reusable UI kit used by adjacent products.",
     bullets: [
@@ -150,8 +156,8 @@ export const projects = [
       "An advanced, customizable, and animated carousel component for React applications with touch support and accessibility features.",
     bullets: [],
     tech: ["React", "Tailwind CSS", "Framer Motion"],
-    github: "https://github.com/kiranrega/animate-carousel",
-    live: "https://animated-carousel1.netlify.app/",
+    githubUrl: "https://github.com/kiranrega/animate-carousel",
+    liveUrl: "https://animated-carousel1.netlify.app/",
     image: "/project/animated-carousel.png",
     isWorking: true,
   },
@@ -163,8 +169,8 @@ export const projects = [
       "A web-based tool that converts images into ASCII art with adjustable output width, real-time preview, and copy-to-clipboard functionality.",
     bullets: [],
     tech: ["React", "Tailwind CSS", "Netlify"],
-    github: "https://github.com/kiranrega/ascii-art-image-generator",
-    live: "https://ascii-art-image-generaator.netlify.app/",
+    githubUrl: "https://github.com/kiranrega/ascii-art-image-generator",
+    liveUrl: "https://ascii-art-image-generaator.netlify.app/",
     image: "/project/ascii-art-generator.png",
     isWorking: true,
   },
@@ -180,6 +186,81 @@ export const education = [
     school: "Vijayanagara Sri Krishna Devaraya University",
     degree: "Master of Technology",
     period: "Jul 2013 - Jul 2016",
+  },
+];
+
+export const skills = [
+  {
+    name: "Next.js",
+    icon: "nextjs",
+    bg: "#000000",
+    fg: "#ffffff",
+  },
+  {
+    name: "Tailwind CSS",
+    icon: "tailwind",
+    bg: "#0ea5e9",
+    fg: "#ffffff",
+  },
+  {
+    name: "TypeScript",
+    icon: "typescript",
+    bg: "#3178c6",
+    fg: "#ffffff",
+  },
+  {
+    name: "React",
+    icon: "react",
+    bg: "#20232a",
+    fg: "#61dafb",
+  },
+  {
+    name: "Figma",
+    icon: "figma",
+    bg: "#1e1e1e",
+    fg: "#ffffff",
+  },
+  {
+    name: "Vercel",
+    icon: "vercel",
+    bg: "#000000",
+    fg: "#ffffff",
+  },
+  {
+    name: "AWS",
+    icon: "aws",
+    bg: "#232f3e",
+    fg: "#ff9900",
+  },
+  {
+    name: "Postman",
+    icon: "postman",
+    bg: "#ef5b25",
+    fg: "#ffffff",
+  },
+  {
+    name: "Node.js",
+    icon: "nodejs",
+    bg: "#3c873a",
+    fg: "#ffffff",
+  },
+  {
+    name: "MongoDB",
+    icon: "mongodb",
+    bg: "#13aa52",
+    fg: "#ffffff",
+  },
+  {
+    name: "Git",
+    icon: "git",
+    bg: "#f05032",
+    fg: "#ffffff",
+  },
+  {
+    name: "Redux",
+    icon: "redux",
+    bg: "#764abc",
+    fg: "#ffffff",
   },
 ];
 

@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #fafafa;
   --foreground: #09090b;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #fafafa;
 }
 
 @theme inline {
@@ -77,12 +84,7 @@ html {
   mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #fafafa;
-  }
-
+.dark {
   .avatar-shell {
     border-color: rgb(39 39 42);
     background:
