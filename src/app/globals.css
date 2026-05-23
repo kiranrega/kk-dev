@@ -29,6 +29,56 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ── Hero typography ── */
+.hero-name {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.hero-tagline {
+  position: relative;
+  display: inline-block;
+}
+
+/* Animated gradient underline */
+.hero-tagline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899, #6366f1);
+  background-size: 200% 100%;
+  animation: gradient-slide 3s linear infinite;
+}
+
+@keyframes gradient-slide {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* Blinking cursor */
+.hero-cursor::after {
+  content: "|";
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+  color: #6366f1;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Stats band number size */
+.stat-number {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+}
+
 ::selection {
   background: #18181b;
   color: #fafafa;
@@ -37,8 +87,8 @@ html {
 .avatar-shell {
   position: relative;
   display: grid;
-  height: 112px;
-  width: 112px;
+  height: 64px;
+  width: 64px;
   place-items: center;
   border-radius: 999px;
   border: 1px solid rgb(228 228 231);
@@ -50,22 +100,22 @@ html {
 
 .avatar-glow {
   position: absolute;
-  inset: 16px;
+  inset: 10px;
   border-radius: 999px;
   background: radial-gradient(circle, rgba(113, 113, 122, 0.22), transparent 68%);
-  filter: blur(10px);
+  filter: blur(8px);
 }
 
 .avatar-face {
   position: relative;
   display: grid;
-  height: 78px;
-  width: 78px;
+  height: 46px;
+  width: 46px;
   place-items: center;
   border-radius: 999px;
   border: 1px solid rgb(212 212 216);
   background: #fafafa;
-  font-size: 1.125rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: #27272a;
 }
