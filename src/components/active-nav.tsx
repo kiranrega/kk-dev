@@ -59,13 +59,13 @@ export function ActiveNav({ items }: { items: NavItem[] }) {
               "relative shrink-0 rounded-lg px-2.5 py-2 text-sm transition",
               "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:focus-visible:outline-zinc-50",
               isActive
-                ? "text-zinc-950 dark:text-zinc-50"
+                ? "text-zinc-950 dark:text-zinc-50 [color:var(--accent)]"
                 : "text-zinc-500 hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50",
             ].join(" ")}
           >
             {item.label}
             {isActive && (
-              <span className="absolute bottom-0.5 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-zinc-950 dark:bg-zinc-50" />
+              <span className="nav-active-bar absolute bottom-0.5 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full" />
             )}
           </Link>
         );

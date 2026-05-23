@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   BriefcaseBusiness,
   Calendar,
@@ -30,6 +31,7 @@ import {
   stackGroups,
 } from "@/data/portfolio";
 import { SkillPill, TechChip } from "@/components/skill-icons";
+import Profile from "../../public/Profile.png";
 
 function Section({
   id,
@@ -113,7 +115,13 @@ export default function Home() {
             <div className="flex items-center gap-5">
               <div className="avatar-shell shrink-0" aria-label={`${profile.name} avatar`}>
                 <div className="avatar-glow" />
-                <div className="avatar-face">KR</div>
+                <Image
+                  src={Profile}
+                  alt="Profile"
+                  width={600}
+                  height={600}
+                  loading="lazy"
+                />
               </div>
               <div className="min-w-0">
                 <h1 className="hero-name text-zinc-950 dark:text-zinc-50">

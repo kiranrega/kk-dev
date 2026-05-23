@@ -82,7 +82,7 @@ export function StatsBand({ stats }: { stats: Stat[] }) {
           <p className="stat-number font-semibold tracking-tight text-zinc-950 dark:text-zinc-50 whitespace-nowrap">
             <CountUp value={stat.value} active={active} />
           </p>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center">{stat.label}</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center uppercase tracking-widest">{stat.label}</p>
         </div>
       ))}
     </div>
