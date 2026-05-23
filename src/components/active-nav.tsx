@@ -56,7 +56,7 @@ export function ActiveNav({ items }: { items: NavItem[] }) {
             key={item.href}
             href={item.href}
             className={[
-              "relative shrink-0 rounded-lg px-2.5 py-2 text-sm transition",
+              "relative shrink-0 rounded-lg px-2.5 py-2 min-h-[44px] text-sm transition",
               "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:focus-visible:outline-zinc-50",
               isActive
                 ? "text-zinc-950 dark:text-zinc-50 [color:var(--accent)]"
