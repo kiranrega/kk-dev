@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -12,16 +9,15 @@ import {
   GitPullRequest,
   Globe,
   GraduationCap,
-  Layers,
   Mail,
-  Star,
   Trophy,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-import { GridBackground } from "@/components/grid-background";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ActiveNav } from "@/components/active-nav";
 import { StatsBand } from "@/components/stats-band";
+import { RevealOnScroll } from "@/components/reveal-on-scroll";
+import { ExperienceItem } from "@/components/experience-item";
+import { ProjectCard } from "@/components/project-card";
 import {
   about,
   education,
@@ -32,8 +28,8 @@ import {
   projects,
   stackGroups,
 } from "@/data/portfolio";
-import { SkillPill, TechChip } from "@/components/skill-icons";
-import Profile from "../../public/Profile.png";
+import { SkillPill } from "@/components/skill-icons";
+import Profile from "../../public/Profile.webp";
 
 function Section({
   id,
@@ -102,29 +98,10 @@ function Card({ children, className, style }: { children: React.ReactNode; class
 }
 
 export default function Home() {
-  useEffect(() => {
-    const revealEls = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
-    if (!revealEls.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    revealEls.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <main className="relative min-h-screen overflow-hidden bg-zinc-50 text-zinc-950 dark:bg-black dark:text-zinc-50">
-      <GridBackground />
+      <RevealOnScroll />
+      {/* <GridBackground /> */}
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-4 py-4 sm:px-6">
         <header className="sticky top-0 z-40 -mx-4 border-b border-zinc-200/80 bg-zinc-50/90 px-4 py-3 backdrop-blur dark:border-zinc-800/80 dark:bg-black/85 sm:-mx-6 sm:px-6">
           <div className="flex items-center justify-between gap-3">
@@ -137,18 +114,19 @@ export default function Home() {
 
         <div id="overview" className="pt-10">
           {/* ── Hero ── */}
-          <section className="relative pb-8 border-b border-zinc-200 dark:border-zinc-800 reveal">
+          <section className="relative pb-8 border-b border-zinc-200 dark:border-zinc-800">
             {/* Avatar + name row */}
             <div className="flex items-center gap-5">
               <div className="avatar-shell shrink-0" aria-label={`${profile.name} avatar`}>
                 <div className="avatar-glow" />
                 <Image
                   src={Profile}
-                  alt="Profile"
+                  alt={`${profile.name} profile photo`}
                   width={100}
                   height={100}
                   className="rounded-full"
-                  loading="lazy"
+                  priority
+                  sizes="100px"
                 />
               </div>
               <div className="min-w-0">
@@ -190,29 +168,25 @@ export default function Home() {
               <Tooltip label="Twitter / X">
                 <Link href="https://twitter.com/kiranrega" target="_blank" rel="noreferrer" aria-label="Twitter / X"
                   className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50">
-                  <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] fill-current" aria-hidden="true">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] stroke-current fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M4 4l16 16M20 4L4 20" />
                   </svg>
                 </Link>
               </Tooltip>
               <Tooltip label="LinkedIn">
                 <Link href={`https://${profile.linkedin}`} target="_blank" rel="noreferrer" aria-label="LinkedIn"
                   className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50">
-                  <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] fill-current" aria-hidden="true">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] stroke-current fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                    <circle cx="4" cy="4" r="2" />
                   </svg>
                 </Link>
               </Tooltip>
               <Tooltip label="GitHub">
                 <Link href={`https://${profile.github}`} target="_blank" rel="noreferrer" aria-label="GitHub"
                   className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 256 256"
-                    className="h-[15px] w-[15px]"
-                  >
-                    <path d="M208.31,75.68A59.78,59.78,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58.14,58.14,0,0,0,208.31,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.72,41.72,0,0,1,200,104Z"></path>
+                  <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] stroke-current fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
                   </svg>
                 </Link>
               </Tooltip>
@@ -232,7 +206,7 @@ export default function Home() {
           </section>
 
           {/* ── Impact stats band ── */}
-          <section id="highlights" className="scroll-mt-24 py-7 reveal">
+          <section id="highlights" className="scroll-mt-24 py-7">
             <StatsBand stats={highlights} />
           </section>
 
@@ -283,139 +257,38 @@ export default function Home() {
           </Section>
 
           <Section id="experience" title="Experience" count={experience.length}>
-            <div className="grid gap-4 reveal">
-              {experience.map((job, index) => (
-                <Card
-                  key={job.company}
-                  className="reveal-item"
-                  style={{ "--reveal-index": index } as React.CSSProperties}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-zinc-200 bg-zinc-50 text-sm font-medium text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-                      {job.company.slice(0, 2)}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
-                        <div>
-                          <h3 className="font-medium text-zinc-950 dark:text-zinc-50">
-                            {job.company}
-                          </h3>
-                          <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                            {job.role}
-                          </p>
-                        </div>
-                        <div className="text-left text-xs text-zinc-500 dark:text-zinc-500 sm:text-right">
-                          <p>{job.period}</p>
-                          <p>{job.duration}</p>
-                        </div>
-                      </div>
-                      <dl className="mt-4 grid gap-2 text-xs text-zinc-500 dark:text-zinc-400 sm:grid-cols-3">
-                        <div>
-                          <dt className="text-zinc-400">Employment Type</dt>
-                          <dd>{job.type}</dd>
-                        </div>
-                        <div>
-                          <dt className="text-zinc-400">Location</dt>
-                          <dd>{job.location}</dd>
-                        </div>
-                        <div>
-                          <dt className="text-zinc-400">Period</dt>
-                          <dd>{job.period}</dd>
-                        </div>
-                      </dl>
-                      <ul className="mt-4 grid gap-2">
-                        {job.bullets.map((bullet) => (
-                          <li key={bullet} className="flex gap-3 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
-                            <Star size={14} className="mt-1.5 shrink-0 text-zinc-400" aria-hidden="true" />
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {job.tech.map((item) => (
-                          <TechChip key={item} name={item} />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </Card>
-              ))}
+            <div className="reveal">
+              {/** track reveal index via CSS var on each item */}
+              <div className="grid gap-4">
+                {experience.map((job, index) => (
+                  <ExperienceItem key={job.company} job={job} index={index} />
+                ))}
+              </div>
             </div>
           </Section>
 
           <Section id="projects" title="Projects" count={projects.length}>
+            {/* Highlights bar */}
+            <div className="mb-10 border-t border-b border-zinc-200 py-5 dark:border-zinc-800 reveal">
+              <div className="flex justify-center gap-8 sm:gap-12">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-zinc-950 dark:text-zinc-50">5</div>
+                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-zinc-500 dark:text-zinc-400">Projects Shipped</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-zinc-950 dark:text-zinc-50">3</div>
+                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-zinc-500 dark:text-zinc-400">In Production</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-zinc-950 dark:text-zinc-50">0</div>
+                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-zinc-500 dark:text-zinc-400">Rollbacks</div>
+                </div>
+              </div>
+            </div>
+
             <div className="grid gap-4 reveal">
               {projects.map((project, index) => (
-                <Card
-                  key={project.name}
-                  className="reveal-item"
-                  style={{ "--reveal-index": index } as React.CSSProperties}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-                      <Layers size={18} aria-hidden="true" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
-                        <div>
-                          <h3 className="font-medium text-zinc-950 dark:text-zinc-50">
-                            {project.name}
-                          </h3>
-                          <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                            {project.subtitle}
-                          </p>
-                        </div>
-                        <p className="text-xs text-zinc-500 dark:text-zinc-500">
-                          {project.period}
-                        </p>
-                      </div>
-                      <p className="mt-4 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
-                        {project.description}
-                      </p>
-                      <ul className="mt-3 grid gap-2">
-                        {project.bullets.map((bullet) => (
-                          <li key={bullet} className="flex gap-3 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
-                            <Check size={15} className="mt-1.5 shrink-0 text-zinc-400" aria-hidden="true" />
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {project.tech.map((item) => (
-                          <TechChip key={item} name={item} />
-                        ))}
-                      </div>
-                      {project.githubUrl || project.liveUrl ? (
-                        <div className="mt-4 flex flex-wrap gap-2">
-                          {project.liveUrl ? (
-                            <Link
-                              href={project.liveUrl}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus-visible:outline-zinc-50"
-                            >
-                              <Globe size={14} aria-hidden="true" />
-                              Live
-                              <ExternalLink size={13} aria-hidden="true" />
-                            </Link>
-                          ) : null}
-                          {project.githubUrl ? (
-                            <Link
-                              href={project.githubUrl}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus-visible:outline-zinc-50"
-                            >
-                              <GitPullRequest size={14} aria-hidden="true" />
-                              GitHub
-                              <ExternalLink size={13} aria-hidden="true" />
-                            </Link>
-                          ) : null}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                </Card>
+                <ProjectCard key={project.name} project={project} index={index} />
               ))}
             </div>
           </Section>
@@ -477,7 +350,7 @@ export default function Home() {
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <Link
                     href={`mailto:${profile.email}`}
-                    className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-[rgba(6,182,212,0.16)] transition hover:bg-[#0596b8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:focus-visible:outline-zinc-50"
+                    className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-[var(--accent-10)] transition hover:bg-[var(--accent-20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:focus-visible:outline-zinc-50"
                   >
                     Email me
                   </Link>

@@ -1,3 +1,5 @@
+import type { Project } from "@/types/index";
+
 export const profile = {
   name: "Kiran Kumar Rega",
   role: "Full-Stack Software Engineer",
@@ -104,7 +106,7 @@ export const experience = [
   },
 ];
 
-export const projects = [
+export const projects: Project[] = [
   {
     name: "Lancerscape",
     subtitle: "Sponsor Management Platform",
@@ -112,13 +114,19 @@ export const projects = [
     githubUrl: "",
     liveUrl: "",
     description:
-      "React and TypeScript sponsor-management platform with performance-focused rendering and high-coverage test workflows.",
+      "Sponsor-management platform with performance-focused rendering and high-coverage test workflows.",
+    platform: "Web App",
+    type: "Production",
+    role: "Lead Dev",
+    keyResult: "90%+ test coverage · 20% rendering perf gain",
+    challenge: "No virtualization — rendering 5,000+ records caused UI freezes",
+    outcome: "20% faster rendering, 90%+ coverage, zero critical bugs across 3 releases",
     bullets: [
       "Improved rendering performance by 20% with React.memo and react-window virtualization over 5,000+ records.",
       "Achieved 90%+ test coverage with zero critical bugs across 3 releases.",
       "Owned task allocation for a 4-person squad, cutting PR review cycle from 3 days to under 1 day.",
     ],
-    tech: ["React", "TypeScript", "Redux", "REST APIs", "Jest"],
+    tech: ["React", "TypeScript", "Redux", "Jest"],
   },
   {
     name: "Catapult",
@@ -128,6 +136,12 @@ export const projects = [
     liveUrl: "",
     description:
       "Roster Preview module for workforce operations that replaced manual spreadsheet workflows.",
+    platform: "Enterprise Web App",
+    type: "Enterprise",
+    role: "Solo contributor",
+    keyResult: "~6 hrs/week saved · 65% fewer code smells",
+    challenge: "Admin team manually managing rosters via spreadsheets — 6+ hrs/week lost",
+    outcome: "Guided preview experience eliminated manual work; 65% code smell reduction via SonarQube",
     bullets: [
       "Saved the admin team about 6 hours per week through a guided roster preview experience.",
       "Resolved 40+ SonarQube defects and cut code-smell density by 65%.",
@@ -142,6 +156,12 @@ export const projects = [
     liveUrl: "",
     description:
       "Dashboard for managing 3,000+ assets with fast search and a reusable UI kit used by adjacent products.",
+    platform: "Internal Tool",
+    type: "Enterprise",
+    role: "Solo contributor",
+    keyResult: "<200ms search · 12-component UI kit adopted across 3 products",
+    challenge: "No central search or reusable UI — each product team built from scratch",
+    outcome: "Sub-200ms search on 3,000+ records; UI kit adopted across 3 products, saving 40% scaffold time",
     bullets: [
       "Built search interactions under 200 ms for large asset records.",
       "Created a 12-component UI kit adopted across 3 products, reducing scaffold time by 40%.",
@@ -153,7 +173,11 @@ export const projects = [
     subtitle: "React Animation Component",
     period: "Personal project",
     description:
-      "An advanced, customizable, and animated carousel component for React applications with touch support and accessibility features.",
+      "Customizable animated carousel with touch support and accessibility features.",
+    platform: "React Component",
+    type: "Personal",
+    role: "Solo",
+    keyResult: "Open source · Live demo",
     bullets: [],
     tech: ["React", "Tailwind CSS", "Framer Motion"],
     githubUrl: "https://github.com/kiranrega/animate-carousel",
@@ -166,7 +190,11 @@ export const projects = [
     subtitle: "Image Conversion Tool",
     period: "Personal project",
     description:
-      "A web-based tool that converts images into ASCII art with adjustable output width, real-time preview, and copy-to-clipboard functionality.",
+      "Converts images into ASCII art with adjustable output width, real-time preview, and copy-to-clipboard functionality.",
+    platform: "Web Tool",
+    type: "Personal",
+    role: "Solo",
+    keyResult: "Live on Netlify",
     bullets: [],
     tech: ["React", "Tailwind CSS", "Netlify"],
     githubUrl: "https://github.com/kiranrega/ascii-art-image-generator",

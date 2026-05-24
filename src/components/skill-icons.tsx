@@ -1,9 +1,6 @@
-"use client";
-
 import type React from "react";
 
 // ---------------------------------------------------------------------------
-// Individual brand SVG icons
 // ---------------------------------------------------------------------------
 
 function NextjsIcon() {
@@ -636,14 +633,11 @@ export function SkillPill({ name }: { name: string }) {
   const IconComponent = entry.component;
 
   return (
-    <div
-      className="group flex h-10 cursor-default items-center overflow-hidden rounded-xl border border-zinc-700/40 transition-all duration-200"
-      style={{ backgroundColor: entry.bg }}
-    >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center">
+    <div className="group inline-flex items-center gap-0 rounded-md border border-dashed border-zinc-300 bg-zinc-50/60 px-2 py-1 text-sm font-medium text-zinc-600 dark:border-zinc-700/50 dark:bg-zinc-950/40 dark:text-zinc-400 outline-none transition-all duration-300 ease-out hover:scale-105 hover:gap-2 hover:border-zinc-400 hover:bg-zinc-100/70 hover:text-zinc-950 dark:hover:border-zinc-600/80 dark:hover:bg-zinc-800/70 dark:hover:text-zinc-50 hover:shadow-sm [&_svg]:size-4">
+      <span className="size-4 shrink-0">
         <IconComponent />
-      </div>
-      <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-medium text-white transition-all duration-200 group-hover:max-w-[140px] group-hover:pr-3">
+      </span>
+      <span className="max-w-0 overflow-hidden opacity-0 whitespace-nowrap transition-all duration-300 ease-out group-hover:max-w-32 group-hover:opacity-100 group-hover:delay-0">
         {name}
       </span>
     </div>
@@ -668,14 +662,11 @@ export function TechChip({ name }: { name: string }) {
   const IconComponent = entry.component;
 
   return (
-    <div
-      className="group flex h-8 cursor-default items-center overflow-hidden rounded-lg border border-zinc-700/40 transition-all duration-200 [&_svg]:h-4 [&_svg]:w-4"
-      style={{ backgroundColor: entry.bg }}
-    >
-      <div className="flex h-8 w-8 shrink-0 items-center justify-center">
+    <div className="group inline-flex items-center gap-0 rounded-md border border-dashed border-zinc-300 bg-zinc-50/60 px-1.5 py-1 text-xs font-medium text-zinc-600 dark:border-zinc-700/50 dark:bg-zinc-950/40 dark:text-zinc-400 outline-none transition-all duration-300 ease-out hover:scale-105 hover:gap-1.5 hover:border-zinc-400 hover:bg-zinc-100/70 hover:text-zinc-950 dark:hover:border-zinc-600/80 dark:hover:bg-zinc-800/70 dark:hover:text-zinc-50 hover:shadow-sm [&_svg]:size-3">
+      <span className="size-3 shrink-0">
         <IconComponent />
-      </div>
-      <span className="max-w-0 overflow-hidden whitespace-nowrap text-xs font-medium text-white transition-all duration-200 group-hover:max-w-[120px] group-hover:pr-2.5">
+      </span>
+      <span className="max-w-0 overflow-hidden opacity-0 whitespace-nowrap transition-all duration-300 ease-out group-hover:max-w-28 group-hover:opacity-100 group-hover:delay-0">
         {name}
       </span>
     </div>
