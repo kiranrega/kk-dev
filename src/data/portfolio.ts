@@ -22,7 +22,7 @@ export const navItems = [
   { label: "Stack", href: "#stack" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  // { label: "Contact", href: "#contact" },
 ];
 
 export const highlights = [

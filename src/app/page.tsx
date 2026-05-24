@@ -30,6 +30,7 @@ import {
 } from "@/data/portfolio";
 import { SkillPill } from "@/components/skill-icons";
 import Profile from "../../public/Profile.webp";
+import OnekoCat from "@/components/oneko/OnekoCat";
 
 function Section({
   id,
@@ -79,6 +80,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-zinc-50 text-zinc-950 dark:bg-black dark:text-zinc-50">
       <RevealOnScroll />
+      <OnekoCat />
       {/* <GridBackground /> */}
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-4 py-4 sm:px-6">
         <header className="sticky top-0 z-40 -mx-4 border-b border-zinc-200/80 bg-zinc-50/90 px-4 py-3 backdrop-blur dark:border-zinc-800/80 dark:bg-black/85 sm:-mx-6 sm:px-6">
@@ -365,37 +367,32 @@ export default function Home() {
             </div>
           </Section>
 
-          <Section id="contact" title="Contact">
+          {/* <Section id="contact" title="Contact">
             <Card className="reveal-item" style={{ "--reveal-index": 0 } as React.CSSProperties}>
               <div className="space-y-6">
                 <p className="text-sm leading-7 text-zinc-700 dark:text-zinc-300">
-                  I&apos;m currently open to senior/mid frontend or full-stack roles. Best reached by email.
+                  I&#39;m currently open to senior/mid frontend or full-stack roles. Reach out via the form below.
                 </p>
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <Link
-                    href={`mailto:${profile.email}`}
-                    className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-[var(--accent-10)] transition hover:bg-[var(--accent-20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:focus-visible:outline-zinc-50"
-                  >
-                    Email me
-                  </Link>
-                  <div className="flex flex-wrap gap-3 text-sm text-zinc-600 dark:text-zinc-300">
-                    <Link href={`https://${profile.linkedin}`} className="inline-flex items-center gap-2 text-zinc-700 transition hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-zinc-50">
-                      <BriefcaseBusiness size={16} aria-hidden="true" />
-                      LinkedIn
-                    </Link>
-                    <Link href={`https://${profile.github}`} className="inline-flex items-center gap-2 text-zinc-700 transition hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-zinc-50">
-                      <GitPullRequest size={16} aria-hidden="true" />
-                      GitHub
-                    </Link>
-                    <Link href={`https://${profile.website}`} className="inline-flex items-center gap-2 text-zinc-700 transition hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-zinc-50">
-                      <Globe size={16} aria-hidden="true" />
-                      Website
-                    </Link>
+                <form action="https://formspree.io/f/{YOUR_FORM_ID}" method="POST" className="grid gap-4">
+                  <div className="flex flex-col">
+                    <label htmlFor="name" className="mb-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">Name</label>
+                    <input type="text" id="name" name="name" required className="rounded-lg border border-zinc-300 bg-white dark:bg-zinc-800 dark:border-zinc-600 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" />
                   </div>
-                </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="email" className="mb-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">Email</label>
+                    <input type="email" id="email" name="email" required className="rounded-lg border border-zinc-300 bg-white dark:bg-zinc-800 dark:border-zinc-600 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" />
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="message" className="mb-1 text-sm font-medium text-zinc-900 dark:text-zinc-100">Message</label>
+                    <textarea id="message" name="message" rows={4} required className="rounded-lg border border-zinc-300 bg-white dark:bg-zinc-800 dark:border-zinc-600 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)]" />
+                  </div>
+                  <button type="submit" className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-2 text-sm font-semibold text-white transition hover:bg-[var(--accent-20)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]">
+                    Send Message
+                  </button>
+                </form>
               </div>
             </Card>
-          </Section>
+          </Section> */}
         </div>
       </div>
     </main>

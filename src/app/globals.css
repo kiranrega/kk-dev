@@ -18,6 +18,17 @@
   --text-muted: rgba(255,255,255,0.45);
   --text-secondary: rgba(255,255,255,0.65);
 
+  /* Typography variables */
+  --font-family-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  --font-family-serif: var(--font-sora), var(--font-geist-sans), sans-serif;
+  --font-family-doto: "Doto", var(--font-sora), var(--font-geist-sans), sans-serif;
+  --font-size-section-label: 0.75rem;
+  --font-size-section-label-sm: 0.65rem;
+  --font-size-hero: clamp(1.7rem, 4vw, 2.75rem);
+  --line-height-hero: 1.05;
+  --font-size-stat-number: clamp(1.5rem, 3vw, 1.5rem);
+  --line-height-base: 1.5;
+
   /* backwards-compatible tokens */
   --background: var(--bg);
   --foreground: var(--text-primary);
@@ -40,19 +51,19 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-family-sans);
 }
 
 h1, h2, h3 {
-  font-family: var(--font-sora), var(--font-geist-sans), sans-serif;
+  font-family: var(--font-family-serif);
 }
 
 .section-label {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: "Doto", var(--font-sora), var(--font-geist-sans), sans-serif;
-  font-size: 0.75rem;
+  font-family: var(--font-family-doto);
+  font-size: var(--font-size-section-label);
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -65,10 +76,8 @@ html {
 
 /* ── Hero typography ── */
 .hero-name {
-  font-size: clamp(1.7rem, 4vw, 2.75rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
+  font-size: var(--font-size-hero);
+  line-height: var(--line-height-hero);
 }
 
 .hero-tagline {
@@ -134,7 +143,7 @@ html {
 
 /* Stats band number size */
 .stat-number {
-  font-size: clamp(1.5rem, 3vw, 1.5rem);
+  font-size: var(--font-size-stat-number);
   line-height: 1;
 }
 
