@@ -14,6 +14,7 @@ export const profile = {
   github: "github.com/kiranrega",
   linkedin: "linkedin.com/in/kiranrega",
   pronouns: "he/him",
+  resume: process.env.NEXT_PUBLIC_RESUME_URL || "https://drive.google.com/uc?export=download&id=1VEj5j4SiNtpHRgQyJi5TsgLyBczkfX45",
 };
 
 export const navItems = [

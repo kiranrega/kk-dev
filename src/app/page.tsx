@@ -9,7 +9,6 @@ import {
   GitPullRequest,
   Globe,
   GraduationCap,
-  Mail,
   Trophy,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -18,6 +17,7 @@ import { StatsBand } from "@/components/stats-band";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { ExperienceItem } from "@/components/experience-item";
 import { ProjectCard } from "@/components/project-card";
+import { getSafeUrl } from "@/lib/utils";
 import {
   about,
   education,
@@ -57,29 +57,7 @@ function Section({
   );
 }
 
-function Chip({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex items-center rounded-md border border-zinc-200 bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-      {children}
-    </span>
-  );
-}
 
-function Tooltip({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div className="group relative inline-flex">
-      {children}
-      <div
-        role="tooltip"
-        className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-white px-2.5 py-1 text-xs font-semibold text-zinc-900 shadow-md ring-1 ring-zinc-200 opacity-0 scale-95 transition-all duration-150 group-hover:opacity-100 group-hover:scale-100 dark:bg-zinc-900 dark:text-zinc-50 dark:ring-zinc-700"
-      >
-        {label}
-        {/* arrow */}
-        <span className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-white dark:border-t-zinc-900" />
-      </div>
-    </div>
-  );
-}
 
 function Card({ children, className, style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   return (
@@ -164,44 +142,90 @@ export default function Home() {
             </p>
 
             {/* Social links */}
-            <div className="mt-5 flex items-center gap-1">
-              <Tooltip label="Twitter / X">
-                <Link href="https://twitter.com/kiranrega" target="_blank" rel="noreferrer" aria-label="Twitter / X"
-                  className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50">
-                  <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] stroke-current fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M4 4l16 16M20 4L4 20" />
-                  </svg>
-                </Link>
-              </Tooltip>
-              <Tooltip label="LinkedIn">
-                <Link href={`https://${profile.linkedin}`} target="_blank" rel="noreferrer" aria-label="LinkedIn"
-                  className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50">
-                  <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] stroke-current fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-                    <circle cx="4" cy="4" r="2" />
-                  </svg>
-                </Link>
-              </Tooltip>
-              <Tooltip label="GitHub">
-                <Link href={`https://${profile.github}`} target="_blank" rel="noreferrer" aria-label="GitHub"
-                  className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50">
-                  <svg viewBox="0 0 24 24" className="h-[15px] w-[15px] stroke-current fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-                  </svg>
-                </Link>
-              </Tooltip>
-              <Tooltip label="Website">
-                <Link href={`https://${profile.website}`} target="_blank" rel="noreferrer" aria-label="Website"
-                  className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50">
-                  <Globe size={15} aria-hidden="true" />
-                </Link>
-              </Tooltip>
-              <Tooltip label="Email">
-                <Link href={`mailto:${profile.email}`} aria-label="Email"
-                  className="grid h-11 w-11 min-h-[44px] min-w-[44px] place-items-center rounded-lg text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50">
-                  <Mail size={15} aria-hidden="true" />
-                </Link>
-              </Tooltip>
+            <div className="mt-5 social-pills-row">
+              <Link
+                href={getSafeUrl("https://twitter.com/kiranrega")}
+                target="_blank"
+                rel="noreferrer"
+                className="social-pill"
+                aria-label="Twitter"
+              >
+                <svg viewBox="0 0 24 24" className="social-icon fill-current" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+                <span className="social-label">Twitter</span>
+              </Link>
+              
+              <Link
+                href={getSafeUrl(`https://${profile.linkedin}`)}
+                target="_blank"
+                rel="noreferrer"
+                className="social-pill"
+                aria-label="LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" className="social-icon stroke-current fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+                <span className="social-label">LinkedIn</span>
+              </Link>
+
+              <Link
+                href={getSafeUrl(`https://${profile.github}`)}
+                target="_blank"
+                rel="noreferrer"
+                className="social-pill"
+                aria-label="GitHub"
+              >
+                <svg viewBox="0 0 24 24" className="social-icon stroke-current fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                </svg>
+                <span className="social-label">GitHub</span>
+              </Link>
+
+              <Link
+                href={getSafeUrl(`https://${profile.website}`)}
+                target="_blank"
+                rel="noreferrer"
+                className="social-pill"
+                aria-label="Portfolio"
+              >
+                <svg viewBox="0 0 24 24" className="social-icon stroke-current fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                  <path d="M2 12h20" />
+                </svg>
+                <span className="social-label">Portfolio</span>
+              </Link>
+
+              <Link
+                href={getSafeUrl(`mailto:${profile.email}`)}
+                className="social-pill"
+                aria-label="Email"
+              >
+                <svg viewBox="0 0 24 24" className="social-icon stroke-current fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+                <span className="social-label">Email</span>
+              </Link>
+
+              <Link
+                href={getSafeUrl(profile.resume)}
+                download
+                target="_blank"
+                rel="noreferrer"
+                className="social-pill"
+                aria-label="Resume"
+              >
+                <svg viewBox="0 0 24 24" className="social-icon stroke-current fill-none" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                  <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                  <path d="M12 18v-6" />
+                  <path d="m9 15 3 3 3-3" />
+                </svg>
+                <span className="social-label">Resume</span>
+              </Link>
             </div>
           </section>
 
@@ -345,7 +369,7 @@ export default function Home() {
             <Card className="reveal-item" style={{ "--reveal-index": 0 } as React.CSSProperties}>
               <div className="space-y-6">
                 <p className="text-sm leading-7 text-zinc-700 dark:text-zinc-300">
-                  I'm currently open to senior/mid frontend or full-stack roles. Best reached by email.
+                  I&apos;m currently open to senior/mid frontend or full-stack roles. Best reached by email.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <Link
