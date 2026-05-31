@@ -337,9 +337,8 @@ export default function Home() {
           </Section> */}
 
           <Section id="experience" title="Experience" count={experience.length}>
-            <div className="reveal">
-              {/** track reveal index via CSS var on each item */}
-              <div className="grid gap-4">
+            <div className="reveal relative border-l border-zinc-200 dark:border-zinc-800 ml-3 mt-4">
+              <div className="flex flex-col gap-12">
                 {experience.map((job, index) => (
                   <ExperienceItem key={job.company} job={job} index={index} />
                 ))}
@@ -356,7 +355,7 @@ export default function Home() {
                   <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-zinc-500 dark:text-zinc-400">Projects Shipped</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-zinc-950 dark:text-zinc-50">3</div>
+                  <div className="text-2xl font-bold text-zinc-950 dark:text-zinc-50">2</div>
                   <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-zinc-500 dark:text-zinc-400">In Production</div>
                 </div>
                 <div className="text-center">
