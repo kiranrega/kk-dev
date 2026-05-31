@@ -145,7 +145,7 @@ function SocialLink({ href, label }: { href: string; label: string }) {
   );
 }
 
-const s = {
+const s: Record<string, React.CSSProperties> = {
   section: {
     background: "transparent",
     minHeight: "auto",
@@ -225,7 +225,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#0a0a0a] text-zinc-100">
+    <main className="relative min-h-screen overflow-hidden bg-zinc-50 text-zinc-950 dark:bg-black dark:text-zinc-50">
       <RevealOnScroll />
       <OnekoCat />
       {/* <GridBackground /> */}
