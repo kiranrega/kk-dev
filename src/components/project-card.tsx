@@ -79,7 +79,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           </div>
         ) : null}
 
-        {project.keyResult ? (
+        {/* {project.keyResult ? (
           <div className="mt-4 flex flex-wrap gap-4">
             {project.keyResult.split(" · ").map((metric: string) => (
               <div key={metric} className="text-sm">
@@ -89,7 +89,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
               </div>
             ))}
           </div>
-        ) : null}
+        ) : null} */}
 
         <div className="mt-4 flex flex-wrap gap-2">
           {project.tech.slice(0, 4).map((item: string) => (

@@ -543,7 +543,7 @@ function MysqlIcon() {
   );
 }
 
- function NetlifyIcon() {
+function NetlifyIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
       <path
@@ -560,6 +560,46 @@ function MysqlIcon() {
         stroke="#00C7B7"
         strokeWidth="2"
       />
+    </svg>
+  );
+}
+
+// function RestApiIcon() {
+//   return (
+//     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
+//       <path d="M4 7h10M4 12h16M4 17h12" stroke="#22d3ee" strokeWidth="2" strokeLinecap="round" />
+//     </svg>
+//   );
+// }
+
+function JwtIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
+      <circle cx="12" cy="5" r="2" fill="#f59e0b" />
+      <circle cx="19" cy="9" r="2" fill="#f59e0b" />
+      <circle cx="19" cy="16" r="2" fill="#f59e0b" />
+      <circle cx="12" cy="20" r="2" fill="#f59e0b" />
+      <circle cx="5" cy="16" r="2" fill="#f59e0b" />
+      <circle cx="5" cy="9" r="2" fill="#f59e0b" />
+      <path d="M12 7v3m6 0-2 1m0 5-2-1m-4 3v-3m-4 1 2-1m0-5 2 1" stroke="#f59e0b" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function EnzymeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
+      <rect x="4" y="4" width="16" height="16" rx="8" fill="#10b981" />
+      <path d="M8 12h8M12 8v8" stroke="#052e16" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CodeReviewIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none">
+      <path d="M5 4h14v12H9l-4 4V4z" stroke="#a78bfa" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M9 10l2 2 4-4" stroke="#a78bfa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -609,6 +649,10 @@ const registry: Record<string, IconEntry> = {
   "axios":                    { component: AxiosIcon,               bg: "#1a1a1a" },
   "framer motion":            { component: FramerMotionIcon,        bg: "#0055ff" },
   "netlify":                  { component: NetlifyIcon,             bg: "#00c7b7" },
+  "rest apis":                { component: RestApiIcon,             bg: "#0f172a" },
+  "jwt authentication":       { component: JwtIcon,                 bg: "#0f172a" },
+  "enzyme":                   { component: EnzymeIcon,              bg: "#064e3b" },
+  "code review":              { component: CodeReviewIcon,          bg: "#1e1b4b" },
 };
 
 function lookup(name: string): IconEntry | undefined {
@@ -619,7 +663,7 @@ function lookup(name: string): IconEntry | undefined {
 // SkillPill — coloured tile, icon always visible, name slides in on hover
 // Used in the Stack section groups
 // ---------------------------------------------------------------------------
-export function SkillPill({ name }: { name: string }) {
+export function SkillPill({ name, iconOnly = false }: { name: string; iconOnly?: boolean }) {
   const entry = lookup(name);
 
   if (!entry) {
@@ -632,8 +676,20 @@ export function SkillPill({ name }: { name: string }) {
 
   const IconComponent = entry.component;
 
+  if (iconOnly) {
+    return (
+      <div
+        className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-zinc-800 bg-[#0b0b0b] text-zinc-100 transition-transform duration-200 hover:scale-105 [&_svg]:size-7"
+        aria-label={name}
+        title={name}
+      >
+        <IconComponent />
+      </div>
+    );
+  }
+
   return (
-    <div className="group inline-flex items-center gap-0 rounded-md border border-dashed border-zinc-300 bg-zinc-50/60 px-2 py-1 text-sm font-medium text-zinc-600 dark:border-zinc-700/50 dark:bg-zinc-950/40 dark:text-zinc-400 outline-none transition-all duration-300 ease-out hover:scale-105 hover:gap-2 hover:border-zinc-400 hover:bg-zinc-100/70 hover:text-zinc-950 dark:hover:border-zinc-600/80 dark:hover:bg-zinc-800/70 dark:hover:text-zinc-50 hover:shadow-sm [&_svg]:size-4">
+    <div className="group inline-flex items-center gap-0 rounded-md border border-dashed border-zinc-300 bg-zinc-50/60 px-2 py-1 text-sm font-medium text-zinc-600 dark:border-zinc-700/50 dark:bg-zinc-950/40 dark:text-zinc-400 outline-none transition-colors duration-300 ease-out hover:border-zinc-400 hover:bg-zinc-100/70 hover:text-zinc-950 dark:hover:border-zinc-600/80 dark:hover:bg-zinc-800/70 dark:hover:text-zinc-50 hover:shadow-sm [&_svg]:size-4">
       <span className="size-4 shrink-0">
         <IconComponent />
       </span>
@@ -662,7 +718,7 @@ export function TechChip({ name }: { name: string }) {
   const IconComponent = entry.component;
 
   return (
-    <div className="group inline-flex items-center gap-0 rounded-md border border-dashed border-zinc-300 bg-zinc-50/60 px-1.5 py-1 text-xs font-medium text-zinc-600 dark:border-zinc-700/50 dark:bg-zinc-950/40 dark:text-zinc-400 outline-none transition-all duration-300 ease-out hover:scale-105 hover:gap-1.5 hover:border-zinc-400 hover:bg-zinc-100/70 hover:text-zinc-950 dark:hover:border-zinc-600/80 dark:hover:bg-zinc-800/70 dark:hover:text-zinc-50 hover:shadow-sm [&_svg]:size-3">
+    <div className="group inline-flex items-center gap-0 rounded-md border border-dashed border-zinc-300 bg-zinc-50/60 px-1.5 py-1 text-xs font-medium text-zinc-600 dark:border-zinc-700/50 dark:bg-zinc-950/40 dark:text-zinc-400 outline-none transition-colors duration-300 ease-out hover:border-zinc-400 hover:bg-zinc-100/70 hover:text-zinc-950 dark:hover:border-zinc-600/80 dark:hover:bg-zinc-800/70 dark:hover:text-zinc-50 hover:shadow-sm [&_svg]:size-3">
       <span className="size-3 shrink-0">
         <IconComponent />
       </span>
