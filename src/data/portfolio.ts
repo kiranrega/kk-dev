@@ -208,7 +208,7 @@ export const projects: Project[] = [
     subtitle: "Real-Time Collaborative Drawing App",
     period: "Personal Project",
     githubUrl: "https://github.com/kiranrega/OpenDraw",
-    liveUrl: "https://opendraw.vercel.app", // add your actual frontend URL
+    liveUrl: "https://opendraw.netlify.app", // add your actual frontend URL
     description:
       "Excalidraw-inspired collaborative canvas with real-time multi-user drawing, JWT auth, and WebSocket-based shape sync.",
     platform: "Web App",
