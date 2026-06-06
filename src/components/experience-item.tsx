@@ -12,10 +12,10 @@ export function ExperienceItem({ job, index }: { job: Experience; index: number 
       
       {/* Timeline dot */}
       <div 
-        className={`absolute -left-[6.5px] top-1.5 h-3 w-3 rounded-full border-[2.5px] border-zinc-50 dark:border-black z-10 transition-colors duration-300 ${
+        className={`absolute -left-[6.5px] top-1.5 h-3 w-3 rounded-full border-[2.5px] border-white dark:border-black z-10 transition-colors duration-300 ${
           isCurrent 
-            ? 'bg-emerald-400 ring-4 ring-emerald-400/20' 
-            : 'bg-zinc-300 dark:bg-zinc-700'
+            ? 'bg-white ring-4 ring-white/10' 
+            : 'bg-zinc-400 dark:bg-zinc-600'
         }`} 
       />
       

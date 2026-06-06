@@ -26,6 +26,14 @@ function CountUp({ value, active }: { value: string; active: boolean }) {
 
   useEffect(() => {
     if (!active) return;
+    
+    // Respect prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setDisplay(num);
+      return;
+    }
+
     startRef.current = null;
 
     function step(ts: number) {

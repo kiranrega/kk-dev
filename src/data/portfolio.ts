@@ -139,7 +139,7 @@ export const projects: Project[] = [
       "Roster Preview module for workforce operations that replaced manual spreadsheet workflows.",
     platform: "Enterprise Web App",
     type: "Enterprise",
-    role: "Solo contributor",
+    role: "Developer",
     keyResult: "~6 hrs/week saved · 65% fewer code smells",
     challenge: "Admin team manually managing rosters via spreadsheets — 6+ hrs/week lost",
     outcome: "Guided preview experience eliminated manual work; 65% code smell reduction via SonarQube",

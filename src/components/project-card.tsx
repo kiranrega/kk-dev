@@ -7,13 +7,15 @@ function Card({ children, className, style }: { children: React.ReactNode; class
   return (
     <div
       className={[
-        "rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm shadow-zinc-950/[0.02] dark:border-zinc-800 dark:bg-zinc-950",
+        "group relative rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm transition-all duration-500 ease-out dark:border-zinc-800 dark:bg-[#0a0a0a] hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-xl dark:hover:shadow-zinc-950/50 hover:-translate-y-1",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
       style={style}
     >
+      {/* Background subtle glow effect */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-zinc-100 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:from-zinc-900/50 rounded-3xl" />
       {children}
     </div>
   );
@@ -21,94 +23,73 @@ function Card({ children, className, style }: { children: React.ReactNode; class
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   const isProd = project.type === "Production" || project.type === "Enterprise";
-  const roleColor = project.role === "Lead Dev" || project.role === "Lead" ? "var(--accent)" : "var(--text-muted)";
-  const roleBorder = project.role === "Lead Dev" || project.role === "Lead" ? "1px solid var(--accent-40)" : "1px solid var(--border)";
 
   return (
     <div className="reveal-item" style={{ "--reveal-index": index } as React.CSSProperties}>
       <Card>
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <span
-            style={{
-              background: project.type === "Production" ? "var(--accent-10)" : project.type === "Enterprise" ? "rgba(255,255,255,0.04)" : "transparent",
-              border: project.type === "Production" ? "1px solid var(--accent-40)" : project.type === "Enterprise" ? "1px solid rgba(255,255,255,0.08)" : "1px solid var(--border)",
-              color: project.type === "Production" ? "var(--accent)" : project.type === "Enterprise" ? "var(--text-muted)" : "var(--text-muted)",
-            }}
-            className="inline-flex rounded-full px-2.5 py-1 text-xs font-medium"
-          >
+        {/* Header Metadata */}
+        <div className="mb-6 flex flex-wrap items-center gap-2.5">
+          <span className="inline-flex rounded-full bg-zinc-950 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white dark:bg-white dark:text-black transition-transform duration-300 group-hover:scale-105">
             {project.type}
           </span>
 
-          <span
-            style={{
-              border: roleBorder,
-              color: roleColor,
-            }}
-            className="inline-flex rounded-full px-2.5 py-1 text-xs font-medium"
-          >
+          <span className="inline-flex rounded-full border border-zinc-200 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-zinc-500 dark:border-zinc-800 dark:text-zinc-500">
             {project.role}
           </span>
 
-          <span className="ml-auto inline-flex rounded-full border border-zinc-200/50 bg-zinc-50/40 px-2.5 py-1 text-xs font-medium text-zinc-600 dark:border-zinc-800/50 dark:bg-zinc-900/30 dark:text-zinc-400">
+          <span className="ml-auto text-[10px] font-bold uppercase tracking-[0.15em] text-zinc-400 dark:text-zinc-600">
             {project.platform}
           </span>
         </div>
 
-        <h3 className="text-xl font-bold text-zinc-950 dark:text-zinc-50">{project.name}</h3>
+        {/* Title & Description */}
+        <div className="space-y-3">
+          <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white transition-colors duration-300 group-hover:text-black dark:group-hover:text-zinc-100">
+            {project.name}
+          </h3>
+          <p className="text-[0.93rem] leading-relaxed text-zinc-600 dark:text-zinc-400 transition-colors duration-300 group-hover:text-zinc-800 dark:group-hover:text-zinc-300">
+            {project.description}
+          </p>
+        </div>
 
-        <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-          {project.description}
-        </p>
-
+        {/* Technical Brief (Collapsible-style appearance) */}
         {isProd && (project.challenge || project.outcome) ? (
-          <div className="mt-4 border-l-2 border-zinc-200 pl-3 dark:border-zinc-800">
+          <div className="mt-8 space-y-4 rounded-2xl bg-zinc-50 p-5 dark:bg-zinc-900/30 transition-colors duration-300 group-hover:bg-zinc-100 dark:group-hover:bg-zinc-900/50">
             {project.challenge ? (
-              <div className="text-xs leading-5">
-                <span className="font-medium text-zinc-500 dark:text-zinc-500">Challenge: </span>
-                <span className="text-zinc-600 dark:text-zinc-400">{project.challenge}</span>
+              <div className="space-y-1.5">
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">Challenge</span>
+                <p className="text-[0.82rem] leading-normal text-zinc-600 dark:text-zinc-400 font-medium">{project.challenge}</p>
               </div>
             ) : null}
             {project.outcome ? (
-              <div className="mt-1 text-xs leading-5">
-                <span className="font-medium" style={{ color: "var(--accent)" }}>
-                  Outcome:{" "}
-                </span>
-                <span className="text-zinc-600 dark:text-zinc-400">{project.outcome}</span>
+              <div className="space-y-1.5 border-t border-zinc-200/50 pt-4 dark:border-zinc-800/50">
+                <span className="text-[9px] font-black uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">Outcome</span>
+                <p className="text-[0.82rem] leading-normal text-zinc-900 dark:text-zinc-100 font-bold">{project.outcome}</p>
               </div>
             ) : null}
           </div>
         ) : null}
 
-        {/* {project.keyResult ? (
-          <div className="mt-4 flex flex-wrap gap-4">
-            {project.keyResult.split(" · ").map((metric: string) => (
-              <div key={metric} className="text-sm">
-                <span style={{ color: "var(--accent)" }} className="font-semibold">
-                  {metric}
-                </span>
-              </div>
-            ))}
-          </div>
-        ) : null} */}
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          {project.tech.slice(0, 4).map((item: string) => (
+        {/* Tech Stack Chips */}
+        <div className="mt-8 flex flex-wrap gap-2 transition-opacity duration-300 group-hover:opacity-100">
+          {project.tech.map((item: string) => (
             <TechChip key={item} name={item} />
           ))}
         </div>
 
+        {/* Action Links */}
         {project.githubUrl || project.liveUrl ? (
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-8 flex flex-wrap gap-4 border-t border-zinc-100 pt-6 dark:border-zinc-900">
             {project.liveUrl ? (
               <Link
                 href={project.liveUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus-visible:outline-zinc-50"
+                className="group/link inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-zinc-900 dark:text-white hover:opacity-70 transition-all duration-300"
               >
-                <Globe size={14} aria-hidden="true" />
-                Live
-                <ExternalLink size={13} aria-hidden="true" />
+                <Globe size={16} className="transition-transform duration-300 group-hover/link:rotate-12" />
+                Live Project
+                <ExternalLink size={14} className="transition-all duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
               </Link>
             ) : null}
             {project.githubUrl ? (
@@ -116,11 +97,11 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2 text-xs font-medium text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 dark:focus-visible:outline-zinc-50"
+                className="group/link inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-all duration-300"
               >
-                <GitPullRequest size={14} aria-hidden="true" />
-                GitHub
-                <ExternalLink size={13} aria-hidden="true" />
+                <GitPullRequest size={16} className="transition-transform duration-300 group-hover/link:-rotate-12" />
+                Source Code
+                <ExternalLink size={14} className="opacity-0 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
               </Link>
             ) : null}
           </div>
