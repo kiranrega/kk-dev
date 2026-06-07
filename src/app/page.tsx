@@ -19,6 +19,7 @@ import {
   stackGroups,
 } from "@/data/portfolio";
 import { SkillPill } from "@/components/skill-icons";
+import { GridBackground } from "@/components/grid-background";
 import { HeroTitle } from "@/components/hero-title";
 import { CatSummoner } from "@/components/cat-summoner";
 
@@ -49,7 +50,7 @@ function Section({
       <div className="mb-6 flex flex-wrap items-center gap-3">
         <h2 className="section-label">{title}</h2>
         {typeof count === "number" ? (
-          <span className="rounded-full border border-zinc-200 px-2 py-0.5 text-xs text-zinc-400 dark:border-zinc-800">
+          <span className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground">
             {count}
           </span>
         ) : null}
@@ -63,7 +64,7 @@ function Card({ children, className, style }: { children: React.ReactNode; class
   return (
     <div
       className={[
-        "rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-[#111111] transition-all duration-200",
+        "rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200",
         className,
       ]
         .filter(Boolean)
@@ -81,7 +82,7 @@ function TechLink({ href, children }: { href: string; children: React.ReactNode 
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-zinc-600 border-b border-zinc-200 hover:text-zinc-950 hover:border-zinc-950 transition-all dark:text-zinc-400 dark:border-zinc-800 dark:hover:text-white dark:hover:border-white font-medium"
+      className="text-foreground border-b border-border hover:opacity-70 transition-all font-medium"
     >
       {children}
     </a>
@@ -94,7 +95,7 @@ function SocialLink({ href, label }: { href: string; label: string }) {
       href={href}
       target={href.startsWith("mailto") ? "_self" : "_blank"}
       rel="noopener noreferrer"
-      className="flex items-center gap-1.5 text-[0.82rem] text-zinc-500 hover:text-zinc-950 transition-colors dark:text-zinc-500 dark:hover:text-white"
+      className="flex items-center gap-1.5 text-[0.82rem] text-muted-foreground hover:text-foreground transition-colors"
     >
       {label}
       <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
@@ -114,11 +115,12 @@ export default function Home() {
   const allSkills = stackGroups.flatMap((group) => group.items);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-white text-zinc-950 dark:bg-black dark:text-white font-sans selection:bg-zinc-950 selection:text-white dark:selection:bg-white dark:selection:text-black">
+    <main className="relative min-h-screen overflow-hidden bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
+      <GridBackground />
       <RevealOnScroll />
       
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-4 py-4 sm:px-6">
-        <header className="sticky top-0 z-40 -mx-4 border-b border-zinc-200/50 bg-white/80 px-4 py-3 backdrop-blur dark:border-zinc-900/80 dark:bg-black/90 sm:-mx-6 sm:px-6">
+        <header className="sticky top-0 z-40 -mx-4 border-b border-border bg-background/80 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
           <div className="flex items-center justify-between gap-3">
             <ActiveNav items={navItems} />
             <div className="flex items-center gap-2">
@@ -142,7 +144,7 @@ export default function Home() {
               />
 
               <div className="space-y-1">
-                <h1 className="m-0 text-4xl sm:text-5xl font-bold tracking-tighter leading-none text-zinc-900 dark:text-white">
+                <h1 className="m-0 text-4xl sm:text-5xl font-bold tracking-tighter leading-none">
                   Kiran Kumar Rega
                 </h1>
                 <HeroTitle />
@@ -156,13 +158,13 @@ export default function Home() {
                 ["Pronouns", "he/him"],
               ].map(([label, value]) => (
                 <div key={label} className="flex flex-col items-start gap-1.5">
-                  <span className="text-[11px] tracking-widest uppercase font-bold text-zinc-400 dark:text-zinc-600">{label}</span>
-                  <span className="text-sm text-zinc-800 dark:text-zinc-200 font-semibold">{value}</span>
+                  <span className="text-[11px] tracking-widest uppercase font-bold text-muted">{label}</span>
+                  <span className="text-sm font-semibold">{value}</span>
                 </div>
               ))}
             </div>
 
-            <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mt-2 max-w-[600px] font-normal">
+            <p className="text-base text-muted-foreground leading-relaxed mt-2 max-w-[600px] font-normal">
               I build full-stack web products end-to-end, obsessing over small details that make software feel right to use. Currently working with{" "}
               <TechLink href="https://react.dev">React</TechLink>,{" "}
               <TechLink href="https://www.typescriptlang.org">TypeScript</TechLink>,{" "}
@@ -171,7 +173,7 @@ export default function Home() {
               3 years. Zero rollbacks.
             </p>
 
-            <div className="flex gap-5 flex-wrap mt-2">
+            <div className="social-pills-row mt-2">
               {SOCIALS.map((social) => (
                 <SocialLink key={social.label} {...social} />
               ))}
@@ -194,7 +196,7 @@ export default function Home() {
           </section>
 
           <Section id="experience" title="Experience" count={experience.length}>
-            <div className="reveal relative border-l border-zinc-200 dark:border-zinc-800 ml-3 mt-4">
+            <div className="reveal relative border-l border-border ml-3 mt-4">
               <div className="flex flex-col gap-12">
                 {experience.map((job, index) => (
                   <ExperienceItem key={job.company} job={job} index={index} />
@@ -204,19 +206,19 @@ export default function Home() {
           </Section>
 
           <Section id="projects" title="Projects" count={projects.length}>
-            <div className="mb-10 border-t border-b border-zinc-200 py-5 dark:border-zinc-800 reveal">
+            <div className="mb-10 border-t border-b border-border py-5 reveal">
               <div className="flex justify-center gap-8 sm:gap-12">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-zinc-950 dark:text-zinc-50">5</div>
-                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-zinc-500 dark:text-zinc-400">Projects Shipped</div>
+                  <div className="text-2xl font-bold">5</div>
+                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-muted-foreground">Projects Shipped</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-zinc-950 dark:text-zinc-50">2</div>
-                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-zinc-500 dark:text-zinc-400">In Production</div>
+                  <div className="text-2xl font-bold">2</div>
+                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-muted-foreground">In Production</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-zinc-950 dark:text-zinc-50">0</div>
-                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-zinc-500 dark:text-zinc-400">Rollbacks</div>
+                  <div className="text-2xl font-bold">0</div>
+                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-muted-foreground">Rollbacks</div>
                 </div>
               </div>
             </div>
@@ -231,14 +233,14 @@ export default function Home() {
           <Section id="recognition" title="Recognition">
             <Card>
               <div className="flex gap-4">
-                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-border bg-card text-muted">
                   <Trophy size={18} aria-hidden="true" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-zinc-950 dark:text-zinc-50">
+                  <h3 className="font-medium">
                     Top Performer - Q3 2024
                   </h3>
-                  <p className="mt-2 text-sm leading-7 text-zinc-700 dark:text-zinc-300">
+                  <p className="mt-2 text-sm leading-7 text-muted-foreground">
                     Recognised at IntouchCX out of the full engineering cohort for delivery quality and measurable product impact.
                   </p>
                 </div>
@@ -255,17 +257,17 @@ export default function Home() {
                   style={{ "--reveal-index": index } as React.CSSProperties}
                 >
                   <div className="flex gap-4">
-                    <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
+                    <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-border bg-card text-muted">
                       <GraduationCap size={18} aria-hidden="true" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-zinc-950 dark:text-zinc-50">
+                      <h3 className="font-medium">
                         {item.degree}
                       </h3>
-                      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+                      <p className="mt-1 text-sm text-muted-foreground">
                         {item.school}
                       </p>
-                      <p className="mt-2 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-500">
+                      <p className="mt-2 flex items-center gap-2 text-xs text-muted">
                         <Calendar size={13} aria-hidden="true" />
                         {item.period}
                       </p>

@@ -57,10 +57,10 @@ export function ActiveNav({ items }: { items: NavItem[] }) {
             href={item.href}
             className={[
               "relative shrink-0 font-geist-sans text-sm transition-colors",
-              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:focus-visible:outline-zinc-50",
+              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground",
               isActive
-                ? "text-[#111111] dark:text-[#e0e0e0]"
-                : "text-[#555555] hover:text-[#111111] dark:text-[#a0a0a0] dark:hover:text-[#e0e0e0]",
+                ? "text-foreground"
+                : "text-muted-foreground hover:text-foreground",
             ].join(" ")}
           >
             {item.label}

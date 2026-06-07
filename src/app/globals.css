@@ -3,27 +3,15 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* User-provided Monochromatic Palette */
-  --black: #000000;
-  --cod-gray: #1C1C1C;
-  --mine-shaft: #3D3D3D;
-  --boulder: #7D7D7D;
-  --silver-chalice: #B0B0B0;
-
-  /* Design Tokens mapping */
-  --bg: var(--black);
-  --bg-card: var(--cod-gray);
-  --border: var(--mine-shaft);
-  --text-primary: #FFFFFF;
-  --text-secondary: var(--silver-chalice);
-  --text-muted: var(--boulder);
+  /* Light Theme - Warm Minimalism */
+  --background: #FFFFFF;
+  --foreground: #09090B;
+  --muted: #71717A;
+  --muted-foreground: #52525B;
+  --border: #E4E4E7;
+  --card: #F9F9F9;
+  --accent: #000000;
   
-  /* Accent: Using white as the primary accent for high-contrast minimalism */
-  --accent: #FFFFFF;
-  --accent-10: rgba(255, 255, 255, 0.1);
-  --accent-20: rgba(255, 255, 255, 0.2);
-  --accent-40: rgba(255, 255, 255, 0.4);
-
   /* Typography variables */
   --font-family-sans: var(--font-geist-sans), Inter, system-ui, sans-serif;
   --font-family-display: var(--font-sora), var(--font-geist-sans), sans-serif;
@@ -31,14 +19,28 @@
   --font-size-hero: clamp(2.25rem, 6vw, 3.5rem);
   --line-height-hero: 1.1;
   --letter-spacing-tight: -0.02em;
+}
 
-  --background: var(--bg);
-  --foreground: var(--text-primary);
+.dark {
+  /* Dark Theme - Pure Monochromatic Black */
+  --background: #000000;
+  --foreground: #FFFFFF;
+  --muted: #7D7D7D;
+  --muted-foreground: #B0B0B0;
+  --border: #3D3D3D;
+  --card: #1C1C1C;
+  --accent: #FFFFFF;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-accent: var(--accent);
+  
   --font-sans: var(--font-geist-sans);
   --font-display: var(--font-sora);
 }
@@ -48,6 +50,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-family-sans);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4 {
@@ -64,7 +67,7 @@ h1, h2, h3, h4 {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: var(--foreground);
 }
 
 html {
@@ -75,14 +78,14 @@ html {
 .hero-name {
   font-size: var(--font-size-hero);
   line-height: var(--line-height-hero);
-  color: var(--text-primary);
+  color: var(--foreground);
 }
 
-/* Minimalist separator instead of animated gradient */
+/* Minimalist separator */
 .hero-underline {
   height: 1px;
   width: 60px;
-  background: var(--mine-shaft);
+  background: var(--border);
   margin: 1.5rem 0;
 }
 
@@ -91,7 +94,7 @@ html {
   content: "|";
   margin-left: 2px;
   animation: blink 1s step-end infinite;
-  color: #FFFFFF;
+  color: var(--foreground);
 }
 
 @keyframes blink {
@@ -124,23 +127,27 @@ html {
 }
 
 ::selection {
-  background: var(--mine-shaft);
-  color: #FFFFFF;
+  background: var(--foreground);
+  color: var(--background);
 }
 
 /* Custom Card Depth */
 .card-glass {
-  background: var(--bg-card);
-  border: 1px solid var(--mine-shaft);
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.3s ease;
+}
+
+.dark .card-glass {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .card-glass:hover {
-  border-color: var(--boulder);
+  border-color: var(--muted);
 }
 
-/* ── Social Pills Row (Monochrome version) ── */
+/* ── Social Pills Row ── */
 .social-pills-row {
   display: flex;
   flex-direction: row;
@@ -159,16 +166,16 @@ html {
   font-size: 0.75rem;
   font-weight: 500;
   transition: all 0.2s ease;
-  background: var(--cod-gray);
-  border: 1px solid var(--mine-shaft);
-  color: var(--silver-chalice);
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
   cursor: pointer;
 }
 
 .social-pill:hover {
-  background: var(--mine-shaft);
-  border-color: var(--boulder);
-  color: #FFFFFF;
+  background: var(--border);
+  border-color: var(--muted);
+  color: var(--foreground);
   transform: translateY(-1px);
 }
 
@@ -179,7 +186,7 @@ html {
   color: inherit;
 }
 
-/* ── Timeline (Monochrome) ── */
+/* ── Timeline ── */
 .timeline-track::before {
   content: "";
   position: absolute;
@@ -187,7 +194,7 @@ html {
   top: 28px;
   bottom: 28px;
   width: 1px;
-  background: var(--mine-shaft);
+  background: var(--border);
 }
 .timeline-node {
   position: relative;
@@ -198,11 +205,11 @@ html {
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  border: 1px solid var(--mine-shaft);
-  background: var(--cod-gray);
+  border: 1px solid var(--border);
+  background: var(--card);
   font-size: 0.75rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: var(--foreground);
   flex-shrink: 0;
 }
 
@@ -210,13 +217,17 @@ html {
   background:
     radial-gradient(
       420px circle at var(--mouse-x, 50%) var(--mouse-y, 18%),
-      rgba(255, 255, 255, 0.03),
+      var(--accent-10, rgba(120, 120, 120, 0.05)),
       transparent 40%
     ),
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, var(--accent-10, rgba(120, 120, 120, 0.05)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--accent-10, rgba(120, 120, 120, 0.05)) 1px, transparent 1px);
   background-size: auto, 40px 40px, 40px 40px;
   mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+}
+
+.dark .bg-grid-pattern {
+  --accent-10: rgba(255, 255, 255, 0.03);
 }
 
 @media (prefers-reduced-motion: reduce) {

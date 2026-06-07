@@ -12,32 +12,32 @@ export function ExperienceItem({ job, index }: { job: Experience; index: number 
       
       {/* Timeline dot */}
       <div 
-        className={`absolute -left-[6.5px] top-1.5 h-3 w-3 rounded-full border-[2.5px] border-white dark:border-black z-10 transition-colors duration-300 ${
+        className={`absolute -left-[6.5px] top-1.5 h-3 w-3 rounded-full border-[2.5px] border-background z-10 transition-colors duration-300 ${
           isCurrent 
-            ? 'bg-white ring-4 ring-white/10' 
-            : 'bg-zinc-400 dark:bg-zinc-600'
+            ? 'bg-foreground ring-4 ring-foreground/10' 
+            : 'bg-muted'
         }`} 
       />
       
       {/* Content */}
       <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-        <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100">
-          {job.role} <span className="font-normal text-zinc-400 dark:text-zinc-500 mx-1">·</span> <span className="font-normal text-zinc-600 dark:text-zinc-400">{job.company}</span>
+        <h3 className="text-base font-semibold text-foreground">
+          {job.role} <span className="font-normal text-muted-foreground mx-1">·</span> <span className="font-normal text-muted">{job.company}</span>
         </h3>
-        <div className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mt-1 sm:mt-0 whitespace-nowrap">
+        <div className="text-sm font-medium text-foreground mt-1 sm:mt-0 whitespace-nowrap">
           {job.period}
         </div>
       </div>
       
-      <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
+      <div className="text-sm text-muted-foreground mt-1">
         {job.location}{job.type ? `, ${job.type}` : ""}
       </div>
       
-      <div className="mt-4 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+      <div className="mt-4 text-sm leading-6 text-muted-foreground">
         <ul className="space-y-2">
           {job.bullets.map((bullet: string) => (
             <li key={bullet} className="flex gap-2">
-              <span className="text-zinc-400 dark:text-zinc-500 mt-0.5 shrink-0">•</span>
+              <span className="text-muted mt-0.5 shrink-0">•</span>
               <span>{bullet}</span>
             </li>
           ))}

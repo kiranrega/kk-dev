@@ -42,40 +42,40 @@ export function CommandMenu() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex h-9 min-w-0 items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 text-sm text-zinc-500 transition hover:bg-zinc-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:focus-visible:outline-zinc-50"
+        className="flex h-9 min-w-0 items-center gap-2 rounded-lg border border-border bg-card px-3 text-sm text-muted-foreground transition hover:bg-muted/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
       >
         <Search size={15} aria-hidden="true" />
         <span className="hidden sm:inline">Search...</span>
-        <kbd className="ml-1 hidden rounded border border-zinc-200 bg-white px-1.5 py-0.5 text-[11px] text-zinc-500 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-400 sm:inline">
+        <kbd className="ml-1 hidden rounded border border-border bg-background px-1.5 py-0.5 text-[11px] text-muted sm:inline">
           Ctrl K
         </kbd>
       </button>
 
       {open ? (
         <div
-          className="fixed inset-0 z-50 bg-zinc-950/30 px-4 py-20 backdrop-blur-sm dark:bg-black/50"
+          className="fixed inset-0 z-50 bg-foreground/10 px-4 py-20 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           aria-label="Command palette"
           onMouseDown={() => setOpen(false)}
         >
           <div
-            className="mx-auto max-w-lg overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-950"
+            className="mx-auto max-w-lg overflow-hidden rounded-2xl border border-border bg-background shadow-2xl"
             onMouseDown={(event) => event.stopPropagation()}
           >
-            <div className="flex items-center gap-3 border-b border-zinc-100 px-4 py-3 dark:border-zinc-900">
-              <Command size={17} className="text-zinc-400" aria-hidden="true" />
+            <div className="flex items-center gap-3 border-b border-border px-4 py-3">
+              <Command size={17} className="text-muted" aria-hidden="true" />
               <input
                 autoFocus
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search for a command to run..."
-                className="h-9 flex-1 bg-transparent text-sm text-zinc-950 outline-none placeholder:text-zinc-400 dark:text-zinc-50"
+                className="h-9 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted"
               />
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="rounded-md p-1 text-zinc-400 transition hover:bg-zinc-100 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+                className="rounded-md p-1 text-muted transition hover:bg-muted/10 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                 aria-label="Close command palette"
               >
                 <X size={16} aria-hidden="true" />
@@ -87,14 +87,14 @@ export function CommandMenu() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-zinc-700 transition hover:bg-zinc-100 hover:text-zinc-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-950 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+                  className="flex items-center justify-between rounded-xl px-3 py-3 text-sm text-muted-foreground transition hover:bg-muted/10 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                 >
                   {item.label}
-                  <span className="text-xs text-zinc-400">Open</span>
+                  <span className="text-xs text-muted">Open</span>
                 </Link>
               ))}
               {filteredCommands.length === 0 ? (
-                <p className="px-3 py-8 text-center text-sm text-zinc-500">
+                <p className="px-3 py-8 text-center text-sm text-muted">
                   No command found.
                 </p>
               ) : null}

@@ -37,9 +37,9 @@ export function CatSummoner() {
         onClick={toggleCat}
         className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg border transition-all duration-200 ${
           catEnabled
-            ? "border-zinc-400 bg-zinc-100 text-zinc-900 dark:border-zinc-600 dark:bg-zinc-800 dark:text-white"
-            : "border-zinc-200 bg-zinc-50 text-zinc-400 dark:border-zinc-800 dark:bg-zinc-900"
-        } hover:bg-zinc-100 dark:hover:bg-zinc-800`}
+            ? "border-muted bg-muted/10 text-foreground"
+            : "border-border bg-card text-muted-foreground"
+        } hover:bg-muted/10`}
         title={catEnabled ? "Dismiss cat" : "Summon cat"}
         aria-label={catEnabled ? "Dismiss cat" : "Summon cat"}
       >

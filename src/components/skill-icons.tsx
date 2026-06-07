@@ -71,7 +71,7 @@ function FigmaIcon() {
 function VercelIcon() {
   return (
     <svg viewBox="0 0 1155 1000" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5">
-      <path d="M577.344 0L1154.69 1000H0L577.344 0Z" fill="white"/>
+      <path d="M577.344 0L1154.69 1000H0L577.344 0Z" fill="currentColor"/>
     </svg>
   );
 }
@@ -642,7 +642,7 @@ export function SkillPill({ name, iconOnly = false }: { name: string; iconOnly?:
 
   if (!entry) {
     return (
-      <span className="inline-flex items-center rounded-md border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
+      <span className="inline-flex items-center rounded-md border border-border bg-card px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
         {name}
       </span>
     );
@@ -653,7 +653,7 @@ export function SkillPill({ name, iconOnly = false }: { name: string; iconOnly?:
   if (iconOnly) {
     return (
       <div
-        className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-900 shadow-sm transition-all duration-300 hover:border-zinc-900 hover:scale-105 dark:border-zinc-800 dark:bg-zinc-950 dark:text-white dark:hover:border-white [&_svg]:size-7 grayscale hover:grayscale-0"
+        className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card text-foreground shadow-sm transition-all duration-300 hover:border-muted hover:scale-105 [&_svg]:size-7 grayscale hover:grayscale-0"
         aria-label={name}
         title={name}
       >
@@ -663,7 +663,7 @@ export function SkillPill({ name, iconOnly = false }: { name: string; iconOnly?:
   }
 
   return (
-    <div className="group inline-flex items-center gap-0 rounded-lg border border-zinc-200 bg-white px-3 py-1.5 text-xs font-semibold text-zinc-600 shadow-sm transition-all duration-300 ease-out hover:border-zinc-900 hover:text-zinc-950 dark:border-zinc-800 dark:bg-[#111111] dark:text-zinc-400 dark:hover:border-zinc-500 dark:hover:text-white [&_svg]:size-4">
+    <div className="group inline-flex items-center gap-0 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-sm transition-all duration-300 ease-out hover:border-muted hover:text-foreground [&_svg]:size-4">
       <span className="size-4 shrink-0 grayscale group-hover:grayscale-0 transition-all duration-300">
         <IconComponent />
       </span>
@@ -682,7 +682,7 @@ export function TechChip({ name }: { name: string }) {
 
   if (!entry) {
     return (
-      <span className="inline-flex items-center rounded-md border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-500">
+      <span className="inline-flex items-center rounded-md border border-border bg-card px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
         {name}
       </span>
     );
@@ -691,7 +691,7 @@ export function TechChip({ name }: { name: string }) {
   const IconComponent = entry.component;
 
   return (
-    <div className="group inline-flex items-center gap-0 rounded-md border border-zinc-200 bg-white px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500 shadow-sm transition-all duration-300 ease-out hover:border-zinc-900 hover:text-zinc-900 dark:border-zinc-800 dark:bg-[#111111] dark:text-zinc-500 dark:hover:border-zinc-500 dark:hover:text-white [&_svg]:size-3">
+    <div className="group inline-flex items-center gap-0 rounded-md border border-border bg-card px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground shadow-sm transition-all duration-300 ease-out hover:border-muted hover:text-foreground [&_svg]:size-3">
       <span className="size-3 shrink-0 grayscale group-hover:grayscale-0 transition-all duration-300">
         <IconComponent />
       </span>

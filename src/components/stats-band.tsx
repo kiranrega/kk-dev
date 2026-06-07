@@ -80,17 +80,17 @@ export function StatsBand({ stats }: { stats: Stat[] }) {
   return (
     <div
       ref={ref}
-      className="grid grid-cols-2 gap-px sm:grid-cols-4 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800"
+      className="grid grid-cols-2 gap-px sm:grid-cols-4 rounded-2xl overflow-hidden border border-border"
     >
       {stats.map((stat) => (
         <div
           key={stat.label}
-          className="flex flex-col items-center justify-center gap-1 bg-white px-4 py-6 dark:bg-zinc-950"
+          className="flex flex-col items-center justify-center gap-1 bg-card px-4 py-6"
         >
-          <p className="stat-number font-semibold tracking-tight text-zinc-950 dark:text-zinc-50 whitespace-nowrap">
+          <p className="stat-number font-semibold tracking-tight text-foreground whitespace-nowrap">
             <CountUp value={stat.value} active={active} />
           </p>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center uppercase tracking-widest">{stat.label}</p>
+          <p className="text-xs text-muted-foreground text-center uppercase tracking-widest">{stat.label}</p>
         </div>
       ))}
     </div>
