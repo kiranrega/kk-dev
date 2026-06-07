@@ -1,12 +1,8 @@
-"use client";
-
-import { useEffect, useState, useMemo } from "react";
+import Image from "next/image";
 import {
   Calendar,
-  Check,
   GraduationCap,
   Trophy,
-  MousePointer2,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ActiveNav } from "@/components/active-nav";
@@ -23,16 +19,8 @@ import {
   stackGroups,
 } from "@/data/portfolio";
 import { SkillPill } from "@/components/skill-icons";
-import OnekoCat from "@/components/oneko/OnekoCat";
-import { GridBackground } from "@/components/grid-background";
-
-const TITLES = [
-  "Full-Stack Software Engineer",
-  "React Developer",
-  "TypeScript Engineer",
-  "Product Builder",
-  "Detail Oriented",
-];
+import { HeroTitle } from "@/components/hero-title";
+import { CatSummoner } from "@/components/cat-summoner";
 
 const SOCIALS = [
   { label: "Twitter", href: "https://twitter.com/kiranrega" },
@@ -122,70 +110,19 @@ function SocialLink({ href, label }: { href: string; label: string }) {
   );
 }
 
-function CatToggle({ enabled, onToggle }: { enabled: boolean; enabledTitle: string; onToggle: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onToggle}
-      className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg border transition-all duration-200 ${
-        enabled 
-          ? "border-zinc-400 bg-zinc-100 text-zinc-900 dark:border-zinc-600 dark:bg-zinc-800 dark:text-white" 
-          : "border-zinc-200 bg-zinc-50 text-zinc-400 dark:border-zinc-800 dark:bg-zinc-900"
-      } hover:bg-zinc-100 dark:hover:bg-zinc-800`}
-      title={enabled ? "Dismiss cat" : "Summon cat"}
-      aria-label={enabled ? "Dismiss cat" : "Summon cat"}
-    >
-      <MousePointer2 size={16} className={enabled ? "animate-pulse" : ""} />
-    </button>
-  );
-}
-
 export default function Home() {
-  const [titleIdx, setTitleIdx] = useState(0);
-  const [visible, setVisible] = useState(true);
-  const [catEnabled, setCatEnabled] = useState(false);
-
-  useEffect(() => {
-    // Check if user prefers reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    if (prefersReducedMotion) return;
-
-    const t = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => {
-        setTitleIdx((i) => (i + 1) % TITLES.length);
-        setVisible(true);
-      }, 320);
-    }, 2600);
-    return () => clearInterval(t);
-  }, []);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("cat-enabled");
-    setCatEnabled(saved === "true");
-  }, []);
-
-  const toggleCat = () => {
-    const next = !catEnabled;
-    setCatEnabled(next);
-    localStorage.setItem("cat-enabled", String(next));
-  };
-
-  const allSkills = useMemo(() => stackGroups.flatMap((group) => group.items), []);
+  const allSkills = stackGroups.flatMap((group) => group.items);
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-white text-zinc-950 dark:bg-black dark:text-white font-sans selection:bg-zinc-950 selection:text-white dark:selection:bg-white dark:selection:text-black">
-      <GridBackground />
       <RevealOnScroll />
-      {catEnabled && <OnekoCat />}
       
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-4 py-4 sm:px-6">
         <header className="sticky top-0 z-40 -mx-4 border-b border-zinc-200/50 bg-white/80 px-4 py-3 backdrop-blur dark:border-zinc-900/80 dark:bg-black/90 sm:-mx-6 sm:px-6">
           <div className="flex items-center justify-between gap-3">
             <ActiveNav items={navItems} />
             <div className="flex items-center gap-2">
-              <CatToggle enabled={catEnabled} enabledTitle="Summon cat" onToggle={toggleCat} />
+              <CatSummoner />
               <ThemeToggle />
             </div>
           </div>
@@ -195,27 +132,20 @@ export default function Home() {
           {/* ── Hero ── */}
           <section className="flex flex-col items-start justify-start gap-8">
             <div className="flex flex-col sm:flex-row sm:items-center gap-6">
-              <img
-                src="/Profile.webp"
+              <Image
+                src="/assets/Profile (2).webp"
                 alt="Kiran Kumar Rega"
-                width={120}
-                height={120}
-                className="rounded-2xl object-cover border border-zinc-200 dark:border-zinc-800 w-24 h-24 sm:w-28 sm:h-28 grayscale hover:grayscale-0 transition-all duration-500"
+                width={160}
+                height={160}
+                priority
+                className="rounded-full object-cover w-32 h-32 sm:w-40 sm:h-40 grayscale hover:grayscale-0 transition-all duration-500"
               />
 
               <div className="space-y-1">
                 <h1 className="m-0 text-4xl sm:text-5xl font-bold tracking-tighter leading-none text-zinc-900 dark:text-white">
                   Kiran Kumar Rega
                 </h1>
-                <div className="h-[24px] overflow-hidden pt-1">
-                  <span
-                    className={`block text-sm sm:text-base font-medium text-zinc-500 dark:text-zinc-400 tracking-tight transition-all duration-320 ${
-                      visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-[7px]"
-                    }`}
-                  >
-                    {TITLES[titleIdx]}
-                  </span>
-                </div>
+                <HeroTitle />
               </div>
             </div>
 

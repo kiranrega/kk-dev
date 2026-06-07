@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     "Frontend Portfolio",
   ],
   authors: [{ name: "Kiran Kumar Rega" }],
+  icons: {
+    icon: "/assets/logo.png",
+  },
   openGraph: {
     title: "Kiran Kumar Rega | Full-Stack Software Engineer",
     description:
@@ -52,8 +55,6 @@ export const metadata: Metadata = {
     follow: true,
   },
 };
-
-// const themeScript = `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;var r=t==='light'||t==='dark'?t:(d?'dark':'light');document.documentElement.classList.toggle('dark',r==='dark');document.documentElement.style.colorScheme=r;}catch(_){}})();`;
 
 export default function RootLayout({
   children,
