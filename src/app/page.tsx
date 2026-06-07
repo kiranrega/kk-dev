@@ -144,7 +144,7 @@ export default function Home() {
               />
 
               <div className="space-y-1">
-                <h1 className="m-0 text-4xl sm:text-5xl font-bold tracking-tighter leading-none">
+                <h1 className="m-0 text-4xl sm:text-5xl font-bold tracking-tighter leading-none animate-blur-in">
                   Kiran Kumar Rega
                 </h1>
                 <HeroTitle />
@@ -169,13 +169,24 @@ export default function Home() {
               <TechLink href="https://react.dev">React</TechLink>,{" "}
               <TechLink href="https://www.typescriptlang.org">TypeScript</TechLink>,{" "}
               <TechLink href="https://nodejs.org">Node.js</TechLink>, and{" "}
-              <TechLink href="https://nextjs.org">Next.js</TechLink>.{" "}
-              3 years. Zero rollbacks.
+              <TechLink href="https://nextjs.org">Next.js</TechLink> — 3 years, zero rollbacks.
             </p>
 
-            <div className="social-pills-row mt-2">
+            <div className="flex gap-5 flex-wrap mt-2">
               {SOCIALS.map((social) => (
                 <SocialLink key={social.label} {...social} />
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-x-6 gap-y-2 mt-6 pt-4 border-t border-neutral-800">
+              {highlights.map((stat, i) => (
+                <div key={stat.label} className="flex items-center gap-3">
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-sm font-semibold text-foreground">{stat.value}</span>
+                    <span className="text-xs text-neutral-500 uppercase tracking-widest">{stat.label}</span>
+                  </div>
+                  {i < highlights.length - 1 && <div className="h-4 w-[1px] bg-neutral-700" />}
+                </div>
               ))}
             </div>
           </section>
@@ -189,11 +200,6 @@ export default function Home() {
               </div>
             </Card>
           </Section>
-
-          {/* ── Impact stats band ── */}
-          <section id="highlights" className="scroll-mt-24 py-7">
-            <StatsBand stats={highlights} />
-          </section>
 
           <Section id="experience" title="Experience" count={experience.length}>
             <div className="reveal relative border-l border-border ml-3 mt-4">

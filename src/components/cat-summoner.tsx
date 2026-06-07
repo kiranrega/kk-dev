@@ -20,6 +20,10 @@ export function CatSummoner() {
     const next = !catEnabled;
     setCatEnabled(next);
     localStorage.setItem("cat-enabled", String(next));
+    if (!next) {
+      // Robust removal fallback
+      document.getElementById("oneko")?.remove();
+    }
   };
 
   // Only render after hydration to prevent hydration mismatch

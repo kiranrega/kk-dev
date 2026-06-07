@@ -85,6 +85,9 @@
   };
 
   function init() {
+    // Remove existing cat if it exists
+    document.getElementById("oneko")?.remove();
+
     nekoEl.id = "oneko";
     nekoEl.ariaHidden = true;
     nekoEl.style.width = "32px";

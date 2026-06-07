@@ -102,6 +102,16 @@ html {
   50%       { opacity: 0; }
 }
 
+/* Blur-In Animation */
+@keyframes blur-in {
+  0% { opacity: 0; filter: blur(8px); transform: translateY(4px); }
+  100% { opacity: 1; filter: blur(0px); transform: translateY(0); }
+}
+
+.animate-blur-in {
+  animation: blur-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* Scroll reveal refinement */
 .reveal {
   opacity: 0;
@@ -121,10 +131,11 @@ html {
   transition-delay: calc(50ms * var(--reveal-index, 0));
 }
 
-.reveal.revealed .reveal-item {
+.revealed .reveal-item {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 ::selection {
   background: var(--foreground);
