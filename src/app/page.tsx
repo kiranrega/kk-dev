@@ -22,6 +22,7 @@ import { SkillPill } from "@/components/skill-icons";
 import { GridBackground } from "@/components/grid-background";
 import { HeroTitle } from "@/components/hero-title";
 import { CatSummoner } from "@/components/cat-summoner";
+import { StatusBadge } from "@/components/StatusBadge";
 
 const SOCIALS = [
   { label: "Twitter", href: "https://twitter.com/kiranrega" },
@@ -126,6 +127,7 @@ export default function Home() {
             <div className="flex items-center gap-2">
               <CatSummoner />
               <ThemeToggle />
+              <StatusBadge />
             </div>
           </div>
         </header>
