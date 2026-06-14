@@ -3,7 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Light Theme - Warm Minimalism */
+  /* Siddz.com Inspired Color Scheme - Need to inspect actual values */
   --background: #FFFFFF;
   --foreground: #09090B;
   --muted: #71717A;
@@ -11,18 +11,18 @@
   --border: #E4E4E7;
   --card: #F9F9F9;
   --accent: #000000;
-  
-  /* Typography variables */
+
+  /* Typography variables - match siddz.com observations */
   --font-family-sans: var(--font-geist-sans), Inter, system-ui, sans-serif;
   --font-family-display: var(--font-sora), var(--font-geist-sans), sans-serif;
-  
+
   --font-size-hero: clamp(2.25rem, 6vw, 3.5rem);
   --line-height-hero: 1.1;
   --letter-spacing-tight: -0.02em;
 }
 
 .dark {
-  /* Dark Theme - Pure Monochromatic Black */
+  /* Dark mode adapted from siddz.com feel */
   --background: #000000;
   --foreground: #FFFFFF;
   --muted: #7D7D7D;
@@ -40,11 +40,12 @@
   --color-border: var(--border);
   --color-card: var(--card);
   --color-accent: var(--accent);
-  
+
   --font-sans: var(--font-geist-sans);
   --font-display: var(--font-sora);
 }
 
+/* Base styles */
 body {
   background: var(--background);
   color: var(--foreground);
@@ -53,12 +54,14 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Heading styles */
 h1, h2, h3, h4 {
   font-family: var(--font-family-display);
   font-weight: 700;
   letter-spacing: var(--letter-spacing-tight);
 }
 
+/* Section label style (match siddz.com heading style) */
 .section-label {
   display: inline-flex;
   align-items: center;
@@ -70,49 +73,12 @@ h1, h2, h3, h4 {
   color: var(--foreground);
 }
 
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* ── Hero typography ── */
-.hero-name {
-  font-size: var(--font-size-hero);
-  line-height: var(--line-height-hero);
-  color: var(--foreground);
-}
-
-/* Minimalist separator */
-.hero-underline {
-  height: 1px;
-  width: 60px;
-  background: var(--border);
-  margin: 1.5rem 0;
-}
-
-/* Blinking cursor (Monochrome) */
-.hero-cursor::after {
-  content: "|";
-  margin-left: 2px;
-  animation: blink 1s step-end infinite;
-  color: var(--foreground);
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-/* Blur-In Animation */
-@keyframes blur-in {
-  0% { opacity: 0; filter: blur(8px); transform: translateY(4px); }
-  100% { opacity: 1; filter: blur(0px); transform: translateY(0); }
-}
-
-.animate-blur-in {
-  animation: blur-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Scroll reveal refinement */
+/* Reveal animation utilities */
 .reveal {
   opacity: 0;
   transform: translateY(10px);
@@ -136,13 +102,13 @@ html {
   transform: translateY(0);
 }
 
-
+/* Selection colors */
 ::selection {
   background: var(--foreground);
   color: var(--background);
 }
 
-/* Custom Card Depth */
+/* Card glass effect (adjusted for siddz.com feel) */
 .card-glass {
   background: var(--card);
   border: 1px solid var(--border);
@@ -158,7 +124,7 @@ html {
   border-color: var(--muted);
 }
 
-/* ── Social Pills Row ── */
+/* Social pills adjustments */
 .social-pills-row {
   display: flex;
   flex-direction: row;
@@ -197,54 +163,9 @@ html {
   color: inherit;
 }
 
-/* ── Timeline ── */
-.timeline-track::before {
-  content: "";
-  position: absolute;
-  left: 19px;
-  top: 28px;
-  bottom: 28px;
-  width: 1px;
-  background: var(--border);
-}
-.timeline-node {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--foreground);
-  flex-shrink: 0;
-}
-
-.bg-grid-pattern {
-  background:
-    radial-gradient(
-      420px circle at var(--mouse-x, 50%) var(--mouse-y, 18%),
-      var(--accent-10, rgba(120, 120, 120, 0.05)),
-      transparent 40%
-    ),
-    linear-gradient(to right, var(--accent-10, rgba(120, 120, 120, 0.05)) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--accent-10, rgba(120, 120, 120, 0.05)) 1px, transparent 1px);
-  background-size: auto, 40px 40px, 40px 40px;
-  mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
-}
-
-.dark .bg-grid-pattern {
-  --accent-10: rgba(255, 255, 255, 0.03);
-}
-
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
