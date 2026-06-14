@@ -30,7 +30,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
         <div className="flex-1 px-4 sm:px-5 py-4 sm:py-5">
           {/* Title row */}
           <div className="flex justify-between items-start mb-2">
-            <h3 className="text-[15px] sm:text-base font-geist-sans font-medium text-[#f0f0f0] tracking-tight">
+            <h3 className="text-[15px] sm:text-base font-geist-sans font-medium tracking-tight">
               {project.name}
             </h3>
             <div className="flex gap-3">
