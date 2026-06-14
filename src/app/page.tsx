@@ -135,6 +135,8 @@ export default function Home() {
         <div id="overview" className="pt-10 sm:pt-10 pb-4">
           {/* ── Hero ── */}
           <section className="flex flex-col items-start justify-start">
+        {/* Status badge placed above profile image and right‑hand content */}
+        <StatusBadge />
             <div className="flex flex-col sm:flex-row sm:items-center">
               <Image
                 src="/assets/Profile (2).webp"
