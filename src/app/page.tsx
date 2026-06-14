@@ -3,13 +3,14 @@ import {
   Calendar,
   GraduationCap,
   Trophy,
+  Link,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { ActiveNav } from "@/components/active-nav";
 import { StatsBand } from "@/components/stats-band";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { ExperienceItem } from "@/components/experience-item";
 import { ProjectCard } from "@/components/project-card";
+import { useState } from "react";
 import {
   education,
   experience,
@@ -46,8 +47,8 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 py-10 reveal">
-      <div className="mb-6 flex flex-wrap items-center gap-3">
+    <section id={id} className="scroll-mt-16 py-6 reveal">
+      <div className="mb-4 flex flex-wrap items-center gap-2">
         <h2 className="section-label">{title}</h2>
         {typeof count === "number" ? (
           <span className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground">
@@ -64,7 +65,7 @@ function Card({ children, className, style }: { children: React.ReactNode; class
   return (
     <div
       className={[
-        "rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200",
+        "rounded-2xl border border-border bg-card p-4 shadow-sm transition-all duration-200",
         className,
       ]
         .filter(Boolean)
@@ -113,6 +114,7 @@ function SocialLink({ href, label }: { href: string; label: string }) {
 
 export default function Home() {
   const allSkills = stackGroups.flatMap((group) => group.items);
+  const [active, setActive] = useState("");
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
@@ -122,17 +124,44 @@ export default function Home() {
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-4 py-4 sm:px-6">
         <header className="sticky top-0 z-40 -mx-4 border-b border-border bg-background/80 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
           <div className="flex items-center justify-between gap-3">
-            <ActiveNav items={navItems} />
+            <nav className="flex min-w-0 items-center gap-4 overflow-x-auto md:gap-5" aria-label="Primary navigation">
+              {navItems.map((item) => {
+                const id = item.href.replace("#", "");
+                const isActive = active === id;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={[
+                      "relative shrink-0 font-geist-sans text-sm transition-colors",
+                      "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground",
+                      isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+                    ].join(" ")}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
             <div className="flex items-center gap-2">
-              <CatSummoner />
-              <ThemeToggle />
+              <Image
+                src="/assets/Profile (2).webp"
+                alt="Kiran Kumar Rega"
+                width={32}
+                height={32}
+                priority
+                className="rounded-full object-cover"
+              />
+              <h1 className="text-2xl font-bold text-foreground">
+                Kiran Kumar Rega
+              </h1>
             </div>
           </div>
         </header>
 
-        <div id="overview" className="pt-10 sm:pt-10 pb-4">
+        <div id="overview" className="pt-8 sm:pt-8 pb-6">
           {/* ── Hero ── */}
-          <section className="flex flex-col items-start justify-start gap-8">
+          <section className="flex flex-col items-start justify-start gap-6">
             <div className="flex flex-col sm:flex-row sm:items-center gap-6">
               <Image
                 src="/assets/Profile (2).webp"
@@ -151,7 +180,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 w-full">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 w-full">
               {[
                 ["Location", "Hyderabad, India"],
                 ["Email", "kirankumar.rega@gmail.com"],
@@ -164,7 +193,7 @@ export default function Home() {
               ))}
             </div>
 
-            <p className="text-base text-muted-foreground leading-relaxed mt-2 max-w-[600px] font-normal">
+            <p className="text-base text-muted-foreground leading-relaxed mt-4 max-w-[600px] font-normal">
               I build full-stack web products end-to-end, obsessing over small details that make software feel right to use. Currently working with{" "}
               <TechLink href="https://react.dev">React</TechLink>,{" "}
               <TechLink href="https://www.typescriptlang.org">TypeScript</TechLink>,{" "}
@@ -172,20 +201,20 @@ export default function Home() {
               <TechLink href="https://nextjs.org">Next.js</TechLink> — 3 years, zero rollbacks.
             </p>
 
-            <div className="flex gap-5 flex-wrap mt-2">
+            <div className="flex gap-6 flex-wrap mt-4">
               {SOCIALS.map((social) => (
                 <SocialLink key={social.label} {...social} />
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-x-6 gap-y-2 mt-6 pt-4 border-t border-neutral-800">
+            <div className="flex flex-wrap gap-x-5 gap-y-2 mt-6 pt-4 border-t border-neutral-800">
               {highlights.map((stat, i) => (
-                <div key={stat.label} className="flex items-center gap-3">
-                  <div className="flex items-baseline gap-1.5">
+                <div key={stat.label} className="flex items-center gap-2">
+                  <div className="flex items-baseline gap-1">
                     <span className="text-sm font-semibold text-foreground">{stat.value}</span>
                     <span className="text-xs text-neutral-500 uppercase tracking-widest">{stat.label}</span>
                   </div>
-                  {i < highlights.length - 1 && <div className="h-4 w-[1px] bg-neutral-700" />}
+                  {i < highlights.length - 1 && <div className="h-3 w-[0.5px] bg-neutral-700" />}
                 </div>
               ))}
             </div>
@@ -193,7 +222,7 @@ export default function Home() {
 
           <Section id="stack" title="TECH STACK" count={allSkills.length}>
             <Card className="reveal-item" style={{ "--reveal-index": 0 } as React.CSSProperties}>
-              <div className="flex flex-wrap gap-2.5 sm:gap-3">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {allSkills.map((item) => (
                   <SkillPill key={`stack-flat-${item}`} name={item} />
                 ))}
@@ -202,8 +231,8 @@ export default function Home() {
           </Section>
 
           <Section id="experience" title="Experience" count={experience.length}>
-            <div className="reveal relative border-l border-border ml-3 mt-4">
-              <div className="flex flex-col gap-12">
+            <div className="reveal relative border-l border-border ml-2 mt-3">
+              <div className="flex flex-col gap-8">
                 {experience.map((job, index) => (
                   <ExperienceItem key={job.company} job={job} index={index} />
                 ))}
@@ -212,8 +241,8 @@ export default function Home() {
           </Section>
 
           <Section id="projects" title="Projects" count={projects.length}>
-            <div className="mb-10 border-t border-b border-border py-5 reveal">
-              <div className="flex justify-center gap-8 sm:gap-12">
+            <div className="mb-4 border-t border-b border-border py-2 reveal">
+              <div className="flex justify-center gap-4 sm:gap-6">
                 <div className="text-center">
                   <div className="text-2xl font-bold">5</div>
                   <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-muted-foreground">Projects Shipped</div>
@@ -229,7 +258,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid gap-4 reveal">
+            <div className="grid gap-3 reveal">
               {projects.map((project, index) => (
                 <ProjectCard key={project.name} project={project} index={index} />
               ))}
@@ -238,7 +267,7 @@ export default function Home() {
 
           <Section id="recognition" title="Recognition">
             <Card>
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-border bg-card text-muted">
                   <Trophy size={18} aria-hidden="true" />
                 </div>
@@ -262,7 +291,7 @@ export default function Home() {
                   className="reveal-item"
                   style={{ "--reveal-index": index } as React.CSSProperties}
                 >
-                  <div className="flex gap-4">
+                  <div className="flex gap-3">
                     <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-border bg-card text-muted">
                       <GraduationCap size={18} aria-hidden="true" />
                     </div>
