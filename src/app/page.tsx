@@ -119,7 +119,7 @@ export default function Home() {
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
       <GridBackground />
       <RevealOnScroll />
-      
+
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-4 py-4 sm:px-6">
         <header className="sticky top-0 z-40 -mx-4 border-b border-border bg-background/80 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
           <div className="flex items-center justify-between gap-3">
@@ -127,7 +127,7 @@ export default function Home() {
             <div className="flex items-center gap-2">
               <CatSummoner />
               <ThemeToggle />
-              <StatusBadge />
+              {/* <StatusBadge /> */}
             </div>
           </div>
         </header>
@@ -135,8 +135,8 @@ export default function Home() {
         <div id="overview" className="pt-10 sm:pt-10 pb-4">
           {/* ── Hero ── */}
           <section className="flex flex-col items-start justify-start">
-        {/* Status badge placed above profile image and right‑hand content */}
-        <StatusBadge />
+            {/* Status badge placed above profile image and right‑hand content */}
+            <StatusBadge />
             <div className="flex flex-col sm:flex-row sm:items-center">
               <Image
                 src="/assets/Profile (2).webp"
@@ -240,7 +240,7 @@ export default function Home() {
             </div>
           </Section>
 
-          <Section id="recognition" title="Recognition">
+          {/* <Section id="recognition" title="Recognition">
             <Card>
               <div className="flex gap-4">
                 <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-border bg-card text-muted">
@@ -286,7 +286,7 @@ export default function Home() {
                 </Card>
               ))}
             </div>
-          </Section>
+          </Section> */}
         </div>
       </div>
     </main>
