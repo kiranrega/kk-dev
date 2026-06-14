@@ -289,6 +289,42 @@ export default function Home() {
           </Section> */}
         </div>
       </div>
-    </main>
+    <section id="no-as-a-service" className="pt-10 pb-4">
+  <div className="mx-auto max-w-3xl">
+    <h2 className="text-2xl font-bold mb-4">❌ No-as-a-Service</h2>
+    <p className="mb-4"><img src="https://raw.githubusercontent.com/hotheadhacker/no-as-a-service/main/assets/imgs/naas-with-no-logo-bunny.png" alt="No-as-a-Service Banner" className="w-full max-w-2xl mx-auto" /></p>
+    <p className="mb-2">Ever needed a graceful way to say “no”? This tiny API returns random, generic, creative, and sometimes hilarious rejection reasons — perfectly suited for any scenario: personal, professional, student life, dev life, or just because.</p>
+    <p className="mb-2">Built for humans, excuses, and humor.</p>
+    <p className="mb-2 text-center"><a href="https://docs.gitads.dev/" target="_blank" rel="noopener noreferrer"><img src="https://gitads.dev/assets/images/sponsor/camos/camo-3.png" alt="Sponsored by GitAds" className="inline-block" /></a></p>
+    <p className="mb-2 text-center">This project is <strong>sponsored by <a href="https://docs.gitads.dev/docs/getting-started/publishers" target="_blank" rel="noopener noreferrer">GitAds</a></strong>.<br/>You can get your GitHub repository sponsored too — <a href="https://docs.gitads.dev/docs/getting-started/publishers" target="_blank" rel="noopener noreferrer">create your account now</a>.</p>
+    <h3 className="text-xl font-semibold mt-4 mb-2">🚀 API Usage</h3>
+    <p><strong>Base URL</strong><br/><code className="bg-gray-100 rounded px-1">https://naas.isalman.dev/no</code></p>
+    <p><strong>Method:</strong> GET<br/><strong>Rate Limit:</strong> 120 requests per minute per IP</p>
+    <h4 className="font-medium mt-2">🔄 Example Request</h4>
+    <pre className="bg-gray-100 p-2 rounded"><code>GET /no</code></pre>
+    <h4 className="font-medium mt-2">✅ Example Response</h4>
+    <pre className="bg-gray-100 p-2 rounded"><code>{"reason": "This feels like something Future Me would yell at Present Me for agreeing to."}</code></pre>
+    <p>Use it in apps, bots, landing pages, Slack integrations, rejection letters, or wherever you need a polite (or witty) no.</p>
+    <h3 className="text-xl font-semibold mt-4 mb-2">🛠️ Self‑Hosting</h3>
+    <p><strong>1. Clone this repository</strong><br/><pre className="bg-gray-100 p-2 rounded"><code>git clone https://github.com/hotheadhacker/no-as-a-service.git
+cd no-as-a-service</code></pre></p>
+    <p><strong>2. Install dependencies</strong><br/><pre className="bg-gray-100 p-2 rounded"><code>npm install</code></pre></p>
+    <p><strong>3. Start the server</strong><br/><pre className="bg-gray-100 p-2 rounded"><code>npm start</code></pre></p>
+    <p>The API will be live at:<br/><code className="bg-gray-100 rounded px-1">http://localhost:3000/no</code></p>
+    <p>You can also change the port using an environment variable:<br/><pre className="bg-gray-100 p-2 rounded"><code>PORT=5000 npm start</code></pre></p>
+    <h3 className="text-xl font-semibold mt-4 mb-2">📁 Project Structure</h3>
+    <pre className="bg-gray-100 p-2 rounded"><code>no-as-service/
+├── index.js            # Express API
+├── reasons.json        # 1000+ universal rejection reasons
+├── package.json
+├── .devcontainer.json  # VS Code / Github devcontainer setup
+└── README.md</code></pre>
+    <h3 className="text-xl font-semibold mt-4 mb-2">📦 package.json</h3>
+    <pre className="bg-gray-100 p-2 rounded"><code>{"name": "no-as-service","version": "1.0.0","description": "A lightweight API that returns random rejection or no reasons.","main": "index.js","scripts": {"start": "node index.js"},"author": "hotheadhacker","license": "MIT","dependencies": {"express": "^4.18.2","express-rate-limit": "^7.0.0"}}</code></pre>
+    <h3 className="text-xl font-semibold mt-4 mb-2">⚓ Devcontainer</h3>
+    <p>If you open this repo in Github Codespaces or VSCode, it will automatically use <code>.devcontainer.json</code> to set up the environment.</p>
+  </div>
+</section>
+</main>
   );
 }
