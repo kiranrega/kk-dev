@@ -34,10 +34,21 @@ export function ThemeToggle() {
   }, []);
 
   function toggleTheme() {
-    const nextTheme = theme === "dark" ? "light" : "dark";
-    setTheme(nextTheme);
-    window.localStorage.setItem("theme", nextTheme);
-    applyTheme(nextTheme);
+    const next = theme === "dark" ? "light" : "dark";
+    const apply = () => {
+      setTheme(next);
+      window.localStorage.setItem("theme", next);
+      applyTheme(next);
+      // Play sound effect (add the file at public/sound/theme-toggle.mp3)
+      const audio = new Audio('/sound/click-003.mp3');
+      // fire‑and‑forget; ignore errors if user blocks autoplay
+      void audio.play().catch(() => {});
+    };
+    if (!document.startViewTransition) {
+      apply();
+      return;
+    }
+    document.startViewTransition(apply);
   }
 
   const isDark = theme === "dark";

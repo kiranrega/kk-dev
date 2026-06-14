@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./theme-transitions.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 

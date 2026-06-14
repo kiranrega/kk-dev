@@ -682,7 +682,7 @@ export function TechChip({ name }: { name: string }) {
 
   if (!entry) {
     return (
-      <span className="inline-flex items-center rounded-md border border-border bg-card px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+      <span className="inline-flex items-center rounded-md border border-border bg-card px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground flex-shrink-0">
         {name}
       </span>
     );
@@ -691,11 +691,11 @@ export function TechChip({ name }: { name: string }) {
   const IconComponent = entry.component;
 
   return (
-    <div className="group inline-flex items-center gap-0 rounded-md border border-border bg-card px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground shadow-sm transition-all duration-300 ease-out hover:border-muted hover:text-foreground [&_svg]:size-3">
+    <div className="group inline-flex items-center gap-0 flex-shrink-0 rounded-md border border-border bg-card px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground shadow-sm transition-all duration-300 ease-out hover:border-muted hover:text-foreground [&_svg]:size-3">
       <span className="size-3 shrink-0 grayscale group-hover:grayscale-0 transition-all duration-300">
         <IconComponent />
       </span>
-      <span className="max-w-0 overflow-hidden opacity-0 whitespace-nowrap transition-all duration-500 ease-out group-hover:max-w-28 group-hover:opacity-100 group-hover:ml-1.5">
+      <span className="max-w-0 overflow-hidden opacity-0 whitespace-nowrap transition-all duration-500 ease-out group-hover:max-w-28 group-hover:opacity-100 group-hover:ml-1.5 flex-shrink-0">
         {name}
       </span>
     </div>
