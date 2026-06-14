@@ -19,7 +19,7 @@ import {
   stackGroups,
 } from "@/data/portfolio";
 import { SkillPill } from "@/components/skill-icons";
-import { GridBackground } from "@/components/grid-background";
+// import { GridBackground } from "@/components/grid-background";
 import { HeroTitle } from "@/components/hero-title";
 import { CatSummoner } from "@/components/cat-summoner";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -117,7 +117,7 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
-      <GridBackground />
+      {/* <GridBackground /> */}
       <RevealOnScroll />
 
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-4 py-4 sm:px-6">
@@ -176,7 +176,7 @@ export default function Home() {
               <TechLink href="https://nextjs.org">Next.js</TechLink> — 3 years, zero rollbacks.
             </p>
 
-            <div className="flex gap-5 flex-wrap mt-2">
+            <div className="flex gap-5 flex-wrap mt-6">
               {SOCIALS.map((social) => (
                 <SocialLink key={social.label} {...social} />
               ))}

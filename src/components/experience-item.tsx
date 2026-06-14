@@ -14,7 +14,7 @@ export function ExperienceItem({ job, index }: { job: Experience; index: number 
       <div
         className={`absolute -left-[4.5px] top-1.5 h-2.5 w-2.5 rounded-full border-[2px] border-background z-10 transition-colors duration-300 ${
           isCurrent
-            ? 'bg-foreground ring-3 ring-foreground/10'
+            ? 'bg-green-500 ring-4 ring-foreground/10 '
             : 'bg-muted'
         }`}
       />
