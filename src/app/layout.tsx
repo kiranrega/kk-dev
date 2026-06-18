@@ -34,7 +34,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Kiran Kumar Rega" }],
   icons: {
-    icon: "/assets/logo.png",
+    icon: [
+      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/assets/logo.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: "/assets/logo.png",
   },
   openGraph: {
     title: "Kiran Kumar Rega | Full-Stack Software Engineer",

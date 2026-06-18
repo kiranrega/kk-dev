@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Globe, GitPullRequest } from "lucide-react";
+import Image from "next/image";
 import { TechChip } from "@/components/skill-icons";
 import type { Project } from "@/types/index";
 
@@ -12,19 +12,13 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
       <div className="flex flex-col sm:flex-row overflow-hidden">
         {/* Image */}
         <div className="relative w-full aspect-video sm:w-[200px] overflow-hidden rounded-t-xl sm:rounded-l-xl border-b sm:border-b-0 sm:border-r border-border">
-          {project.liveUrl ? (
-            <Link href={project.liveUrl} target="_blank" rel="noreferrer">
-              <img
-                src={`/project/${project.name.toLowerCase().replace(/\s+/g, "-")}.png`}
-                alt={`${project.name} preview`}
-                className="w-full h-full object-cover"
-              />
-            </Link>
-          ) : (
-            <div className="w-full h-full bg-muted/20 flex items-center justify-center">
-              <span className="text-muted-foreground">No Image</span>
-            </div>
-          )}
+          <Image
+            src={`/project/${project.name.toLowerCase().replace(/\s+/g, "-")}.png`}
+            alt={`${project.name} preview`}
+            fill
+            sizes="(max-width: 640px) 100vw, 200px"
+            className="object-cover"
+          />
         </div>
         {/* Content */}
         <div className="flex-1 px-4 sm:px-5 py-4 sm:py-5">
