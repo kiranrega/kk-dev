@@ -6,12 +6,12 @@ import type { Project } from "@/types/index";
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <article
-      className="group font-geist-sans rounded-xl border bg-[rgba(0,0,0,0.005)] border-[rgba(0,0,0,0.05)] dark:bg-[rgba(255,255,255,0.02)] dark:border-[rgba(255,255,255,0.06)] transition-all duration-200 ease-out"
+      className="group font-geist-sans rounded-xl border border-border bg-card transition-all duration-200 ease-out hover:border-muted"
       style={{ "--reveal-index": index } as React.CSSProperties}
     >
       <div className="flex flex-col sm:flex-row overflow-hidden">
         {/* Image */}
-        <div className="relative w-full aspect-video sm:w-[200px] overflow-hidden rounded-t-xl sm:rounded-l-xl border-b-0 sm:border-b sm:border-b-0 sm:border-r border-zinc-800/40">
+        <div className="relative w-full aspect-video sm:w-[200px] overflow-hidden rounded-t-xl sm:rounded-l-xl border-b sm:border-b-0 sm:border-r border-border">
           {project.liveUrl ? (
             <Link href={project.liveUrl} target="_blank" rel="noreferrer">
               <img

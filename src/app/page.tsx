@@ -23,17 +23,10 @@ import { SkillPill } from "@/components/skill-icons";
 import { HeroTitle } from "@/components/hero-title";
 import { CatSummoner } from "@/components/cat-summoner";
 import { StatusBadge } from "@/components/StatusBadge";
-
-const SOCIALS = [
-  { label: "Twitter", href: "https://twitter.com/kiranrega" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/kiranrega" },
-  { label: "GitHub", href: "https://github.com/kiranrega" },
-  { label: "Email", href: "mailto:kirankumar.rega@gmail.com" },
-  {
-    label: "Resume",
-    href: "https://drive.google.com/uc?export=download&id=1VEj5j4SiNtpHRgQyJi5TsgLyBczkfX45",
-  },
-];
+import FloatingTOC from "@/components/floating-toc";
+import { AnimatedSocials } from "@/components/animated-socials";
+import { RandomQuote } from "@/components/random-quote";
+import { VisitorCounter } from "@/components/visitor-counter";
 
 function Section({
   id,
@@ -47,7 +40,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 py-10 reveal">
+    <section id={id} className="scroll-mt-24 py-10 border-t border-border reveal">
       <div className="mb-6 flex flex-wrap items-center gap-3">
         <h2 className="section-label">{title}</h2>
         {typeof count === "number" ? (
@@ -65,7 +58,7 @@ function Card({ children, className, style }: { children: React.ReactNode; class
   return (
     <div
       className={[
-        "rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200",
+        "rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:border-muted",
         className,
       ]
         .filter(Boolean)
@@ -90,28 +83,6 @@ function TechLink({ href, children }: { href: string; children: React.ReactNode 
   );
 }
 
-function SocialLink({ href, label }: { href: string; label: string }) {
-  return (
-    <a
-      href={href}
-      target={href.startsWith("mailto") ? "_self" : "_blank"}
-      rel="noopener noreferrer"
-      className="flex items-center gap-1.5 text-[0.82rem] text-muted-foreground hover:text-foreground transition-colors"
-    >
-      {label}
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-        <path
-          d="M1 9L9 1M9 1H3M9 1V7"
-          stroke="currentColor"
-          strokeWidth="1.3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </a>
-  );
-}
-
 export default function Home() {
   const allSkills = stackGroups.flatMap((group) => group.items);
 
@@ -119,6 +90,7 @@ export default function Home() {
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
       {/* <GridBackground /> */}
       <RevealOnScroll />
+      <FloatingTOC />
 
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-4 py-4 sm:px-6">
         <header className="sticky top-0 z-40 -mx-4 border-b border-border bg-background/80 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
@@ -127,16 +99,13 @@ export default function Home() {
             <div className="flex items-center gap-2">
               <CatSummoner />
               <ThemeToggle />
-              {/* <StatusBadge /> */}
             </div>
           </div>
         </header>
 
-        <div id="overview" className="pt-10 sm:pt-10 pb-4">
+        <div className="pt-10 sm:pt-10 pb-4">
           {/* ── Hero ── */}
-          <section className="flex flex-col items-start justify-start">
-            {/* Status badge placed above profile image and right‑hand content */}
-            <StatusBadge />
+          <section id="overview" className="flex flex-col items-start justify-start scroll-mt-24">
             <div className="flex flex-col sm:flex-row sm:items-center">
               <Image
                 src="/assets/Profile (2).webp"
@@ -152,6 +121,9 @@ export default function Home() {
                   Kiran Kumar Rega
                 </h1>
                 <HeroTitle />
+                <div className="pt-2">
+                  <StatusBadge />
+                </div>
               </div>
             </div>
 
@@ -177,9 +149,7 @@ export default function Home() {
             </p>
 
             <div className="flex gap-5 flex-wrap mt-6">
-              {SOCIALS.map((social) => (
-                <SocialLink key={social.label} {...social} />
-              ))}
+              <AnimatedSocials />
             </div>
 
             <div className="flex flex-wrap gap-x-6 gap-y-2 mt-6 pt-4 border-t border-neutral-800">
@@ -216,23 +186,6 @@ export default function Home() {
           </Section>
 
           <Section id="projects" title="Projects" count={projects.length}>
-            <div className="mb-10 border-t border-b border-border py-5 reveal">
-              <div className="flex justify-center gap-8 sm:gap-12">
-                <div className="text-center">
-                  <div className="text-2xl font-bold">5</div>
-                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-muted-foreground">Projects Shipped</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold">2</div>
-                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-muted-foreground">In Production</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold">0</div>
-                  <div className="mt-1 text-xs font-semibold uppercase letter-spacing text-muted-foreground">Rollbacks</div>
-                </div>
-              </div>
-            </div>
-
             <div className="grid gap-4 reveal">
               {projects.map((project, index) => (
                 <ProjectCard key={project.name} project={project} index={index} />
@@ -288,7 +241,25 @@ export default function Home() {
             </div>
           </Section> */}
         </div>
+
+        <RandomQuote />
+
+        <footer className="mt-8 mb-8 py-8 border-t border-border">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+            <div>
+              <span>Designed & Developed by </span>
+              <span className="font-semibold text-foreground">Kiran Kumar Rega</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <VisitorCounter username="kiranrega" token="Ye6b8f28-0574-49c0-bfa6-2067d7fc117d" />
+              <span>&copy; {new Date().getFullYear()} All rights reserved.</span>
+            </div>
+          </div>
+          <div className="mt-3 text-xs text-muted text-center sm:text-left">
+            Hyderabad, India
+          </div>
+        </footer>
       </div>
-</main>
+    </main>
   );
 }

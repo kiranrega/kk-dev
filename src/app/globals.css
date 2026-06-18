@@ -28,8 +28,8 @@
   --foreground: #FFFFFF;
   --muted: #7D7D7D;
   --muted-foreground: #B0B0B0;
-  --border: #3D3D3D;
-  --card: #1C1C1C;
+  --border: #262626;
+  --card: #0A0A0A;
   --accent: #FFFFFF;
 }
 
@@ -265,4 +265,10 @@ html {
     50% { transform: translateY(-3px); }
   }
   .animate-bounceIdle { animation: bounceIdle 2s ease-in-out infinite; }
+
+  @keyframes bounceOnce {
+    0%, 100% { transform: translateY(0) scale(1.1); }
+    50% { transform: translateY(-4px) scale(1.15); }
+  }
+  .animate-bounce-once { animation: bounceOnce 0.4s ease-in-out; }
 }

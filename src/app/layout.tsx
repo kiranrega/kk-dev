@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Sora } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -68,8 +69,16 @@ export default function RootLayout({
       className={`${geistSans.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <Script
+          src="https://cdn.counter.dev/script.js"
+          data-id="Ye6b8f28-0574-49c0-bfa6-2067d7fc117d"
+          data-user="kiranrega"
+          strategy="afterInteractive"
+        />
         {children}
       </body>
     </html>
   );
 }
+
+{/* <script src="https://cdn.counter.dev/script.js" data-id="Ye6b8f28-0574-49c0-bfa6-2067d7fc117d" data-user="kiranrega"></script> */}
