@@ -99,7 +99,7 @@ export default function FloatingTOC() {
 
   return (
     <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block">
-      <div className="flex items-center gap-1 h-11 pl-2.5 pr-2.5 rounded-2xl bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-neutral-200 dark:border-neutral-800 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+      <div className="flex items-center gap-1 h-11 pl-2 pr-1 rounded-2xl bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-neutral-200 dark:border-neutral-800 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
         <ScrollProgress />
         <div className="w-[1px] h-5 bg-neutral-200 dark:bg-neutral-800 mx-1" />
         {sections.map((section) => {

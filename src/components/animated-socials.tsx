@@ -90,7 +90,19 @@ export function AnimatedSocials() {
           <span className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
             {social.icon}
           </span>
-          {/* <span className="text-sm font-medium hidden sm:inline">{social.label}</span> */}
+
+          {/* Tooltip */}
+          <span className={`
+            absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg
+            text-xs font-medium whitespace-nowrap
+            bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900
+            shadow-lg pointer-events-none
+            transition-all duration-200 ease-out
+            ${hoveredIndex === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'}
+          `}>
+            {social.label}
+            <span className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 rotate-45 bg-neutral-900 dark:bg-neutral-100" />
+          </span>
         </a>
       ))}
     </div>

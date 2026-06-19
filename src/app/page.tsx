@@ -27,6 +27,7 @@ import FloatingTOC from "@/components/floating-toc";
 import { AnimatedSocials } from "@/components/animated-socials";
 import { RandomQuote } from "@/components/random-quote";
 import { VisitorCounter } from "@/components/visitor-counter";
+import { CopyButton } from "@/components/copy-button";
 
 function Section({
   id,
@@ -128,16 +129,21 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 w-full">
-              {[
-                ["Location", "Hyderabad, India"],
-                ["Email", "kirankumar.rega@gmail.com"],
-                ["Pronouns", "he/him"],
-              ].map(([label, value]) => (
-                <div key={label} className="flex flex-col items-start gap-1.5">
-                  <span className="text-[11px] tracking-widest uppercase font-bold text-muted">{label}</span>
-                  <span className="text-sm font-semibold">{value}</span>
+              <div className="flex flex-col items-start gap-1.5">
+                <span className="text-[11px] tracking-widest uppercase font-bold text-muted">Location</span>
+                <span className="text-sm font-semibold">Hyderabad, India</span>
+              </div>
+              <div className="flex flex-col items-start gap-1.5">
+                <span className="text-[11px] tracking-widest uppercase font-bold text-muted">Email</span>
+                <div className="flex items-center gap-1">
+                  <span className="text-sm font-semibold">kirankumar.rega@gmail.com</span>
+                  <CopyButton text="kirankumar.rega@gmail.com" />
                 </div>
-              ))}
+              </div>
+              <div className="flex flex-col items-start gap-1.5">
+                <span className="text-[11px] tracking-widest uppercase font-bold text-muted">Pronouns</span>
+                <span className="text-sm font-semibold">he/him</span>
+              </div>
             </div>
 
             <p className="text-base text-muted-foreground leading-relaxed mt-2 max-w-[600px] font-normal">
@@ -251,7 +257,7 @@ export default function Home() {
               <span className="font-semibold text-foreground">Kiran Kumar Rega</span>
             </div>
             <div className="flex items-center gap-4">
-              <VisitorCounter username="kiranrega" token="Ye6b8f28-0574-49c0-bfa6-2067d7fc117d" />
+              <VisitorCounter repo="kiranrega/kiranrega" />
               <span>&copy; {new Date().getFullYear()} All rights reserved.</span>
             </div>
           </div>

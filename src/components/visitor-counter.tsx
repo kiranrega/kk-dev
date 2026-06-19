@@ -1,33 +1,28 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-
 interface VisitorCounterProps {
-  username: string;
-  token: string;
+  repo: string;
 }
 
-export function VisitorCounter({ username, token }: VisitorCounterProps) {
-  const [count, setCount] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (username === 'YOUR_USERNAME') return;
-
-    fetch(`https://counter.dev/get?token=${token}&user=${username}&period=all`)
-      .then((res) => res.json())
-      .then((data) => {
-        const visitors = data.visitors ?? data.visits ?? data.count ?? 0;
-        setCount(visitors);
-      })
-      .catch(() => setCount(0));
-  }, [username, token]);
+export function VisitorCounter({ repo }: VisitorCounterProps) {
+  const trackUrl = `https://hits.sh/github.com/${repo}`;
+  const badgeUrl = `https://hits.sh/github.com/${repo}.svg?style=flat-square&label=&color=555`;
 
   return (
-    <span className="text-muted-foreground">
-      Visitors{' '}
-      <span className="font-semibold text-foreground">
-        #{count !== null ? count.toLocaleString() : '---'}
+    <a
+      href={trackUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-1.5 group"
+    >
+      <span className="relative flex h-1.5 w-1.5">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
       </span>
-    </span>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={badgeUrl}
+        alt="Visitor count"
+        className="h-4 opacity-70 group-hover:opacity-100 transition-opacity"
+      />
+    </a>
   );
 }
