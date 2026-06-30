@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+  
+  <!-- Sidebar -->
+  <rect x="0" y="0" width="200" height="450" fill="#0f0f23"/>
+  <rect x="20" y="24" width="120" height="24" rx="4" fill="url(#accent)"/>
+  <text x="30" y="41" font-family="system-ui" font-size="12" font-weight="600" fill="white">Lancerscape</text>
+  
+  <!-- Nav items -->
+  <rect x="20" y="80" width="160" height="36" rx="6" fill="#1a1a2e"/>
+  <rect x="32" y="92" width="100" height="8" rx="2" fill="#4b5563"/>
+  <rect x="20" y="128" width="160" height="36" rx="6" fill="transparent"/>
+  <rect x="32" y="140" width="80" height="8" rx="2" fill="#6b7280"/>
+  <rect x="20" y="176" width="160" height="36" rx="6" fill="transparent"/>
+  <rect x="32" y="188" width="90" height="8" rx="2" fill="#6b7280"/>
+  
+  <!-- Main content -->
+  <rect x="232" y="24" width="544" height="60" rx="8" fill="#1a1a2e"/>
+  <text x="252" y="52" font-family="system-ui" font-size="18" font-weight="600" fill="white">Sponsor Dashboard</text>
+  <rect x="656" y="36" width="100" height="32" rx="6" fill="url(#accent)"/>
+  <text x="672" y="56" font-family="system-ui" font-size="11" fill="white">+ Add Sponsor</text>
+  
+  <!-- Stats cards -->
+  <rect x="232" y="100" width="168" height="80" rx="8" fill="#1a1a2e"/>
+  <rect x="248" y="116" width="80" height="8" rx="2" fill="#6b7280"/>
+  <rect x="248" y="136" width="60" height="20" rx="4" fill="#22c55e"/>
+  <text x="256" y="152" font-family="system-ui" font-size="14" font-weight="700" fill="white">248</text>
+  <rect x="248" y="164" width="100" height="6" rx="2" fill="#4b5563"/>
+  
+  <rect x="416" y="100" width="168" height="80" rx="8" fill="#1a1a2e"/>
+  <rect x="432" y="116" width="80" height="8" rx="2" fill="#6b7280"/>
+  <rect x="432" y="136" width="60" height="20" rx="4" fill="#6366f1"/>
+  <text x="440" y="152" font-family="system-ui" font-size="14" font-weight="700" fill="white">$42.5K</text>
+  <rect x="432" y="164" width="100" height="6" rx="2" fill="#4b5563"/>
+  
+  <rect x="600" y="100" width="176" height="80" rx="8" fill="#1a1a2e"/>
+  <rect x="616" y="116" width="80" height="8" rx="2" fill="#6b7280"/>
+  <rect x="616" y="136" width="60" height="20" rx="4" fill="#f59e0b"/>
+  <text x="624" y="152" font-family="system-ui" font-size="14" font-weight="700" fill="white">94%</text>
+  <rect x="616" y="164" width="100" height="6" rx="2" fill="#4b5563"/>
+  
+  <!-- Table -->
+  <rect x="232" y="200" width="544" height="230" rx="8" fill="#1a1a2e"/>
+  <rect x="248" y="216" width="120" height="8" rx="2" fill="#6b7280"/>
+  
+  <!-- Table header -->
+  <rect x="248" y="240" width="512" height="32" rx="4" fill="#0f0f23"/>
+  <rect x="264" y="250" width="80" height="8" rx="2" fill="#4b5563"/>
+  <rect x="360" y="250" width="60" height="8" rx="2" fill="#4b5563"/>
+  <rect x="460" y="250" width="70" height="8" rx="2" fill="#4b5563"/>
+  <rect x="580" y="250" width="50" height="8" rx="2" fill="#4b5563"/>
+  <rect x="680" y="250" width="60" height="8" rx="2" fill="#4b5563"/>
+  
+  <!-- Table rows -->
+  <rect x="248" y="284" width="512" height="28" rx="0" fill="#16213e"/>
+  <rect x="264" y="292" width="100" height="8" rx="2" fill="#e5e7eb"/>
+  <rect x="376" y="292" width="50" height="8" rx="2" fill="#22c55e"/>
+  <rect x="468" y="292" width="60" height="8" rx="2" fill="#9ca3af"/>
+  <rect x="576" y="292" width="40" height="8" rx="2" fill="#9ca3af"/>
+  <rect x="672" y="292" width="80" height="20" rx="4" fill="url(#accent)"/>
+  
+  <rect x="248" y="316" width="512" height="28" rx="0" fill="#1a1a2e"/>
+  <rect x="264" y="324" width="90" height="8" rx="2" fill="#e5e7eb"/>
+  <rect x="376" y="324" width="50" height="8" rx="2" fill="#22c55e"/>
+  <rect x="468" y="324" width="60" height="8" rx="2" fill="#9ca3af"/>
+  <rect x="576" y="324" width="40" height="8" rx="2" fill="#9ca3af"/>
+  <rect x="672" y="324" width="80" height="20" rx="4" fill="url(#accent)"/>
+  
+  <rect x="248" y="348" width="512" height="28" rx="0" fill="#16213e"/>
+  <rect x="264" y="356" width="110" height="8" rx="2" fill="#e5e7eb"/>
+  <rect x="376" y="356" width="50" height="8" rx="2" fill="#f59e0b"/>
+  <rect x="468" y="356" width="60" height="8" rx="2" fill="#9ca3af"/>
+  <rect x="576" y="356" width="40" height="8" rx="2" fill="#9ca3af"/>
+  <rect x="672" y="356" width="80" height="20" rx="4" fill="url(#accent)"/>
+  
+  <rect x="248" y="380" width="512" height="28" rx="0" fill="#1a1a2e"/>
+  <rect x="264" y="388" width="85" height="8" rx="2" fill="#e5e7eb"/>
+  <rect x="376" y="388" width="50" height="8" rx="2" fill="#22c55e"/>
+  <rect x="468" y="388" width="60" height="8" rx="2" fill="#9ca3af"/>
+  <rect x="576" y="388" width="40" height="8" rx="2" fill="#9ca3af"/>
+  <rect x="672" y="388" width="80" height="20" rx="4" fill="url(#accent)"/>
+</svg>

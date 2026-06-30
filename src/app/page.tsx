@@ -106,7 +106,7 @@ export default function Home() {
 
         <div className="pt-10 sm:pt-10 pb-4">
           {/* ── Hero ── */}
-          <section id="overview" className="flex flex-col items-start justify-start scroll-mt-24">
+          <section id="overview" className="flex flex-col items-start justify-start scroll-mt-24 w-full">
             <div className="flex flex-col sm:flex-row sm:items-center">
               <Image
                 src="/assets/Profile (2).webp"
@@ -158,6 +158,7 @@ export default function Home() {
               <AnimatedSocials />
             </div>
 
+           {/* for metrics and stats, can be uncommented if needed 
             <div className="flex flex-wrap gap-x-6 gap-y-2 mt-6 pt-4 border-t border-neutral-800">
               {highlights.map((stat, i) => (
                 <div key={stat.label} className="flex items-center gap-3">
@@ -168,7 +169,7 @@ export default function Home() {
                   {i < highlights.length - 1 && <div className="h-4 w-[1px] bg-neutral-700" />}
                 </div>
               ))}
-            </div>
+            </div> */}
           </section>
 
           <Section id="stack" title="TECH STACK" count={allSkills.length}>
