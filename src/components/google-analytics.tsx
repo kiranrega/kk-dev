@@ -24,7 +24,7 @@ function GoogleAnalyticsTracker({ measurementId }: { measurementId?: string }) {
 export function GoogleAnalytics() {
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
   const isValidMeasurementId = /^G-[A-Z0-9]+$/i.test(measurementId ?? "");
-  
+  console.log("Google Analytics Measurement ID:", measurementId);
   if (!measurementId || !isValidMeasurementId) {
     if (process.env.NODE_ENV !== "production") {
       console.warn("Google Analytics is disabled because the measurement ID is missing or invalid.");
