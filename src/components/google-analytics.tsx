@@ -4,6 +4,8 @@ import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 
+const GA_MEASUREMENT_ID = "G-8H24BDT7DK";
+
 declare global {
   interface Window {
     gtag?: (
@@ -31,7 +33,7 @@ function GoogleAnalyticsTracker({ measurementId }: { measurementId?: string }) {
 }
 
 export function GoogleAnalytics() {
-  const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+  const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || GA_MEASUREMENT_ID;
   const isValidMeasurementId = /^G-[A-Z0-9]+$/i.test(measurementId ?? "");
 
   if (!measurementId || !isValidMeasurementId) {
