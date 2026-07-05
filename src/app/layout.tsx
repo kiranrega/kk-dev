@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Sora } from "next/font/google";
-import { GoogleAnalytics } from "@/components/google-analytics";
+import { CloudflareAnalytics } from "@/components/cloudflare-analytics";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -73,7 +73,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <GoogleAnalytics />
+        <CloudflareAnalytics />
         {children}
       </body>
     </html>
