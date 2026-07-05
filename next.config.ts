@@ -4,6 +4,18 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  headers: async () => [
+    {
+      source: "/(.*)",
+      headers: [
+        {
+          key: "Content-Security-Policy",
+          value:
+            "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline';",
+        },
+      ],
+    },
+  ],
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
