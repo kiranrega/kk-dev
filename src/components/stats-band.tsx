@@ -30,6 +30,7 @@ function CountUp({ value, active }: { value: string; active: boolean }) {
     // Respect prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDisplay(num);
       return;
     }

@@ -1,19 +1,11 @@
 import Image from "next/image";
-import {
-  Calendar,
-  GraduationCap,
-  Trophy,
-} from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
+import ThemeToggle from "@/components/theme-toggle";
 import { ActiveNav } from "@/components/active-nav";
-import { StatsBand } from "@/components/stats-band";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { ExperienceItem } from "@/components/experience-item";
 import { ProjectCard } from "@/components/project-card";
 import {
-  education,
   experience,
-  highlights,
   navItems,
   projects,
   stackGroups,
@@ -92,14 +84,14 @@ export default function Home() {
       {/* <GridBackground /> */}
       <RevealOnScroll />
       <FloatingTOC />
+      <ThemeToggle />
 
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-4 py-4 sm:px-6">
-        <header className="sticky top-0 z-40 -mx-4 border-b border-border bg-background/80 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
+        <header className="lg:hidden sticky top-0 z-40 -mx-4 border-b border-border bg-background/80 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
           <div className="flex items-center justify-between gap-3">
             <ActiveNav items={navItems} />
             <div className="flex items-center gap-2">
-              <CatSummoner />
-              <ThemeToggle />
+              {/* <CatSummoner /> */}
             </div>
           </div>
         </header>

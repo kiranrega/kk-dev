@@ -20,6 +20,12 @@
   --font-size-hero: clamp(2.25rem, 6vw, 3.5rem);
   --line-height-hero: 1.1;
   --letter-spacing-tight: -0.02em;
+
+  /* Bulb SVG theme vars (light) */
+  --cord: #555;
+  --filament: #999;
+  --stroke: #555;
+  --bulb: transparent;
 }
 
 .dark {
@@ -31,6 +37,12 @@
   --border: #262626;
   --card: #0A0A0A;
   --accent: #FFFFFF;
+
+  /* Bulb SVG theme vars (dark) */
+  --cord: #888;
+  --filament: orange;
+  --stroke: #888;
+  --bulb: transparent;
 }
 
 @theme inline {
@@ -271,4 +283,173 @@ html {
     50% { transform: translateY(-4px) scale(1.15); }
   }
   .animate-bounce-once { animation: bounceOnce 0.4s ease-in-out; }
+}
+
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
+
+/* ════════════════════════════════════════
+   Sketch Lightbulb Toggle  (top-right, fixed)
+   ════════════════════════════════════════ */
+
+/* Outer wrapper – fixed to viewport top-right */
+.toggle-form {
+  position: fixed;
+  top: 0;
+  right: 16px;
+  width: 64px;
+  height: 200px;
+  z-index: 999999;
+  pointer-events: none;
+  transform-origin: top center;
+  animation: bulbSway 6s ease-in-out infinite;
+}
+
+/* The button fills the wrapper */
+.toggle-btn {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+/* SVG scene: bulb + cord */
+.toggle-scene {
+  overflow: visible;
+  position: absolute;
+  width: 70%;
+  height: 100%;
+  top: 2px;
+  left: 50%;
+  translate: -50% 0;
+}
+
+/* ── Cord ── */
+.toggle-scene__dummy-cord line {
+  stroke: var(--bulb-stroke);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+/* ── Glass globe ── */
+.bulb__bulb {
+  fill: transparent;
+  stroke: var(--bulb-stroke);
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+/* Lit state: glow inside globe */
+[aria-pressed="true"] .bulb__bulb {
+  fill: rgba(255, 230, 100, 0.18);
+  stroke: var(--bulb-stroke);
+  filter: drop-shadow(0 0 8px rgba(255, 220, 80, 0.5));
+}
+
+/* ── Cap (base of bulb) ── */
+.bulb__cap {
+  fill: var(--bulb-stroke);
+  stroke: none;
+}
+
+/* ── Filament ── */
+.bulb__filament {
+  stroke: var(--bulb-stroke);
+  stroke-width: 6;
+  opacity: 0.55;
+  transition: opacity 0.3s ease, stroke 0.3s ease;
+}
+
+[aria-pressed="true"] .bulb__filament {
+  stroke: #ffd84d;
+  opacity: 1;
+}
+
+/* ── Grab handle (invisible circle at cord end) ── */
+.grab-handle {
+  width: 52px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 10;
+  cursor: grab;
+  pointer-events: all;
+}
+.grab-handle:active { cursor: grabbing; }
+
+/* ── Theme colour tokens for the bulb ── */
+:root {
+  --bulb-stroke: #5a5a5a;   /* light mode: dark grey sketch */
+}
+.dark {
+  --bulb-stroke: #d4d4d4;   /* dark mode: light grey / near-white sketch */
+}
+
+/* ════════════════════════════════════════
+   "drag me." Hint
+   ════════════════════════════════════════ */
+
+.drag-hint {
+  position: fixed;
+  /* anchored near the cord bottom / grab handle */
+  top: 110px;
+  right: 100px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 999998;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  color: white;
+}
+
+.drag-hint--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Handwritten text */
+.drag-hint__text {
+  font-family: var(--font-caveat), 'Caveat', 'Patrick Hand', cursive;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: white;
+  white-space: nowrap;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+}
+
+:root:not(.dark) .drag-hint__text {
+  color: #1a1a1a;
+  text-shadow: none;
+}
+
+/* Curved arrow */
+.drag-hint__arrow {
+  width: 90px;
+  height: 56px;
+  align-self: flex-end;
+  margin-right: -10px;
+  color: white;
+  opacity: 0.8;
+}
+
+:root:not(.dark) .drag-hint__arrow {
+  color: #1a1a1a;
+}
+
+/* Gentle idle sway on the whole toggle */
+@keyframes bulbSway {
+  0%, 100% { transform: rotate(0deg);   }
+  25%       { transform: rotate(1.5deg); }
+  75%       { transform: rotate(-1.5deg);}
 }

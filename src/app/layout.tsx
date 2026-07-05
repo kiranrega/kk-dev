@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Sora } from "next/font/google";
+import { Geist, Sora, Caveat } from "next/font/google";
 import { CloudflareAnalytics } from "@/components/cloudflare-analytics";
 import "./globals.css";
 
@@ -11,6 +11,13 @@ const geistSans = Geist({
 
 const sora = Sora({
   variable: "--font-sora",
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
   subsets: ["latin"],
   weight: ["600", "700"],
   display: "swap",
@@ -44,7 +51,7 @@ export const metadata: Metadata = {
     title: "Kiran Kumar Rega | Full-Stack Software Engineer",
     description:
       "React, TypeScript, Next.js, and Node.js portfolio focused on measurable frontend and full-stack engineering impact.",
-    url: "https://kiranrega.is-a.dev",
+    url: "https://kiranrega.in",
     siteName: "Kiran Kumar Rega Portfolio",
     locale: "en_US",
     type: "website",
@@ -70,8 +77,15 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${sora.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${sora.variable} ${caveat.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.toggle('dark', (localStorage.getItem('theme') || 'dark') === 'dark');`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <CloudflareAnalytics />
         {children}
