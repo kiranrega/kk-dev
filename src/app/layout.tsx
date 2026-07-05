@@ -1,11 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Sora, Caveat } from "next/font/google";
+import { Geist, Sora, Caveat, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { CloudflareAnalytics } from "@/components/cloudflare-analytics";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -77,7 +90,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${sora.variable} ${caveat.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${sora.variable} ${caveat.variable} ${geistMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <head>
         <script

@@ -4,14 +4,20 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Light Theme - Warm Minimalism */
-  --background: #FFFFFF;
-  --foreground: #09090B;
-  --muted: #71717A;
-  --muted-foreground: #52525B;
-  --border: #E4E4E7;
-  --card: #F9F9F9;
-  --accent: #000000;
+  /* Warm Minimalism oklch values */
+  --portfolio-surface: oklch(1 0 0);
+  --portfolio-ink: oklch(0 0 0);
+  --portfolio-muted: oklch(0.45 0 0);
+  --portfolio-border: oklch(0.88 0 0);
+  --portfolio-page: oklch(0.97 0 0);
+
+  --background: var(--portfolio-surface);
+  --foreground: var(--portfolio-ink);
+  --muted: var(--portfolio-muted);
+  --muted-foreground: var(--portfolio-muted);
+  --border: var(--portfolio-border);
+  --card: var(--portfolio-surface);
+  --accent: var(--portfolio-ink);
   
   /* Typography variables */
   --font-family-sans: var(--font-geist-sans), Inter, system-ui, sans-serif;
@@ -29,14 +35,20 @@
 }
 
 .dark {
-  /* Dark Theme - Pure Monochromatic Black */
-  --background: #000000;
-  --foreground: #FFFFFF;
-  --muted: #7D7D7D;
-  --muted-foreground: #B0B0B0;
-  --border: #262626;
-  --card: #0A0A0A;
-  --accent: #FFFFFF;
+  /* Dark Theme - Warm Minimalism oklch values */
+  --portfolio-surface: oklch(0.173 0 0);
+  --portfolio-ink: oklch(1 0 0);
+  --portfolio-muted: oklch(0.735 0 0);
+  --portfolio-border: oklch(0.309 0 0);
+  --portfolio-page: oklch(0.182 0 0);
+
+  --background: var(--portfolio-surface);
+  --foreground: var(--portfolio-ink);
+  --muted: var(--portfolio-muted);
+  --muted-foreground: var(--portfolio-muted);
+  --border: var(--portfolio-border);
+  --card: var(--portfolio-surface);
+  --accent: var(--portfolio-ink);
 
   /* Bulb SVG theme vars (dark) */
   --cord: #888;
@@ -56,7 +68,10 @@
   
   --font-sans: var(--font-geist-sans);
   --font-display: var(--font-sora);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif);
 }
+
 
 body {
   background: var(--background);
@@ -453,3 +468,29 @@ html {
   25%       { transform: rotate(1.5deg); }
   75%       { transform: rotate(-1.5deg);}
 }
+
+/* Typography classes for the redesigned hero section */
+.hero-font-mono {
+  font-family: var(--font-geist-mono), monospace !important;
+}
+
+.hero-font-serif {
+  font-family: var(--font-instrument-serif), serif !important;
+}
+
+.hero-type-heading-2 {
+  font-family: var(--font-instrument-serif), serif !important;
+  font-size: 2.25rem !important; /* Tall, elegant serif header size */
+  line-height: 1.1 !important;
+  font-weight: 400 !important; /* Serif looks best when not artificially bolded */
+  letter-spacing: -0.02em !important;
+}
+
+.hero-type-body-small {
+  font-family: var(--font-geist-mono), monospace !important;
+  font-size: 0.95rem !important;
+  line-height: 1.5 !important;
+  letter-spacing: -0.01em !important;
+}
+
+

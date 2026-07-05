@@ -20,6 +20,51 @@ import { AnimatedSocials } from "@/components/animated-socials";
 import { RandomQuote } from "@/components/random-quote";
 import { VisitorCounter } from "@/components/visitor-counter";
 import { CopyButton } from "@/components/copy-button";
+import { OpenToWorkBadge } from "@/components/open-to-work-badge";
+
+function CompanySVG() {
+  return (
+    <svg className="size-4 shrink-0 inline-block align-middle" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+    </svg>
+  );
+}
+
+function ReactSVG() {
+  return (
+    <svg className="size-4 shrink-0 inline-block align-middle text-[#61DAFB]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(0 12 12)" />
+      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+    </svg>
+  );
+}
+
+function TypeScriptSVG() {
+  return (
+    <svg className="size-4 shrink-0 inline-block align-middle text-[#3178C6]" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20 3H4a1 1 0 00-1 1v16a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1zM9.4 17.2c-.8 0-1.5-.4-1.8-1l1.3-.8c.2.4.5.6.8.6.4 0 .6-.2.6-.5 0-.8-2-.5-2-1.9 0-.8.6-1.4 1.6-1.4.7 0 1.3.3 1.6.8l-1.1.8c-.2-.3-.4-.4-.6-.4-.3 0-.5.1-.5.4 0 .7 2 .4 2 1.8.1.9-.6 1.6-1.9 1.6zm7.2-.2h-4.3v-1.2h1.5v-3.7h-1.5v-1.2h4.3v1.2h-1.5v3.7h1.5v1.2z" />
+    </svg>
+  );
+}
+
+function NodeSVG() {
+  return (
+    <svg className="size-4 shrink-0 inline-block align-middle text-[#339933]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>
+  );
+}
+
+function LocationSVG() {
+  return (
+    <svg className="size-4 shrink-0 inline-block align-middle text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  );
+}
 
 function Section({
   id,
@@ -51,7 +96,7 @@ function Card({ children, className, style }: { children: React.ReactNode; class
   return (
     <div
       className={[
-        "rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:border-muted",
+        " bg-card p-5 shadow-sm transition-all duration-200",
         className,
       ]
         .filter(Boolean)
@@ -115,40 +160,65 @@ export default function Home() {
                 </h1>
                 <HeroTitle />
                 <div className="pt-2">
-                  <StatusBadge />
+                  {/* <StatusBadge /> */}
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 w-full">
-              <div className="flex flex-col items-start gap-1.5">
-                <span className="text-[11px] tracking-widest uppercase font-bold text-muted">Location</span>
-                <span className="text-sm font-semibold">Hyderabad, India</span>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 w-full mt-6 border-t border-b border-border py-4 hero-font-mono">
+              <div className="flex flex-col items-start gap-1">
+                <span className="text-[10px] tracking-wider uppercase font-medium text-muted">Location</span>
+                <span className="text-sm font-normal text-foreground">Hyderabad, India</span>
               </div>
-              <div className="flex flex-col items-start gap-1.5">
-                <span className="text-[11px] tracking-widest uppercase font-bold text-muted">Email</span>
-                <div className="flex items-center gap-1">
-                  <span className="text-sm font-semibold">kirankumar.rega@gmail.com</span>
+              <div className="flex flex-col items-start gap-1">
+                <span className="text-[10px] tracking-wider uppercase font-medium text-muted">Email</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm font-normal text-foreground">kirankumar.rega@gmail.com</span>
                   <CopyButton text="kirankumar.rega@gmail.com" />
                 </div>
               </div>
-              <div className="flex flex-col items-start gap-1.5">
-                <span className="text-[11px] tracking-widest uppercase font-bold text-muted">Pronouns</span>
-                <span className="text-sm font-semibold">he/him</span>
+              <div className="flex flex-col items-start gap-1">
+                <span className="text-[10px] tracking-wider uppercase font-medium text-muted">Pronouns</span>
+                <span className="text-sm font-normal text-foreground">he/him</span>
               </div>
             </div>
 
-            <p className="text-base text-muted-foreground leading-relaxed mt-2 max-w-[600px] font-normal">
-              I build full-stack web products end-to-end, obsessing over small details that make software feel right to use. Currently working with{" "}
-              <TechLink href="https://react.dev">React</TechLink>,{" "}
-              <TechLink href="https://www.typescriptlang.org">TypeScript</TechLink>,{" "}
-              <TechLink href="https://nodejs.org">Node.js</TechLink>, and{" "}
-              <TechLink href="https://nextjs.org">Next.js</TechLink> — 3 years, zero rollbacks.
+            <p className="max-w-[650px] hero-type-body-small text-pretty text-muted mt-6 hero-font-mono leading-relaxed">
+              I build full-stack web products end-to-end, obsessing over small details that make software feel right to use. Currently working as{" "}
+              <span className="text-foreground">Software Developer</span> at{" "}
+              <a
+                href="https://www.intouchcx.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 align-middle decoration-muted decoration-dotted underline-offset-4 underline"
+              >
+                <CompanySVG />
+                <span className="bg-gradient-to-r from-[#0052CC] to-[#00C6FF] bg-clip-text font-medium text-transparent dark:from-[#3388FF] dark:to-[#88DDFF]">
+                  IntouchCX
+                </span>
+              </a>
+              . Shipped code focused on{" "}
+              <span className="inline-flex items-center gap-1.5 align-middle text-foreground">
+                <ReactSVG /> React
+              </span>
+              ,{" "}
+              <span className="inline-flex items-center gap-1.5 align-middle text-foreground">
+                <TypeScriptSVG /> TypeScript
+              </span>
+              , and{" "}
+              <span className="inline-flex items-center gap-1.5 align-middle text-foreground">
+                <NodeSVG /> Node.js
+              </span>{" "}
+              — delivering high performance, reliability, and excellent user outcomes.
             </p>
 
-            <div className="flex gap-5 flex-wrap mt-6">
-              <AnimatedSocials />
+            <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full border-t border-border pt-6">
+              <div className="flex gap-5 flex-wrap">
+                <AnimatedSocials />
+              </div>
+              <OpenToWorkBadge />
             </div>
+
 
            {/* for metrics and stats, can be uncommented if needed 
             <div className="flex flex-wrap gap-x-6 gap-y-2 mt-6 pt-4 border-t border-neutral-800">
