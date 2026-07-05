@@ -4,6 +4,8 @@ import { TechChip } from "@/components/skill-icons";
 import type { Project } from "@/types/index";
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const imageSrc = project.image ?? `/project/${project.name.toLowerCase().replace(/\s+/g, "-")}.png`;
+
   return (
     <article
       className="group font-geist-sans rounded-xl border border-border bg-card transition-all duration-200 ease-out hover:border-muted"
@@ -13,7 +15,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
         {/* Image */}
         <div className="relative w-full aspect-video sm:w-[200px] overflow-hidden rounded-t-xl sm:rounded-l-xl border-b sm:border-b-0 sm:border-r border-border">
           <Image
-            src={`/project/${project.name.toLowerCase().replace(/\s+/g, "-")}.png`}
+            src={imageSrc}
             alt={`${project.name} preview`}
             fill
             sizes="(max-width: 640px) 100vw, 200px"

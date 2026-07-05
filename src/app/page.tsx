@@ -212,7 +212,7 @@ export default function Home() {
               — delivering high performance, reliability, and excellent user outcomes.
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full border-t border-border pt-6">
+            <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 w-full p-2 ">
               <div className="flex gap-5 flex-wrap">
                 <AnimatedSocials />
               </div>

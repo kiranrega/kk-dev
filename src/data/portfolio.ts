@@ -128,6 +128,7 @@ export const projects: Project[] = [
       "Owned task allocation for a 4-person squad, cutting PR review cycle from 3 days to under 1 day.",
     ],
     tech: ["React", "TypeScript", "Redux", "Jest"],
+    image: "/project/lancerscape.svg",
   },
   {
     name: "Catapult",
@@ -148,6 +149,7 @@ export const projects: Project[] = [
       "Resolved 40+ SonarQube defects and cut code-smell density by 65%.",
     ],
     tech: ["React.js", "Redux", "SonarQube"],
+    image: "/project/catapult.png",
   },
   // {
   //   name: "Extended Asset Management System",
@@ -222,6 +224,7 @@ export const projects: Project[] = [
       "Implemented JWT-secured WebSocket connections, PostgreSQL shape persistence via Prisma, and bcrypt + rate-limited auth — supporting multi-user rooms with live canvas sync.",
     ],
     tech: ["Next.js", "TypeScript", "Node.js", "WebSockets", "PostgreSQL", "Prisma", "Turborepo"],
+    image: "/project/opendraw.png",
   },
 ];
 
