@@ -9,7 +9,7 @@ export function Footer() {
           <span className="font-semibold text-foreground">Kiran Kumar Rega</span>
         </div>
         <div className="flex items-center gap-4">
-          <VisitorCounter repo="kiranrega/kiranrega" />
+          <VisitorCounter />
           <span>&copy; {new Date().getFullYear()} All rights reserved.</span>
         </div>
       </div>
