@@ -15,6 +15,7 @@ import { SkillPill } from "@/components/skill-icons";
 import { HeroTitle } from "@/components/hero-title";
 import { CatSummoner } from "@/components/cat-summoner";
 import { StatusBadge } from "@/components/StatusBadge";
+import { ProfileInfoCard } from "@/components/profile-info-card";
 import FloatingTOC from "@/components/floating-toc";
 import { AnimatedSocials } from "@/components/animated-socials";
 import { RandomQuote } from "@/components/random-quote";
@@ -136,7 +137,7 @@ export default function Home() {
           <div className="flex items-center justify-between gap-3">
             <ActiveNav items={navItems} />
             <div className="flex items-center gap-2">
-              {/* <CatSummoner /> */}
+              <CatSummoner />
             </div>
           </div>
         </header>
@@ -151,36 +152,22 @@ export default function Home() {
                 width={160}
                 height={160}
                 priority
-                className="rounded-full object-cover w-32 h-32 sm:w-40 sm:h-40 grayscale hover:grayscale-0 transition-all duration-500"
+                className="rounded-full object-cover w-32 h-32 sm:w-40 sm:h-40 grayscale hover:grayscale-0 transition-all duration-200"
               />
 
               <div className="space-y-1">
-                <h1 className="m-0 text-4xl sm:text-5xl font-bold tracking-tighter leading-none animate-blur-in">
-                  Kiran Kumar Rega
-                </h1>
-                <HeroTitle />
-                <div className="pt-2">
-                  {/* <StatusBadge /> */}
+                <div className="flex items-center gap-3 flex-wrap">
+                  <h1 className="m-0 text-4xl sm:text-5xl font-bold tracking-tighter leading-none animate-blur-in">
+                    Kiran Kumar Rega
+                  </h1>
+                  <OpenToWorkBadge />
                 </div>
+                <HeroTitle />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 w-full mt-6 border-t border-b border-border py-4 hero-font-mono">
-              <div className="flex flex-col items-start gap-1">
-                <span className="text-[10px] tracking-wider uppercase font-medium text-muted">Location</span>
-                <span className="text-sm font-normal text-foreground">Hyderabad, India</span>
-              </div>
-              <div className="flex flex-col items-start gap-1">
-                <span className="text-[10px] tracking-wider uppercase font-medium text-muted">Email</span>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-normal text-foreground">kirankumar.rega@gmail.com</span>
-                  <CopyButton text="kirankumar.rega@gmail.com" />
-                </div>
-              </div>
-              <div className="flex flex-col items-start gap-1">
-                <span className="text-[10px] tracking-wider uppercase font-medium text-muted">Pronouns</span>
-                <span className="text-sm font-normal text-foreground">he/him</span>
-              </div>
+            <div className="w-full mt-6 border-t border-b border-border py-4">
+              <ProfileInfoCard />
             </div>
 
             <p className="max-w-[650px] hero-type-body-small text-pretty text-muted mt-6 hero-font-mono leading-relaxed">
@@ -216,7 +203,6 @@ export default function Home() {
               <div className="flex gap-5 flex-wrap">
                 <AnimatedSocials />
               </div>
-              <OpenToWorkBadge />
             </div>
 
 

@@ -16,34 +16,27 @@ export function ActiveNav({ items }: { items: NavItem[] }) {
       .map((i) => i.href.replace("#", ""))
       .filter(Boolean);
 
-    const observers: IntersectionObserver[] = [];
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+      // Find the entry closest to the top of the viewport that's visible
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+          return;
+        }
+      }
+    };
 
-    // Track which sections are currently visible
-    const visible = new Set<string>();
+    const observer = new IntersectionObserver(handleIntersect, {
+      rootMargin: "-10% 0px -70% 0px",
+      threshold: 0,
+    });
 
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
-      if (!el) return;
-
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            visible.add(id);
-          } else {
-            visible.delete(id);
-          }
-          // Pick the first visible section in document order
-          const first = sectionIds.find((s) => visible.has(s));
-          if (first) setActive(first);
-        },
-        { rootMargin: "-20% 0px -60% 0px", threshold: 0 }
-      );
-
-      obs.observe(el);
-      observers.push(obs);
+      if (el) observer.observe(el);
     });
 
-    return () => observers.forEach((o) => o.disconnect());
+    return () => observer.disconnect();
   }, [items]);
 
   return (

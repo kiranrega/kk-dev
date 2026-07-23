@@ -10,7 +10,7 @@ export const profile = {
   location: "Hyderabad, India",
   phone: "+91 85000 44241",
   email: "kirankumar.rega@gmail.com",
-  website: "kiranrega.netlify.app",
+  website: "kiranrega.in",
   github: "github.com/kiranrega",
   linkedin: "linkedin.com/in/kiranrega",
   pronouns: "he/him",

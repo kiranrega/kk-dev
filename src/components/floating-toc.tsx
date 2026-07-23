@@ -71,18 +71,20 @@ export default function FloatingTOC() {
   const [activeSection, setActiveSection] = useState('overview');
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          const top = visible.reduce((a, b) =>
-            a.boundingClientRect.top < b.boundingClientRect.top ? a : b
-          );
-          setActiveSection(top.target.id);
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+      // Find the entry closest to the top of the viewport that's visible
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+          return;
         }
-      },
-      { rootMargin: '-80px 0px -60% 0px', threshold: 0 }
-    );
+      }
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0,
+    });
 
     sections.forEach(({ id }) => {
       const el = document.getElementById(id);
