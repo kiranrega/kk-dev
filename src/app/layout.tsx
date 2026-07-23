@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Sora, Caveat, Geist_Mono, Instrument_Serif } from "next/font/google";
-import { CloudflareAnalytics } from "@/components/cloudflare-analytics";
+import { CloudflareAnalytics } from "@/components/features/cloudflare-analytics";
 import "./globals.css";
 
 const geistSans = Geist({
