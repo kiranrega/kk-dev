@@ -20,9 +20,9 @@
   --accent: var(--portfolio-ink);
   
   /* Typography variables */
-  --font-family-sans: var(--font-geist-sans), system-ui, sans-serif;
-  --font-family-mono: var(--font-geist-mono), ui-monospace, monospace;
-
+  --font-family-sans: var(--font-geist-sans), Inter, system-ui, sans-serif;
+  --font-family-display: var(--font-sora), var(--font-geist-sans), sans-serif;
+  
   --font-size-hero: clamp(2.25rem, 6vw, 3.5rem);
   --line-height-hero: 1.1;
   --letter-spacing-tight: -0.02em;
@@ -65,9 +65,11 @@
   --color-border: var(--border);
   --color-card: var(--card);
   --color-accent: var(--accent);
-
+  
   --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-sora);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif);
 }
 
 
@@ -80,7 +82,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-family-display);
   font-weight: 700;
   letter-spacing: var(--letter-spacing-tight);
 }
@@ -432,7 +434,7 @@ html {
 
 /* Handwritten text */
 .drag-hint__text {
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-caveat), 'Caveat', 'Patrick Hand', cursive;
   font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -473,14 +475,14 @@ html {
 }
 
 .hero-font-serif {
-  font-family: var(--font-geist-sans), system-ui, sans-serif !important;
+  font-family: var(--font-instrument-serif), serif !important;
 }
 
 .hero-type-heading-2 {
-  font-family: var(--font-geist-sans), system-ui, sans-serif !important;
-  font-size: 2.25rem !important;
+  font-family: var(--font-instrument-serif), serif !important;
+  font-size: 2.25rem !important; /* Tall, elegant serif header size */
   line-height: 1.1 !important;
-  font-weight: 700 !important;
+  font-weight: 400 !important; /* Serif looks best when not artificially bolded */
   letter-spacing: -0.02em !important;
 }
 
