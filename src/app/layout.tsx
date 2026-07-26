@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Caveat, Geist_Mono, IBM_Plex_Serif } from "next/font/google";
+import { Geist, Sora, Caveat, Geist_Mono, IBM_Plex_Serif } from "next/font/google";
 import { CloudflareAnalytics } from "@/components/features/cloudflare-analytics";
 import "./globals.css";
 
@@ -20,6 +20,13 @@ const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
+  display: "swap",
+});
+
+const sora = Sora({
+  variable: "--font-sora",
+  subsets: ["latin"],
+  weight: ["600", "700"],
   display: "swap",
 });
 
@@ -84,7 +91,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${caveat.variable} ${geistMono.variable} ${ibmPlexSerif.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${sora.variable} ${caveat.variable} ${geistMono.variable} ${ibmPlexSerif.variable} h-full antialiased`}
     >
       <head>
         <script
