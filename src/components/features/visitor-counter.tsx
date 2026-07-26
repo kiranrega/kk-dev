@@ -3,26 +3,15 @@
 import { useEffect, useState } from "react";
 
 const API_BASE = "https://api.counterapi.dev/v2/kiran-kumar-regas-team-4807/first-counter-4807";
-const API_KEY = process.env.NEXT_PUBLIC_COUNTER_API_KEY;
 
 export function VisitorCounter() {
   const [views, setViews] = useState<number | null>(null);
 
   useEffect(() => {
-    if (!API_KEY) {
-      setViews(0);
-      return;
-    }
-
-    // Increment the counter
-    fetch(`${API_BASE}/up`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${API_KEY}`,
-      },
-    })
+    // Increment the counter (public counter, no auth needed)
+    fetch(`${API_BASE}/up`)
       .then((res) => res.json())
-      .then((data) => setViews(data.count ?? 0))
+      .then((data) => setViews(data.up_count ?? 0))
       .catch(() => setViews(0));
   }, []);
 
