@@ -3,6 +3,7 @@
 import { Home, Layers, Briefcase, FolderGit2, ChevronUp, ChevronDown } from "lucide-react";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
+import { BallPit } from "@/components/features/ball-pit";
 
 const sections = [
   { id: "overview", label: "Home", icon: Home },
@@ -92,6 +93,8 @@ export function FloatingTOC() {
             </button>
           );
         })}
+        <div className="w-[1px] h-5 bg-neutral-200 dark:bg-neutral-800 mx-1" />
+        <BallPit />
       </div>
     </div>
   );
