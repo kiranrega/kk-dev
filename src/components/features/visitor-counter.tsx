@@ -11,7 +11,7 @@ export function VisitorCounter() {
     // Increment the counter (public counter, no auth needed)
     fetch(`${API_BASE}/up`)
       .then((res) => res.json())
-      .then((data) => setViews(data.up_count ?? 0))
+      .then((res) => setViews(res.data.up_count ?? 0))
       .catch(() => setViews(0));
   }, []);
 
