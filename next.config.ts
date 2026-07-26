@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
         {
           key: "Content-Security-Policy",
           value:
-            "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline';",
+            "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com https://api.counterapi.dev; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline';",
         },
       ],
     },
