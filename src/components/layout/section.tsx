@@ -11,7 +11,7 @@ export function Section({ id, title, count, children }: SectionProps) {
       <div className="mb-6 flex flex-wrap items-center gap-3">
         <h2 className="section-label">{title}</h2>
         {typeof count === "number" ? (
-          <span className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground">
+          <span className="rounded-full border border-border px-2 py-0.5 text-xs text-muted-foreground font-mono">
             {count}
           </span>
         ) : null}

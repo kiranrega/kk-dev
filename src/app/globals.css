@@ -4,30 +4,96 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Warm Minimalism oklch values */
-  --portfolio-surface: oklch(1 0 0);
-  --portfolio-ink: oklch(0 0 0);
-  --portfolio-muted: oklch(0.45 0 0);
-  --portfolio-border: oklch(0.88 0 0);
-  --portfolio-page: oklch(0.97 0 0);
+  /* ── Color System (lab) ── */
+  --background: lab(98.26% 0 0);
+  --foreground: lab(2.51107% .242703 -.886115);
+  --primary: lab(98.26% 0 0);
+  --primary-foreground: lab(2.51107% .242703 -.886115);
+  --secondary: lab(90.6853% .399232 -1.45452);
+  --secondary-foreground: lab(2.51107% .242703 -.886115);
+  --muted: lab(96.1634% .0993311 -.364041);
+  --muted-foreground: lab(47.8878% 1.65477 -5.77283);
+  --card: lab(96.1634% .0993311 -.364041);
+  --card-foreground: lab(2.51107% .242703 -.886115);
+  --popover: lab(96.1634% .0993311 -.364041);
+  --popover-foreground: lab(2.51107% .242703 -.886115);
+  --accent: lab(96.1634% .0993311 -.364041);
+  --accent-muted: color-mix(in oklab, var(--accent) 20%, transparent);
+  --accent-foreground: lab(2.51107% .242703 -.886115);
+  --border: lab(90.6853% .399232 -1.45452);
+  --input: lab(100% 0 0/.15);
+  --ring: lab(47.8878% 1.65477 -5.77283);
+  --link: lab(54.1736% 13.3369 -74.6839);
+  --success: lab(70.5521% -66.5147 45.8073);
+  --destructive: lab(40.4273% 67.2623 53.7441);
+  --info: lab(61.1364% -10.0766 -55.1112);
+  --surface: lab(96.1634% .0993311 -.364041);
+  --surface-foreground: lab(2.51107% .242703 -.886115);
+  --line: color-mix(in oklab, var(--border) 64%, var(--background));
+  --selection: lab(2.51107% .242703 -.886115);
+  --selection-foreground: lab(98.26% 0 0);
+  --code: var(--background);
+  --code-foreground: var(--foreground);
+  --code-number: lab(33.88% -.0000149012 0);
+  --code-highlight: lab(64.4251% 68.652 101.243/.06);
 
-  --background: var(--portfolio-surface);
-  --foreground: var(--portfolio-ink);
-  --muted: var(--portfolio-muted);
-  --muted-foreground: var(--portfolio-muted);
-  --border: var(--portfolio-border);
-  --card: var(--portfolio-surface);
-  --accent: var(--portfolio-ink);
-  
-  /* Typography variables */
-  --font-family-sans: var(--font-geist-sans), Inter, system-ui, sans-serif;
-  --font-family-display: var(--font-sora), var(--font-geist-sans), sans-serif;
-  
+  /* ── Sidebar tokens ── */
+  --sidebar: lab(96.1634% .0993311 -.364041);
+  --sidebar-foreground: lab(2.51107% .242703 -.886115);
+  --sidebar-primary: lab(36.9089% 35.0961 -85.6872);
+  --sidebar-primary-foreground: lab(98.26% 0 0);
+  --sidebar-accent: lab(90.6853% .399232 -1.45452);
+  --sidebar-accent-foreground: lab(2.51107% .242703 -.886115);
+  --sidebar-border: lab(100% 0 0/.1);
+  --sidebar-ring: lab(47.8878% 1.65477 -5.77283);
+
+  /* ── Chart tokens ── */
+  --chart-1: lab(2.51107% .242703 -.886115);
+  --chart-2: lab(29.24% -.0000149012 0);
+  --chart-3: lab(43.16% 0 0);
+  --chart-4: lab(68.68% 0 0);
+  --chart-5: lab(98.26% 0 0);
+  --chart-background: lab(2.51107% .242703 -.886115);
+  --chart-foreground: lab(98.26% 0 0);
+  --chart-foreground-muted: lab(65.6464% 1.53497 -5.42429);
+  --chart-grid: color-mix(in oklab, var(--border) 64%, var(--background));
+  --chart-crosshair: lab(35.1166% 1.78212 -6.1173);
+  --chart-tooltip-background: lab(96.1634% .0993311 -.364041);
+  --chart-tooltip-foreground: lab(2.51107% .242703 -.886115);
+  --chart-tooltip-muted: lab(65.6464% 1.53497 -5.42429);
+  --chart-marker-background: lab(88.4% 0 .0000119209);
+  --chart-marker-border: lab(30.3655% -.474572 -3.71171);
+  --chart-marker-foreground: lab(2.51107% .242703 -.886115);
+  --chart-ring-background: lab(24.5649% -.463679 -3.70624/.25);
+  --chart-label: lab(70.9674% -.509977 -3.73039);
+
+  /* ── Typography ── */
+  --font-family-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-family-mono: var(--font-geist-mono), ui-monospace, monospace;
+
   --font-size-hero: clamp(2.25rem, 6vw, 3.5rem);
   --line-height-hero: 1.1;
-  --letter-spacing-tight: -0.02em;
+  --letter-spacing-tight: -0.025em;
 
-  /* Bulb SVG theme vars (light) */
+  /* ── Layout tokens ── */
+  --header-height: calc(var(--spacing) * 14);
+  --separator-height: calc(var(--spacing) * 8);
+  --fade-bottom-height: calc(var(--spacing) * 24);
+
+  /* ── BProgress tokens ── */
+  --bprogress-color: var(--foreground);
+  --bprogress-height: 2px;
+  --bprogress-spinner-size: 18px;
+  --bprogress-spinner-animation-duration: 400ms;
+  --bprogress-spinner-border-size: 2px;
+  --bprogress-box-shadow: 0 0 10px var(--foreground), 0 0 5px var(--foreground);
+  --bprogress-z-index: 99999;
+  --bprogress-spinner-top: 15px;
+  --bprogress-spinner-bottom: auto;
+  --bprogress-spinner-right: 15px;
+  --bprogress-spinner-left: auto;
+
+  /* ── Bulb SVG theme vars (light) ── */
   --cord: #555;
   --filament: #999;
   --stroke: #555;
@@ -35,22 +101,70 @@
 }
 
 .dark {
-  /* Dark Theme - Warm Minimalism oklch values */
-  --portfolio-surface: oklch(0.173 0 0);
-  --portfolio-ink: oklch(1 0 0);
-  --portfolio-muted: oklch(0.735 0 0);
-  --portfolio-border: oklch(0.309 0 0);
-  --portfolio-page: oklch(0.182 0 0);
+  /* ── Color System (lab) - Dark ── */
+  --background: lab(2.51107% .242703 -.886115);
+  --foreground: lab(98.26% 0 0);
+  --primary: lab(98.26% 0 0);
+  --primary-foreground: lab(2.51107% .242703 -.886115);
+  --secondary: lab(15.7305% .613764 -2.1659);
+  --secondary-foreground: lab(98.26% 0 0);
+  --muted: lab(15.7305% .613764 -2.1659);
+  --muted-foreground: lab(65.6464% 1.53497 -5.42429);
+  --card: lab(8.30603% .618205 -2.16572);
+  --card-foreground: lab(98.26% 0 0);
+  --popover: lab(8.30603% .618205 -2.16572);
+  --popover-foreground: lab(98.26% 0 0);
+  --accent: lab(15.7305% .613764 -2.1659);
+  --accent-muted: color-mix(in oklab, var(--accent) 20%, transparent);
+  --accent-foreground: lab(98.26% 0 0);
+  --border: lab(15.7305% .613764 -2.1659);
+  --input: lab(100% 0 0/.15);
+  --ring: lab(47.8878% 1.65477 -5.77283);
+  --link: lab(54.1736% 13.3369 -74.6839);
+  --success: lab(70.5521% -66.5147 45.8073);
+  --destructive: lab(40.4273% 67.2623 53.7441);
+  --info: lab(61.1364% -10.0766 -55.1112);
+  --surface: lab(8.30603% .618205 -2.16572);
+  --surface-foreground: lab(98.26% 0 0);
+  --line: color-mix(in oklab, var(--border) 64%, var(--background));
+  --selection: lab(98.26% 0 0);
+  --selection-foreground: lab(2.51107% .242703 -.886115);
+  --code: var(--background);
+  --code-foreground: var(--foreground);
+  --code-number: lab(33.88% -.0000149012 0);
+  --code-highlight: lab(64.4251% 68.652 101.243/.06);
 
-  --background: var(--portfolio-surface);
-  --foreground: var(--portfolio-ink);
-  --muted: var(--portfolio-muted);
-  --muted-foreground: var(--portfolio-muted);
-  --border: var(--portfolio-border);
-  --card: var(--portfolio-surface);
-  --accent: var(--portfolio-ink);
+  /* ── Sidebar tokens - Dark ── */
+  --sidebar: lab(8.30603% .618205 -2.16572);
+  --sidebar-foreground: lab(98.26% 0 0);
+  --sidebar-primary: lab(36.9089% 35.0961 -85.6872);
+  --sidebar-primary-foreground: lab(98.26% 0 0);
+  --sidebar-accent: lab(15.7305% .613764 -2.1659);
+  --sidebar-accent-foreground: lab(98.26% 0 0);
+  --sidebar-border: lab(100% 0 0/.1);
+  --sidebar-ring: lab(47.8878% 1.65477 -5.77283);
 
-  /* Bulb SVG theme vars (dark) */
+  /* ── Chart tokens - Dark ── */
+  --chart-1: lab(98.26% 0 0);
+  --chart-2: lab(68.68% 0 0);
+  --chart-3: lab(43.16% 0 0);
+  --chart-4: lab(29.24% -.0000149012 0);
+  --chart-5: lab(21.12% 0 0);
+  --chart-background: lab(2.51107% .242703 -.886115);
+  --chart-foreground: lab(98.26% 0 0);
+  --chart-foreground-muted: lab(65.6464% 1.53497 -5.42429);
+  --chart-grid: color-mix(in oklab, var(--border) 64%, var(--background));
+  --chart-crosshair: lab(35.1166% 1.78212 -6.1173);
+  --chart-tooltip-background: lab(8.30603% .618205 -2.16572);
+  --chart-tooltip-foreground: lab(98.26% 0 0);
+  --chart-tooltip-muted: lab(65.6464% 1.53497 -5.42429);
+  --chart-marker-background: lab(12.9629% -.428468 -3.68954);
+  --chart-marker-border: lab(30.3655% -.474572 -3.71171);
+  --chart-marker-foreground: lab(88.4% 0 .0000119209);
+  --chart-ring-background: lab(24.5649% -.463679 -3.70624/.25);
+  --chart-label: lab(70.9674% -.509977 -3.73039);
+
+  /* ── Bulb SVG theme vars (dark) ── */
   --cord: #888;
   --filament: orange;
   --stroke: #888;
@@ -60,33 +174,153 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
   --color-accent: var(--accent);
-  
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --color-link: var(--link);
+  --color-success: var(--success);
+  --color-destructive: var(--destructive);
+  --color-info: var(--info);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+
   --font-sans: var(--font-geist-sans);
-  --font-display: var(--font-sora);
   --font-mono: var(--font-geist-mono);
-  --font-serif: var(--font-instrument-serif);
+  --font-serif: var(--font-ibm-plex-serif), "IBM Plex Serif", serif;
+  --font-handwritten: var(--font-caveat), "Caveat", cursive;
+  --font-heading: var(--font-sans);
+
+  --default-font-family: var(--font-sans);
+  --default-mono-font-family: var(--font-mono);
+
+  --animate-spin: spin 1s linear infinite;
+  --animate-ping: ping 1s cubic-bezier(0, 0, .2, 1) infinite;
+  --animate-pulse: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite;
+  --blur-md: 12px;
+  --aspect-video: 16 / 9;
+  --default-transition-duration: .15s;
+  --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  --ease-out: cubic-bezier(0, 0, .2, 1);
+  --ease-in-out: cubic-bezier(.4, 0, .2, 1);
+
+  /* ── Spacing ── */
+  --spacing: .25rem;
+
+  /* ── Container sizes ── */
+  --container-xs: 20rem;
+  --container-sm: 24rem;
+  --container-md: 28rem;
+  --container-lg: 32rem;
+  --container-3xl: 48rem;
+
+  /* ── Border radius ── */
+  --radius-xs: .125rem;
+  --radius-sm: .25rem;
+  --radius-md: .375rem;
+  --radius-lg: .5rem;
+  --radius-xl: .75rem;
+  --radius-2xl: 1rem;
+
+  /* ── Font sizes ── */
+  --text-xs: .75rem;
+  --text-sm: .875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+  --text-8xl: 6rem;
+
+  /* ── Font weights ── */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* ── Tracking ── */
+  --tracking-tight: -.025em;
+  --tracking-normal: 0em;
+  --tracking-wide: .025em;
+
+  /* ── Leading ── */
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
 }
 
+/* ── Global styles ── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border: 0 solid;
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  color-scheme: dark;
+}
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-family-sans);
+  font-family: var(--default-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif);
+  font-feature-settings: var(--default-font-feature-settings, normal);
+  font-variation-settings: var(--default-font-variation-settings, normal);
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  font-synthesis-weight: none;
+  text-rendering: optimizelegibility;
+  color: var(--foreground);
+  line-height: 1.5;
   transition: background-color 0.3s ease, color 0.3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-family-display);
+  font-family: var(--font-heading);
   font-weight: 700;
   letter-spacing: var(--letter-spacing-tight);
 }
 
+::selection {
+  background: var(--selection);
+  color: var(--selection-foreground);
+}
+
+:focus-visible {
+  outline-color: color-mix(in oklab, var(--ring) 50%, transparent);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── Section label ── */
 .section-label {
   display: inline-flex;
   align-items: center;
@@ -98,10 +332,6 @@ h1, h2, h3, h4 {
   color: var(--foreground);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 /* ── Hero typography ── */
 .hero-name {
   font-size: var(--font-size-hero);
@@ -109,7 +339,6 @@ html {
   color: var(--foreground);
 }
 
-/* Minimalist separator */
 .hero-underline {
   height: 1px;
   width: 60px;
@@ -117,7 +346,6 @@ html {
   margin: 1.5rem 0;
 }
 
-/* Blinking cursor (Monochrome) */
 .hero-cursor::after {
   content: "|";
   margin-left: 2px;
@@ -130,7 +358,7 @@ html {
   50%       { opacity: 0; }
 }
 
-/* Blur-In Animation */
+/* ── Blur-In Animation ── */
 @keyframes blur-in {
   0% { opacity: 0; filter: blur(8px); transform: translateY(4px); }
   100% { opacity: 1; filter: blur(0px); transform: translateY(0); }
@@ -140,7 +368,7 @@ html {
   animation: blur-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Scroll reveal refinement */
+/* ── Scroll reveal ── */
 .reveal {
   opacity: 0;
   transform: translateY(10px);
@@ -164,13 +392,18 @@ html {
   transform: translateY(0);
 }
 
-
-::selection {
-  background: var(--foreground);
-  color: var(--background);
+/* ── Link style ── */
+.link {
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.15s ease;
 }
 
-/* Custom Card Depth */
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ── Card Glass ── */
 .card-glass {
   background: var(--card);
   border: 1px solid var(--border);
@@ -184,6 +417,49 @@ html {
 
 .card-glass:hover {
   border-color: var(--muted);
+}
+
+/* ── Icon container ── */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+  border-radius: 0.375rem;
+  border: 1px solid color-mix(in oklab, var(--muted-foreground) 15%, transparent);
+  background: var(--muted);
+  ring: 1px var(--line);
+  ring-offset: 1px var(--background);
+}
+
+.icon-container svg {
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+}
+
+/* ── Panel body grid ── */
+.panel-body {
+  display: grid;
+  gap: 0.625rem 1rem;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .panel-body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ── Panel row ── */
+.panel-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
 }
 
 /* ── Social Pills Row ── */
@@ -235,6 +511,7 @@ html {
   width: 1px;
   background: var(--border);
 }
+
 .timeline-node {
   position: relative;
   z-index: 1;
@@ -252,6 +529,7 @@ html {
   flex-shrink: 0;
 }
 
+/* ── Grid pattern ── */
 .bg-grid-pattern {
   background:
     radial-gradient(
@@ -269,6 +547,7 @@ html {
   --accent-10: rgba(255, 255, 255, 0.03);
 }
 
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -280,6 +559,7 @@ html {
   }
 }
 
+/* ── Utilities ── */
 @layer utilities {
   @keyframes pulse {
     0%, 100% { opacity: 1; transform: scale(1); }
@@ -300,14 +580,12 @@ html {
   .animate-bounce-once { animation: bounceOnce 0.4s ease-in-out; }
 }
 
-
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
 
 /* ════════════════════════════════════════
    Sketch Lightbulb Toggle  (top-right, fixed)
    ════════════════════════════════════════ */
 
-/* Outer wrapper – fixed to viewport top-right */
 .toggle-form {
   position: fixed;
   top: 0;
@@ -320,7 +598,6 @@ html {
   animation: bulbSway 6s ease-in-out infinite;
 }
 
-/* The button fills the wrapper */
 .toggle-btn {
   position: absolute;
   inset: 0;
@@ -330,7 +607,6 @@ html {
   pointer-events: all;
 }
 
-/* SVG scene: bulb + cord */
 .toggle-scene {
   overflow: visible;
   position: absolute;
@@ -341,14 +617,12 @@ html {
   translate: -50% 0;
 }
 
-/* ── Cord ── */
 .toggle-scene__dummy-cord line {
   stroke: var(--bulb-stroke);
   stroke-width: 6;
   stroke-linecap: round;
 }
 
-/* ── Glass globe ── */
 .bulb__bulb {
   fill: transparent;
   stroke: var(--bulb-stroke);
@@ -357,20 +631,17 @@ html {
   transition: fill 0.3s ease, stroke 0.3s ease;
 }
 
-/* Lit state: glow inside globe */
 [aria-pressed="true"] .bulb__bulb {
   fill: rgba(255, 230, 100, 0.18);
   stroke: var(--bulb-stroke);
   filter: drop-shadow(0 0 8px rgba(255, 220, 80, 0.5));
 }
 
-/* ── Cap (base of bulb) ── */
 .bulb__cap {
   fill: var(--bulb-stroke);
   stroke: none;
 }
 
-/* ── Filament ── */
 .bulb__filament {
   stroke: var(--bulb-stroke);
   stroke-width: 6;
@@ -383,7 +654,6 @@ html {
   opacity: 1;
 }
 
-/* ── Grab handle (invisible circle at cord end) ── */
 .grab-handle {
   width: 52px;
   aspect-ratio: 1;
@@ -398,12 +668,11 @@ html {
 }
 .grab-handle:active { cursor: grabbing; }
 
-/* ── Theme colour tokens for the bulb ── */
 :root {
-  --bulb-stroke: #5a5a5a;   /* light mode: dark grey sketch */
+  --bulb-stroke: #5a5a5a;
 }
 .dark {
-  --bulb-stroke: #d4d4d4;   /* dark mode: light grey / near-white sketch */
+  --bulb-stroke: #d4d4d4;
 }
 
 /* ════════════════════════════════════════
@@ -412,7 +681,6 @@ html {
 
 .drag-hint {
   position: fixed;
-  /* anchored near the cord bottom / grab handle */
   top: 110px;
   right: 100px;
   pointer-events: none;
@@ -432,9 +700,8 @@ html {
   transform: translateX(0);
 }
 
-/* Handwritten text */
 .drag-hint__text {
-  font-family: var(--font-caveat), 'Caveat', 'Patrick Hand', cursive;
+  font-family: var(--font-handwritten);
   font-size: 1.3rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -448,7 +715,6 @@ html {
   text-shadow: none;
 }
 
-/* Curved arrow */
 .drag-hint__arrow {
   width: 90px;
   height: 56px;
@@ -462,35 +728,37 @@ html {
   color: #1a1a1a;
 }
 
-/* Gentle idle sway on the whole toggle */
 @keyframes bulbSway {
   0%, 100% { transform: rotate(0deg);   }
   25%       { transform: rotate(1.5deg); }
   75%       { transform: rotate(-1.5deg);}
 }
 
-/* Typography classes for the redesigned hero section */
+/* ── Hero typography classes ── */
 .hero-font-mono {
-  font-family: var(--font-geist-mono), monospace !important;
+  font-family: var(--font-mono) !important;
 }
 
 .hero-font-serif {
-  font-family: var(--font-instrument-serif), serif !important;
+  font-family: var(--font-serif) !important;
 }
 
 .hero-type-heading-2 {
-  font-family: var(--font-instrument-serif), serif !important;
-  font-size: 2.25rem !important; /* Tall, elegant serif header size */
+  font-family: var(--font-serif) !important;
+  font-size: 2.25rem !important;
   line-height: 1.1 !important;
-  font-weight: 400 !important; /* Serif looks best when not artificially bolded */
+  font-weight: 400 !important;
   letter-spacing: -0.02em !important;
 }
 
 .hero-type-body-small {
-  font-family: var(--font-geist-mono), monospace !important;
+  font-family: var(--font-mono) !important;
   font-size: 0.95rem !important;
   line-height: 1.5 !important;
   letter-spacing: -0.01em !important;
 }
 
-
+/* ── Exponential easing ── */
+:root {
+  --expo-out: linear(0 0%, .1684 2.66%, .3165 5.49%, .446 8.52%, .5581 11.78%, .6535 15.29%, .7341 19.11%, .8011 23.3%, .8557 27.93%, .8962 32.68%, .9283 38.01%, .9529 44.08%, .9711 51.14%, .9833 59.06%, .9915 68.74%, 1 100%);
+}

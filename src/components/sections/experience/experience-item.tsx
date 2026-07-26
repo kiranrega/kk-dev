@@ -21,7 +21,7 @@ export function ExperienceItem({
       <div
         className={`absolute -left-[4.5px] top-1.5 h-2.5 w-2.5 rounded-full border-[2px] border-background z-10 transition-colors duration-300 ${
           isCurrent
-            ? "bg-green-500 ring-4 ring-foreground/10"
+            ? "bg-success ring-4 ring-foreground/10"
             : "bg-muted"
         }`}
       />
@@ -30,7 +30,7 @@ export function ExperienceItem({
         <h3 className="text-base font-semibold text-foreground">
           {job.role}{" "}
           <span className="font-normal text-muted-foreground mx-0.5">·</span>{" "}
-          <span className="font-normal text-muted">{job.company}</span>
+          <span className="font-normal text-muted-foreground">{job.company}</span>
         </h3>
         <div className="text-sm font-medium text-foreground mt-0 sm:mt-0 whitespace-nowrap">
           {job.period}
@@ -46,7 +46,7 @@ export function ExperienceItem({
         <ul className="space-y-1">
           {job.bullets.map((bullet: string) => (
             <li key={bullet} className="flex gap-1.5">
-              <span className="text-muted mt-0 shrink-0">•</span>
+              <span className="text-muted-foreground mt-0 shrink-0">•</span>
               <span>{bullet}</span>
             </li>
           ))}

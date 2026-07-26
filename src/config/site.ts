@@ -16,7 +16,7 @@ export const siteConfig = {
   },
   location: "Hyderabad, India",
   phone: "+91 85000 44241",
-  website: "kiranrega.netlify.app",
+  website: "https://kiranrega.in",
   pronouns: "he/him",
 };
 

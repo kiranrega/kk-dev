@@ -37,7 +37,7 @@ export function HeroSection() {
         <ProfileInfoCard />
       </div>
 
-      <p className="max-w-[650px] hero-type-body-small text-pretty text-muted mt-6 hero-font-mono leading-relaxed">
+      <p className="max-w-[650px] hero-type-body-small text-balance text-muted mt-6 leading-relaxed">
         I build full-stack web products end-to-end, obsessing over small details
         that make software feel right to use. Currently working as{" "}
         <span className="text-foreground">Software Developer</span> at{" "}

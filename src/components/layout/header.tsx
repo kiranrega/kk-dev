@@ -3,6 +3,7 @@
 import { navItems } from "@/config/site";
 import { ActiveNav } from "@/components/layout/active-nav";
 import { CatSummoner } from "@/components/features/cat-summoner";
+import { BallPit } from "@/components/features/ball-pit";
 
 export function Header() {
   return (
@@ -11,6 +12,7 @@ export function Header() {
         <ActiveNav items={navItems} />
         <div className="flex items-center gap-2">
           <CatSummoner />
+          <BallPit />
         </div>
       </div>
     </header>
