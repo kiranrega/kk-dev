@@ -26,7 +26,7 @@ const WALL_RESTITUTION = 0.58;
 const DOM_RESTITUTION = 0.65;
 const DAMPING = 0.985;
 const SLEEP_VELOCITY = 26; // px/s
-const BALL_RESTITUTION = 1.85; // ball-ball bounce multiplier
+const BALL_RESTITUTION = 0.9; // ball-ball bounce multiplier (<=1 for stable energy)
 const STEPS_PER_SECOND = 120;
 const FIXED_DT = 1 / STEPS_PER_SECOND;
 
@@ -58,13 +58,43 @@ function resolveDomCollision(ball: Ball, rect: Collider): boolean {
   const dx = ball.x - closestX;
   const dy = ball.y - closestY;
   const distSq = dx * dx + dy * dy;
+  if (distSq >= ball.r * ball.r) return false;
 
-  if (distSq >= ball.r * ball.r || distSq === 0) return false;
+  let nx = 0;
+  let ny = 0;
+  let overlap = 0;
 
-  const dist = Math.sqrt(distSq);
-  const nx = dx / dist;
-  const ny = dy / dist;
-  const overlap = ball.r - dist;
+  if (distSq === 0) {
+    // Ball center is exactly at the closest point (center inside rect).
+    // Push out along the shortest axis to avoid division-by-zero.
+    const leftPen = ball.x - rect.left;
+    const rightPen = rect.right - ball.x;
+    const topPen = ball.y - rect.top;
+    const bottomPen = rect.bottom - ball.y;
+    const minPen = Math.min(leftPen, rightPen, topPen, bottomPen);
+    if (minPen === leftPen) {
+      nx = -1;
+      ny = 0;
+      overlap = ball.r + leftPen;
+    } else if (minPen === rightPen) {
+      nx = 1;
+      ny = 0;
+      overlap = ball.r + rightPen;
+    } else if (minPen === topPen) {
+      nx = 0;
+      ny = -1;
+      overlap = ball.r + topPen;
+    } else {
+      nx = 0;
+      ny = 1;
+      overlap = ball.r + bottomPen;
+    }
+  } else {
+    const dist = Math.sqrt(distSq);
+    nx = dx / dist;
+    ny = dy / dist;
+    overlap = ball.r - dist;
+  }
 
   ball.x += nx * overlap;
   ball.y += ny * overlap;
@@ -72,6 +102,8 @@ function resolveDomCollision(ball: Ball, rect: Collider): boolean {
   const dot = ball.vx * nx + ball.vy * ny;
   ball.vx -= (1 + DOM_RESTITUTION) * dot * nx;
   ball.vy -= (1 + DOM_RESTITUTION) * dot * ny;
+  // wake the ball if it was asleep
+  ball.asleep = false;
   return true;
 }
 
@@ -80,18 +112,30 @@ function resolveBallCollision(a: Ball, b: Ball) {
   const dy = b.y - a.y;
   const distSq = dx * dx + dy * dy;
   const minDist = a.r + b.r;
+  if (distSq >= minDist * minDist) return;
 
-  if (distSq >= minDist * minDist || distSq === 0) return;
+  let dist = Math.sqrt(distSq);
+  let nx = 0;
+  let ny = 0;
+  if (dist === 0) {
+    // Exact overlap: pick an arbitrary normal to separate
+    nx = 1;
+    ny = 0;
+  } else {
+    nx = dx / dist;
+    ny = dy / dist;
+  }
 
-  const dist = Math.sqrt(distSq);
-  const nx = dx / dist;
-  const ny = dy / dist;
   const overlap = (minDist - dist) / 2;
 
   a.x -= nx * overlap;
   a.y -= ny * overlap;
   b.x += nx * overlap;
   b.y += ny * overlap;
+
+  // wake both balls
+  a.asleep = false;
+  b.asleep = false;
 
   const relVx = b.vx - a.vx;
   const relVy = b.vy - a.vy;
