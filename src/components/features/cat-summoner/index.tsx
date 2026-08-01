@@ -10,9 +10,12 @@ export function CatSummoner() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("cat-enabled");
-    setCatEnabled(saved === "true");
+    const timer = setTimeout(() => {
+      setMounted(true);
+      const saved = localStorage.getItem("cat-enabled");
+      setCatEnabled(saved === "true");
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const toggleCat = () => {

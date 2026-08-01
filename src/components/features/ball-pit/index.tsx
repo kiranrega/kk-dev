@@ -16,9 +16,12 @@ export function BallPit() {
   const draggingRef = useRef<{ x: number; y: number; startX: number; startY: number; t: number } | null>(null);
 
   useEffect(() => {
-    setMounted(true);
-    const saved = localStorage.getItem("ball-pit-enabled");
-    setEnabled(saved === "true");
+    const timer = setTimeout(() => {
+      setMounted(true);
+      const saved = localStorage.getItem("ball-pit-enabled");
+      setEnabled(saved === "true");
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const toggle = () => {
@@ -84,7 +87,16 @@ export function BallPit() {
     raf = requestAnimationFrame(loop);
 
     const onPointerDown = (e: PointerEvent) => {
+      const target = e.target as Element | null;
+      if (target?.closest("a, button, input, select, textarea, [role='button']")) {
+        return;
+      }
       draggingRef.current = { x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY, t: performance.now() };
+      
+      // Prevent text selection during drag
+      document.body.style.userSelect = "none";
+      document.body.style.webkitUserSelect = "none";
+      window.getSelection()?.removeAllRanges();
     };
     const onPointerMove = (e: PointerEvent) => {
       if (!draggingRef.current) return;
@@ -94,6 +106,11 @@ export function BallPit() {
     const onPointerUp = (e: PointerEvent) => {
       const d = draggingRef.current;
       draggingRef.current = null;
+      
+      // Restore text selection
+      document.body.style.userSelect = "";
+      document.body.style.webkitUserSelect = "";
+
       if (!d) return;
       const dt = Math.max(performance.now() - d.t, 16);
       const vx = ((d.startX - e.clientX) / dt) * 1000 * 0.6;
@@ -102,18 +119,25 @@ export function BallPit() {
       ballsRef.current.push(createBall(d.startX, d.startY, vx, vy, color));
       if (ballsRef.current.length > 40) ballsRef.current.shift();
     };
+    const onPointerCancel = () => {
+      draggingRef.current = null;
+      document.body.style.userSelect = "";
+      document.body.style.webkitUserSelect = "";
+    };
 
-    canvas.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("pointerdown", onPointerDown);
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
+    window.addEventListener("pointercancel", onPointerCancel);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
       mutationObserver.disconnect();
-      canvas.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
+      window.removeEventListener("pointercancel", onPointerCancel);
     };
   }, [enabled]);
 
@@ -125,7 +149,7 @@ export function BallPit() {
         createPortal(
           <canvas
             ref={canvasRef}
-            className="pointer-events-auto fixed inset-0 z-50 touch-none"
+            className="pointer-events-none fixed inset-0 z-50 touch-none"
             aria-hidden="true"
           />,
           document.body
