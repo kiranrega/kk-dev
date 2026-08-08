@@ -82,7 +82,6 @@ export const metadata: Metadata = {
   },
 };
 
-import { ShaderBackground } from '@/components/features/shader-background';
 
 export default function RootLayout({
   children,
