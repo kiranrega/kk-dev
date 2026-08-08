@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const API_BASE = "https://api.counterapi.dev/v2/kiran-kumar-regas-team-4807/first-counter-4807";
+const API_BASE = "/api/counter";
 
 export function VisitorCounter() {
   const [views, setViews] = useState<number | null>(null);

@@ -4,7 +4,7 @@ export const siteConfig = {
   description:
     "Portfolio of Kiran Kumar Rega, a React, TypeScript, Next.js, and Node.js software engineer focused on frontend performance and product quality.",
   url: "https://kiranrega.is-a.dev",
-  ogImage: "/assets/Profile (2).webp",
+  ogImage: "/assets/kiran_kumar_rega.avif",
   links: {
     email: "kirankumar.rega@gmail.com",
     github: "https://github.com/kiranrega",

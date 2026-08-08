@@ -56,10 +56,10 @@ export const metadata: Metadata = {
   authors: [{ name: "Kiran Kumar Rega" }],
   icons: {
     icon: [
-      { url: "/favicon.png", sizes: "32x32", type: "image/png" },
-      { url: "/assets/logo.png", sizes: "192x192", type: "image/png" },
+      { url: "/assets/kiran_kumar_rega.avif", sizes: "192x192", type: "image/avif" },
+      { url: "/kiran_kumar_rega.avif", sizes: "32x32", type: "image/png" },
     ],
-    apple: "/assets/logo.png",
+    apple: "/assets/kiran_kumar_rega.avif",
   },
   openGraph: {
     title: "Kiran Kumar Rega | Full-Stack Software Engineer",
@@ -82,6 +82,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { ShaderBackground } from '@/components/features/shader-background';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -102,6 +104,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <CloudflareAnalytics />
+        <ShaderBackground />
         {children}
       </body>
     </html>
