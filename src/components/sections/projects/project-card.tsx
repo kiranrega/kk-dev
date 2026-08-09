@@ -1,5 +1,8 @@
+"use client";
+
 import { ExternalLink } from "lucide-react";
 import { TechChip } from "@/components/features/skill-icons";
+import { GSAPScrubText } from "@/components/features/gsap-scrub-text";
 import type { Project } from "@/types";
 
 export function ProjectCard({
@@ -11,25 +14,26 @@ export function ProjectCard({
 }) {
   return (
     <article
-      className="group relative"
+      className="group relative rounded-2xl bg-neutral-100/40 dark:bg-neutral-900/40 border border-neutral-200/80 dark:border-neutral-800/80 p-5 sm:p-6 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-neutral-400 dark:hover:border-neutral-600 hover:shadow-xl dark:hover:shadow-black/30 group-hover:scale-[1.01]"
       style={{ "--reveal-index": index } as React.CSSProperties}
     >
-      <div className="flex items-start justify-between gap-4 mb-1.5">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <h3 className="text-[15px] font-medium text-foreground truncate">
+      <div className="flex items-start justify-between gap-4 mb-2">
+        <div className="flex flex-wrap items-center gap-2.5 min-w-0">
+          <h3 className="text-base sm:text-lg font-bold text-foreground group-hover:text-primary transition-colors">
             {project.name}
           </h3>
-          <span className="text-[11px] text-muted-foreground font-mono shrink-0">
+          <span className="text-xs text-muted-foreground font-mono px-2 py-0.5 rounded-md bg-neutral-200/50 dark:bg-neutral-800/50 border border-neutral-300/50 dark:border-neutral-700/50 shrink-0">
             {project.role}
           </span>
         </div>
+
         <div className="flex items-center gap-2 shrink-0">
           {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors duration-150"
+              className="p-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 text-muted-foreground hover:text-foreground hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 transition-all"
               aria-label={`${project.name} GitHub`}
             >
               <svg
@@ -51,26 +55,28 @@ export function ProjectCard({
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors duration-150"
+              className="p-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 text-muted-foreground hover:text-foreground hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 transition-all"
               aria-label={`${project.name} live demo`}
             >
-              <ExternalLink size={15} strokeWidth={1.5} />
+              <ExternalLink size={15} />
             </a>
           )}
         </div>
       </div>
 
       {project.keyResult && (
-        <p className="text-[12px] font-mono text-emerald-600 dark:text-emerald-400 mb-2">
+        <p className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold mb-3 flex items-center gap-1.5">
+          <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
           {project.keyResult}
         </p>
       )}
 
-      <p className="text-[13px] leading-relaxed text-muted-foreground max-w-[540px] mb-3">
+      {/* GSAP Word-by-Word Scroll Opacity Scrubbing */}
+      <GSAPScrubText className="text-xs sm:text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 mb-4">
         {project.description}
-      </p>
+      </GSAPScrubText>
 
-      <div className="flex items-center gap-3 flex-wrap">
+      <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-border/40">
         {project.tech.map((tech) => (
           <TechChip key={tech} name={tech} />
         ))}
@@ -78,8 +84,6 @@ export function ProjectCard({
           {project.type}
         </span>
       </div>
-
-      <div className="mt-4 border-b border-border/50" />
     </article>
   );
 }

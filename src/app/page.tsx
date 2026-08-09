@@ -10,15 +10,15 @@ import { ProjectsSection } from "@/components/sections/projects";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
+    <main className="relative min-h-screen overflow-x-hidden w-full max-w-full bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
       <RevealOnScroll />
       <FloatingTOC />
       <ThemeToggle />
 
-      <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-4 py-4 sm:px-6">
+      <div className="relative z-10 mx-auto min-h-screen w-full max-w-5xl lg:max-w-6xl px-4 py-4 sm:px-6 md:px-8">
         <Header />
 
-        <div className="pt-10 sm:pt-10 pb-4">
+        <div className="pt-8 sm:pt-12 pb-8">
           <HeroSection />
           <StackSection />
           <ExperienceSection />
