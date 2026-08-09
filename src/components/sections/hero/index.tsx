@@ -27,18 +27,16 @@ export function HeroSection() {
       className="flex flex-col items-start justify-start scroll-mt-24 w-full"
     >
       <div className="flex items-center gap-3 sm:gap-4 animate-blur-in">
-        <picture>
-          <source srcSet="/assets/kiran_kumar_rega.avif" type="image/avif" />
-          <source srcSet="/assets/kiran_kumar_rega.png" type="image/png" />
+        <div className="rounded-full bg-slate-100/70 dark:bg-slate-900/70 p-1 sm:p-1.5 shadow-sm shadow-slate-900/5 dark:shadow-black/20">
           <Image
-            src="/assets/Profile (2).webp"
+            src="/assets/Kiran%20Kumar%20Rega.avif"
             alt={siteConfig.name}
             width={128}
             height={128}
             priority
             className="rounded-full object-cover w-28 h-28 sm:w-32 sm:h-32 grayscale hover:grayscale-0 transition-all duration-300 shrink-0"
           />
-        </picture>
+        </div>
 
         <div className="flex flex-col justify-center min-w-0">
           <h1 className="m-0 text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight text-foreground">
