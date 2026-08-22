@@ -653,7 +653,7 @@ export function SkillPill({ name, iconOnly = false }: { name: string; iconOnly?:
   if (iconOnly) {
     return (
       <div
-        className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card text-foreground shadow-sm transition-all duration-300 hover:border-muted hover:scale-105 [&_svg]:size-7 grayscale hover:grayscale-0"
+        className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-card text-foreground shadow-sm transition-all duration-300 hover:border-muted hover:scale-105 [&_svg]:size-7 grayscale !grayscale-0 hover:grayscale-0"
         aria-label={name}
         title={name}
       >
@@ -664,7 +664,7 @@ export function SkillPill({ name, iconOnly = false }: { name: string; iconOnly?:
 
   return (
     <div className="group inline-flex items-center gap-0 rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-sm transition-all duration-300 ease-out hover:border-muted hover:text-foreground [&_svg]:size-4">
-      <span className="size-4 shrink-0 grayscale group-hover:grayscale-0 transition-all duration-300">
+      <span className="size-4 shrink-0 grayscale !grayscale-0 group-hover:grayscale-0 transition-all duration-300">
         <IconComponent />
       </span>
       <span className="max-w-0 overflow-hidden opacity-0 whitespace-nowrap transition-all duration-500 ease-out group-hover:max-w-32 group-hover:opacity-100 group-hover:ml-2">
@@ -692,7 +692,7 @@ export function TechChip({ name }: { name: string }) {
 
   return (
     <div className="group inline-flex items-center gap-0 flex-shrink-0 rounded-md border border-border bg-card px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-muted-foreground shadow-sm transition-all duration-300 ease-out hover:border-muted hover:text-foreground [&_svg]:size-3">
-      <span className="size-3 shrink-0 grayscale group-hover:grayscale-0 transition-all duration-300">
+      <span className="size-3 shrink-0 grayscale !grayscale-0 group-hover:grayscale-0 transition-all duration-300">
         <IconComponent />
       </span>
       <span className="max-w-0 overflow-hidden opacity-0 whitespace-nowrap transition-all duration-500 ease-out group-hover:max-w-28 group-hover:opacity-100 group-hover:ml-1.5 flex-shrink-0">

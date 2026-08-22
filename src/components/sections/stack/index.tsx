@@ -9,8 +9,14 @@ export function StackSection() {
       <Card className="reveal-item" style={{ "--reveal-index": 0 } as React.CSSProperties}>
         <div className="flex flex-wrap gap-2.5 sm:gap-3">
           {allSkills.map((item) => (
+            <SkillPill key={`stack-icon-${item}`} name={item} iconOnly />
+          ))}
+
+          {/*
+          {allSkills.map((item) => (
             <SkillPill key={`stack-flat-${item}`} name={item} />
           ))}
+          */}
         </div>
       </Card>
     </Section>
