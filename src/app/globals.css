@@ -66,6 +66,7 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --color-line: var(--line);
   --color-card: var(--card);
   --color-accent: var(--accent);
   
@@ -73,7 +74,6 @@
   --font-display: var(--font-sora);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-ibm-plex-serif), "IBM Plex Serif", serif;
-  --font-serif: var(--font-instrument-serif);
 }
 
 
@@ -141,7 +141,7 @@ html {
 }
 
 .animate-blur-in {
-  animation: blur-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: blur-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Scroll reveal refinement */
@@ -473,7 +473,7 @@ html {
   75%       { transform: rotate(-1.5deg);}
 }
 
-/* Typography classes for the redesigned hero section */
+/* Typography classes for the redesigned hero section 
 .hero-font-mono {
   font-family: var(--font-geist-mono), monospace !important;
 }
@@ -484,9 +484,9 @@ html {
 
 .hero-type-heading-2 {
   font-family: var(--font-instrument-serif), serif !important;
-  font-size: 2.25rem !important; /* Tall, elegant serif header size */
+  font-size: 2.25rem !important; 
   line-height: 1.1 !important;
-  font-weight: 400 !important; /* Serif looks best when not artificially bolded */
+  font-weight: 400 !important; 
   letter-spacing: -0.02em !important;
 }
 
@@ -496,7 +496,7 @@ html {
   line-height: 1.5 !important;
   letter-spacing: -0.01em !important;
 }
-
+*/
 /* ── Link style ── */
 .link {
   color: var(--link);

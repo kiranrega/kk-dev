@@ -15,6 +15,7 @@ export const siteConfig = {
       "https://drive.google.com/uc?export=download&id=1VEj5j4SiNtpHRgQyJi5TsgLyBczkfX45",
   },
   location: "Hyderabad, India",
+  timezone: "Asia/Kolkata",
   phone: "+91 85000 44241",
   website: "https://kiranrega.in",
   pronouns: "he/him",

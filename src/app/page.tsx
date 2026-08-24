@@ -3,8 +3,12 @@ import { Footer } from "@/components/layout/footer";
 import { FloatingTOC } from "@/components/layout/floating-toc";
 import { RevealOnScroll } from "@/components/features/reveal-on-scroll";
 import ThemeToggle from "@/components/features/theme-toggle";
+import { Section } from "@/components/layout/section";
 import { HeroSection } from "@/components/sections/hero";
-import { StackSection } from "@/components/sections/stack";
+// Old stack section kept for reference — replaced by the new categorized
+// stack component in components/stack.tsx.
+// import { StackSection } from "@/components/sections/stack";
+import { Stack, stackToolCount } from "@/components/stack";
 import { ExperienceSection } from "@/components/sections/experience";
 import { ProjectsSection } from "@/components/sections/projects";
 
@@ -20,7 +24,21 @@ export default function Home() {
 
         <div className="pt-8 sm:pt-12 pb-8">
           <HeroSection />
+          {/* Old stack section (flat icon grid) — kept for reference
           <StackSection />
+          */}
+          <Section
+            id="stack"
+            title="TECH STACK"
+            count={stackToolCount}
+            subtitle="01 / Tools & Technologies"
+            description="The languages, frameworks, and infrastructure I reach for when building and shipping web products."
+            pinned={true}
+          >
+            <div className="reveal-item" style={{ "--reveal-index": 0 } as React.CSSProperties}>
+              <Stack />
+            </div>
+          </Section>
           <ExperienceSection />
           <ProjectsSection />
         </div>
