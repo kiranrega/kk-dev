@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
+import CipherText from "@/components/features/CipherText";
 import { SocialLinks } from "./social-links";
 import { AvailabilityStatus } from "@/components/ui/availability-status";
 import { Check, Copy, ArrowDownRight, MapPin, Clock } from "lucide-react";
@@ -86,7 +87,7 @@ export function HeroSection() {
           </h1>
 
           <p className="text-sm sm:text-base text-muted-foreground mt-4 leading-relaxed max-w-2xl">
-            Hi, I&apos;m <span className="text-foreground font-semibold">{siteConfig.name}</span> — {siteConfig.role}. I specialize in crafting performant frontend interfaces and scalable web applications.
+            Hi, I&apos;m <CipherText text={siteConfig.name} trigger="mount" speed={12} className="inline-block text-foreground font-semibold" /> — <CipherText text={siteConfig.role} trigger="mount" speed={10} className="inline-block text-foreground/90" />. I specialize in crafting performant frontend interfaces and scalable web applications.
           </p>
         </div>
 
