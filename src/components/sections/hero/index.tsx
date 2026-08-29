@@ -95,7 +95,7 @@ export function HeroSection() {
         <div className="shrink-0 relative group/avatar">
           <div className="relative rounded-2xl p-1.5 bg-gradient-to-b from-neutral-200 to-neutral-300 dark:from-neutral-800 dark:to-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl shadow-black/5 dark:shadow-black/30">
             <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-900">
-              <Image
+              <Image width={128} height={128}
                 src="/assets/kiran_kumar_rega.avif"
                 alt={siteConfig.name}
                 fill
