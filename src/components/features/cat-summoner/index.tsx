@@ -2,18 +2,20 @@
 
 import { useEffect, useState, lazy, Suspense } from "react";
 import { MousePointer2 } from "lucide-react";
+import { catConfig } from "./oneko/OnekoCat";
 
 const OnekoCat = lazy(() => import("./oneko/OnekoCat"));
 
 export function CatSummoner() {
-  const [catEnabled, setCatEnabled] = useState(false);
+  const [catEnabled, setCatEnabled] = useState(catConfig.enabled);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setMounted(true);
       const saved = localStorage.getItem("cat-enabled");
-      setCatEnabled(saved === "true");
+      const shouldBeEnabled = saved === null ? catConfig.enabled : saved === "true";
+      setCatEnabled(shouldBeEnabled);
     }, 0);
     return () => clearTimeout(timer);
   }, []);
