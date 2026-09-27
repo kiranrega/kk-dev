@@ -6,7 +6,7 @@ export function ExperienceSection() {
   return (
     <Section
       id="experience"
-      title="EXPERIENCE"
+      title="Experience"
       count={experience.length}
       subtitle="02 / Career Trajectory"
       description="Proven engineering impact delivering high-performance full-stack applications, optimizing frontend load times, and driving production features."

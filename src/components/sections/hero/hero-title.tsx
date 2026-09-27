@@ -31,9 +31,9 @@ export function HeroTitle() {
   }, []);
 
   return (
-    <div className="h-[24px] overflow-hidden pt-1">
+    <div className="h-5 overflow-hidden">
       <span
-        className={`block text-sm sm:text-base font-medium text-muted-foreground tracking-tight transition-all duration-320 ${
+        className={`block font-mono text-sm font-normal text-muted-foreground transition-all duration-320 ${
           visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-[7px]"
         }`}
       >

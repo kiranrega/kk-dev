@@ -1,19 +1,17 @@
-import { VisitorCounter } from "@/components/features/visitor-counter";
+import { CornerPluses } from "./plus";
 
 export function Footer() {
   return (
-    <footer className="mt-8 mb-8 py-8 border-t border-border">
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+    <footer className="relative mb-24 border-x border-edge screen-line-before screen-line-after px-4 py-8 sm:px-5">
+      <CornerPluses bottom />
+      <div className="flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
         <div>
           <span>Designed & Developed by </span>
           <span className="font-semibold text-foreground">Kiran Kumar Rega</span>
         </div>
-        <div className="flex items-center gap-4">
-          <VisitorCounter />
-          <span>&copy; {new Date().getFullYear()} All rights reserved.</span>
-        </div>
+        <span>&copy; {new Date().getFullYear()} All rights reserved.</span>
       </div>
-      <div className="mt-3 text-xs text-muted text-center sm:text-left">
+      <div className="mt-3 text-center font-mono text-xs text-muted sm:text-left">
         Hyderabad, India
       </div>
     </footer>

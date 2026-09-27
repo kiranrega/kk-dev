@@ -103,7 +103,13 @@ export const stackToolCount = CATEGORIES.reduce(
 
 export function Stack() {
   return (
-    <div className="relative [--badge-height:--spacing(6)] [--col-left-width:--spacing(48)]">
+    <div
+      className="relative"
+      style={{
+        '--badge-height': '1.5rem',
+        '--col-left-width': '12rem',
+      } as React.CSSProperties}
+    >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-y-0 left-(--col-left-width) -z-10 w-px border-r border-dashed border-line max-sm:hidden"

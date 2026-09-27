@@ -6,7 +6,7 @@ export function ProjectsSection() {
   return (
     <Section
       id="projects"
-      title="PROJECTS"
+      title="Projects"
       count={projects.length}
       subtitle="03 / Selected Works"
       description="Curated web apps and developer tooling built with an obsession for performance, clean architecture, and intuitive UX."

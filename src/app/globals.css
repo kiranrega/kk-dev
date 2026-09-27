@@ -24,11 +24,15 @@
   /* Typography variables */
   --text-sm: .875rem;
   --font-family-sans: var(--font-geist-sans), Inter, system-ui, sans-serif;
-  --font-family-display: var(--font-sora), var(--font-geist-sans), sans-serif;
-  
-  --font-size-hero: clamp(2.25rem, 6vw, 3.5rem);
-  --line-height-hero: 1.1;
+  --font-family-display: var(--font-geist-pixel-grid), var(--font-geist-mono), ui-monospace, monospace;
+  --font-family-pixel: var(--font-geist-pixel-grid), var(--font-geist-mono), ui-monospace, monospace;
+
+  --font-size-hero: clamp(1.5rem, 4vw, 1.875rem);
+  --line-height-hero: 1;
   --letter-spacing-tight: -0.02em;
+
+  --edge: color-mix(in oklab, var(--border) 64%, var(--background));
+  --pattern-foreground: color-mix(in oklab, var(--color-zinc-400, #9f9fa9) 60%, transparent);
 
   /* Bulb SVG theme vars (light) */
   --cord: #555;
@@ -52,6 +56,8 @@
   --border: var(--portfolio-border);
   --card: var(--portfolio-surface);
   --accent: var(--portfolio-ink);
+  --edge: lab(14.0875% 0.834942 -2.88312);
+  --pattern-foreground: color-mix(in oklab, var(--color-zinc-600, #52525c) 60%, transparent);
 
   /* Bulb SVG theme vars (dark) */
   --cord: #888;
@@ -66,12 +72,14 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
+  --color-edge: var(--edge);
   --color-line: var(--line);
   --color-card: var(--card);
   --color-accent: var(--accent);
   
   --font-sans: var(--font-geist-sans);
-  --font-display: var(--font-sora);
+  --font-display: var(--font-geist-pixel-grid);
+  --font-pixel: var(--font-geist-pixel-grid), var(--font-geist-mono), ui-monospace, monospace;
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-ibm-plex-serif), "IBM Plex Serif", serif;
 }
@@ -85,21 +93,72 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-family-display);
-  font-weight: 700;
-  letter-spacing: var(--letter-spacing-tight);
+.font-pixel,
+.section-label {
+  font-family: var(--font-pixel);
 }
 
 .section-label {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 1.875rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: none;
   color: var(--foreground);
+}
+
+.screen-line-before,
+.screen-line-after {
+  position: relative;
+}
+
+.screen-line-before::before,
+.screen-line-after::after {
+  content: "";
+  position: absolute;
+  left: -100vw;
+  z-index: 0;
+  width: 200vw;
+  height: 1px;
+  background-color: var(--edge);
+  pointer-events: none;
+}
+
+.screen-line-before::before {
+  top: 0;
+}
+
+.screen-line-after::after {
+  bottom: 0;
+}
+
+.page-hatch {
+  overflow: hidden;
+}
+
+.page-hatch::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: -100vw;
+  width: 200vw;
+  background: repeating-linear-gradient(
+    315deg,
+    var(--pattern-foreground) 0,
+    var(--pattern-foreground) 1px,
+    transparent 0,
+    transparent 50%
+  );
+  background-size: 10px 10px;
+}
+
+.page-dots {
+  background-image: radial-gradient(var(--pattern-foreground) 1px, transparent 0);
+  background-size: 10px 10px;
+  background-position: center;
 }
 
 html {
