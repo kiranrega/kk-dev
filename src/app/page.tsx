@@ -1,7 +1,8 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { FloatingTOC } from "@/components/layout/floating-toc";
+// import { FloatingTOC } from "@/components/layout/floating-toc";
 import { RevealOnScroll } from "@/components/features/reveal-on-scroll";
+import OnekoCat from "@/components/features/cat-summoner/oneko/OnekoCat";
 import ThemeToggle from "@/components/features/theme-toggle";
 import { Section } from "@/components/layout/section";
 import { Hatch } from "@/components/layout/hatch";
@@ -14,7 +15,8 @@ export default function Home() {
   return (
     <main className="relative min-h-screen w-full max-w-full overflow-x-clip bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
       <RevealOnScroll />
-      <FloatingTOC />
+      {/* <FloatingTOC /> */}
+      <OnekoCat />
       <ThemeToggle />
 
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-2 pt-2 sm:px-4">
@@ -29,6 +31,7 @@ export default function Home() {
           subtitle="01 / Tools & Technologies"
           description="The languages, frameworks, and infrastructure I reach for when building and shipping web products."
           pinned={true}
+          className="reveal"
         >
           <div className="reveal-item" style={{ "--reveal-index": 0 } as React.CSSProperties}>
             <Stack />

@@ -101,7 +101,7 @@ export function HeroSection() {
           . I build systems that hold up at scale.
         </p>
 
-        <div className="mt-5 flex flex-wrap items-center gap-3">
+        {/* <div className="mt-5 flex flex-wrap items-center gap-3">
           <a
             href="#projects"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
@@ -121,7 +121,7 @@ export function HeroSection() {
               <Copy size={16} className="shrink-0 text-muted-foreground" />
             )}
           </button>
-        </div>
+        </div> */}
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
           <SocialLinks />

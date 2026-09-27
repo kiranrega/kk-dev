@@ -12,7 +12,7 @@ export function ExperienceSection() {
       description="Proven engineering impact delivering high-performance full-stack applications, optimizing frontend load times, and driving production features."
       pinned={true}
     >
-      <div className="relative border-l border-neutral-300 dark:border-neutral-800 ml-2 sm:ml-4 space-y-8">
+      <div className="space-y-6">
         {experience.map((job, index) => (
           <ExperienceItem key={job.company} job={job} index={index} />
         ))}

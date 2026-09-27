@@ -17,18 +17,9 @@ export function ExperienceItem({
 
   return (
     <div
-      className="relative pl-6 sm:pl-8 group"
+      className="group"
       style={{ "--reveal-index": index } as React.CSSProperties}
     >
-      {/* Timeline Node Ring */}
-      <div
-        className={`absolute -left-[5px] top-7 h-3 w-3 rounded-full border-2 border-background z-10 transition-all duration-300 group-hover:scale-125 ${
-          isCurrent
-            ? "bg-emerald-500 ring-4 ring-emerald-500/20"
-            : "bg-neutral-400 dark:bg-neutral-600 group-hover:bg-foreground"
-        }`}
-      />
-
       {/* Experience Glass Card Container with Spring Physics */}
       <div className="rounded-2xl bg-neutral-100/40 dark:bg-neutral-900/40 border border-neutral-200/80 dark:border-neutral-800/80 p-5 sm:p-6 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-neutral-400 dark:hover:border-neutral-600 hover:shadow-lg dark:hover:shadow-black/20 group-hover:scale-[1.01]">
         {/* Role & Company Header */}
@@ -42,6 +33,12 @@ export function ExperienceItem({
                 <Building2 size={13} className="shrink-0 text-muted-foreground" />
                 {job.company}
               </span>
+              {isCurrent ? (
+                <span className="inline-flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400">
+                  <span aria-hidden className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Current role
+                </span>
+              ) : null}
               <span>·</span>
               <span className="inline-flex items-center gap-1">
                 <MapPin size={12} className="shrink-0" />
