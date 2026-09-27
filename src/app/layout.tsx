@@ -31,12 +31,23 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Kiran Kumar Rega" }],
   icons: {
-    icon: [
-      { url: "/assets/kiran_kumar_rega.avif", sizes: "192x192", type: "image/avif" },
-      { url: "/kiran_kumar_rega.avif", sizes: "32x32", type: "image/png" },
-    ],
-    apple: "/assets/kiran_kumar_rega.avif",
+    // icon: [
+    //   { url: "/assets/kiran_kumar_rega_sketch.png", sizes: "192x192", type: "image/png" },
+    //   { url: "/assets/kiran_kumar_rega_sketch.png", sizes: "32x32", type: "image/png" },
+    // ],
+    icon: "/icon",
+    // apple: "/assets/kiran_kumar_rega_sketch.png",
+    apple: "/icon",
   },
+  /*
+  icons: {
+    icon: [
+      { url: "/assets/kiran_kumar_rega_sketch.png", sizes: "192x192", type: "image/png" },
+      { url: "/assets/kiran_kumar_rega_sketch.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/assets/kiran_kumar_rega_sketch.png",
+  },
+  */
   openGraph: {
     title: "Kiran Kumar Rega | Full-Stack Software Engineer",
     description:

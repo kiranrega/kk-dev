@@ -227,7 +227,7 @@ export default function ThemeToggle() {
         className="drag-hint drag-hint--visible"
         aria-hidden="true"
       >
-        <span className="drag-hint__text">drag me.</span>
+        <span className="drag-hint__text">drag me to see magic.</span>
         <svg
           className="drag-hint__arrow"
           viewBox="0 0 100 70"

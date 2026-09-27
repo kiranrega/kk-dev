@@ -13,6 +13,7 @@ import { Check, Copy, ArrowDownRight, MapPin, Clock } from "lucide-react";
 export function HeroSection() {
   const [copied, setCopied] = useState(false);
   const [localTime, setLocalTime] = useState<string | null>(null);
+  const [showInitials, setShowInitials] = useState(false);
 
   useEffect(() => {
     const format = new Intl.DateTimeFormat("en-US", {
@@ -34,6 +35,26 @@ export function HeroSection() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  useEffect(() => {
+    const toggleProfileWithKey = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (
+        event.key.toLowerCase() !== "p" ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.altKey ||
+        target?.closest("input, textarea, select, [contenteditable='true']")
+      ) {
+        return;
+      }
+
+      setShowInitials((current) => !current);
+    };
+
+    window.addEventListener("keydown", toggleProfileWithKey);
+    return () => window.removeEventListener("keydown", toggleProfileWithKey);
+  }, []);
+
   return (
     <section id="overview" className="scroll-mt-24 w-full">
       <div className="relative min-h-[70px] w-full border-x border-edge screen-line-before screen-line-after page-dots sm:min-h-[110px]">
@@ -44,18 +65,34 @@ export function HeroSection() {
         <CornerPluses bottom />
 
         <div className="w-[35%] shrink-0 p-2 sm:w-auto sm:p-5">
-          <div className="aspect-square h-auto w-full overflow-hidden rounded-[12px] border border-border p-[4px] transition duration-300 hover:brightness-90 sm:size-32">
-            <div className="relative aspect-square overflow-hidden rounded-[8px]">
+          <button
+            type="button"
+            onClick={() => setShowInitials((current) => !current)}
+            className="relative aspect-square h-auto w-full overflow-hidden rounded-[12px] border border-border p-[4px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground sm:size-32"
+            aria-label="Toggle profile image"
+            title="Toggle profile image (P)"
+          >
+            <div className="relative aspect-square overflow-hidden rounded-[8px] bg-background">
+              <span
+                aria-hidden
+                className={`absolute inset-0 grid place-items-center bg-foreground font-pixel text-3xl font-black text-background transition-all duration-300 ${
+                  showInitials ? "scale-100 opacity-100" : "scale-95 opacity-0"
+                }`}
+              >
+                KR
+              </span>
               <Image
-                src="/assets/kiran_kumar_rega.avif"
+                src={siteConfig.ogImage}
                 alt={siteConfig.name}
                 fill
                 sizes="128px"
                 priority
-                className="object-cover"
+                className={`object-cover bg-background transition-all duration-300 ${
+                  showInitials ? "scale-105 opacity-0" : "scale-100 opacity-100"
+                }`}
               />
             </div>
-          </div>
+          </button>
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col justify-center gap-1 py-3 pl-2 sm:pl-4">
