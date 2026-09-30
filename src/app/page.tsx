@@ -7,7 +7,9 @@ import ThemeToggle from "@/components/features/theme-toggle";
 import { Section } from "@/components/layout/section";
 import { Hatch } from "@/components/layout/hatch";
 import { HeroSection } from "@/components/sections/hero";
-import { Stack, stackToolCount } from "@/components/stack";
+// import { Stack, stackToolCount } from "@/components/stack";
+import { SkillsFilter } from "@/components/skills-filter";
+import { allSkills } from "@/config/skills";
 import { ExperienceSection } from "@/components/sections/experience";
 import { ProjectsSection } from "@/components/sections/projects";
 
@@ -26,6 +28,20 @@ export default function Home() {
         <Hatch />
         <Section
           id="stack"
+          title="Skills"
+          count={allSkills.length}
+          subtitle="01 / Tools & Technologies"
+          description="The technologies I use to build and ship web applications."
+          pinned={true}
+          className="reveal"
+        >
+          <div className="reveal-item" style={{ "--reveal-index": 0 } as React.CSSProperties}>
+            <SkillsFilter />
+          </div>
+        </Section>
+        {/* Previous skills section, kept here for easy restoration:
+        <Section
+          id="stack"
           title="Stack"
           count={stackToolCount}
           subtitle="01 / Tools & Technologies"
@@ -37,6 +53,7 @@ export default function Home() {
             <Stack />
           </div>
         </Section>
+        */}
         <Hatch />
         <ExperienceSection />
         <Hatch />

@@ -227,6 +227,38 @@ html {
   transform: translateY(0);
 }
 
+@keyframes skill-chip-enter {
+  from { opacity: 0; transform: translateY(6px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.skill-chip-enter {
+  animation: skill-chip-enter 260ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.skill-chip {
+  transition: transform 160ms ease, border-color 160ms ease, color 160ms ease, background-color 160ms ease;
+}
+
+.skill-chip:hover {
+  transform: translateY(-2px);
+}
+
+.skill-chip-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-chip-enter {
+    animation: none;
+  }
+
+  .skill-chip {
+    transition: none;
+  }
+}
+
 
 ::selection {
   background: var(--foreground);
@@ -609,5 +641,4 @@ html {
   font-family: var(--font-mono);
   font-size: var(--text-sm);
 }
-
 

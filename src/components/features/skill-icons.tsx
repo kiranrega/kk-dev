@@ -674,6 +674,24 @@ export function SkillPill({ name, iconOnly = false }: { name: string; iconOnly?:
   );
 }
 
+export function SkillBadge({ name }: { name: string }) {
+  const entry = lookup(name);
+  const IconComponent = entry?.component;
+
+  return (
+    <span className="skill-chip inline-flex min-h-9 items-center gap-2 rounded-md border border-border bg-card px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground">
+      {IconComponent ? (
+        <span aria-hidden="true" className="skill-chip-icon inline-flex size-4 shrink-0 items-center justify-center grayscale">
+          <IconComponent />
+        </span>
+      ) : (
+        <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-foreground/50" />
+      )}
+      {name}
+    </span>
+  );
+}
+
 // ---------------------------------------------------------------------------
 // TechChip — same hover-expand animation as SkillPill, slightly smaller
 // ---------------------------------------------------------------------------
