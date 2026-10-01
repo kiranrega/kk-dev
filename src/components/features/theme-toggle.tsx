@@ -75,14 +75,13 @@
 
 
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { Draggable } from 'gsap/Draggable'
 gsap.registerPlugin(Draggable)
 
 export default function ThemeToggle() {
   const formRef = useRef<HTMLFormElement | null>(null)
-  const [showHint, setShowHint] = useState(true)
 
   useEffect(() => {
     const saved = localStorage.getItem('theme') || 'dark'
@@ -96,10 +95,7 @@ export default function ThemeToggle() {
     const HIT    = FORM.querySelector<HTMLElement>('.grab-handle')
     const DUMMY_CORD = FORM.querySelector<SVGLineElement>('.toggle-scene__dummy-cord line')
     if (!TOGGLE || !HIT || !DUMMY_CORD) return
-
-    // Hint stays permanently visible; dismiss only after first drag
-    const dismissHint = () => setShowHint(false)
-    HIT.addEventListener('pointerdown', dismissHint, { once: true })
+    TOGGLE.setAttribute('aria-pressed', String(saved === 'light'))
 
     let startX = 0, startY = 0
     const PROXY = document.createElement('div')
@@ -108,6 +104,15 @@ export default function ThemeToggle() {
     const RESET = () => gsap.set(PROXY, { x: ENDX, y: ENDY })
     RESET()
 
+    let skipNextSubmitSound = false
+    const playToggleSound = () => {
+      // Play during the user gesture; the transition callback may run after
+      // the browser's user-activation window has expired.
+      const audio = new Audio('/sound/click-003.mp3')
+      audio.volume = 0.7
+      void audio.play().catch(() => {})
+    }
+
     const toggle = () => {
       const isLight = TOGGLE.getAttribute('aria-pressed') === 'false'
       TOGGLE.setAttribute('aria-pressed', String(isLight))
@@ -115,12 +120,15 @@ export default function ThemeToggle() {
       document.documentElement.classList.toggle('dark', next === 'dark')
       document.documentElement.style.colorScheme = next
       localStorage.setItem('theme', next)
-      const audio = new Audio('/sound/click-003.mp3')
-      void audio.play().catch(() => {})
     }
 
     const onSubmit = (e: Event) => {
       e.preventDefault()
+      if (skipNextSubmitSound) {
+        skipNextSubmitSound = false
+      } else {
+        playToggleSound()
+      }
       if (document.startViewTransition) {
         document.startViewTransition(toggle)
       } else {
@@ -132,7 +140,7 @@ export default function ThemeToggle() {
     const draggable = Draggable.create(PROXY, {
       trigger: HIT,
       type: 'x,y',
-      onPress(e: any)   { startX = e.x; startY = e.y },
+      onPress(e: { x: number; y: number })   { startX = e.x; startY = e.y },
       onDragStart()     { document.documentElement.style.cursor = 'grabbing' },
       onDrag() {
         const ratio = 1 / ((FORM.offsetWidth * 0.65) / 134)
@@ -143,13 +151,18 @@ export default function ThemeToggle() {
           },
         })
       },
-      onRelease(e: any) {
+      onRelease(e: { x: number; y: number }) {
         document.documentElement.style.cursor = 'unset'
         const travelled = Math.hypot(Math.abs(e.x - startX), Math.abs(e.y - startY))
+        const shouldToggle = travelled > 50
+        if (shouldToggle) {
+          skipNextSubmitSound = true
+          playToggleSound()
+        }
         gsap.to(DUMMY_CORD, {
           attr: { x2: ENDX, y2: ENDY },
           duration: 0.1,
-          onComplete: () => { if (travelled > 50) FORM.requestSubmit(); RESET() },
+          onComplete: () => { if (shouldToggle) FORM.requestSubmit(); RESET() },
         })
       },
     })
@@ -157,7 +170,6 @@ export default function ThemeToggle() {
     return () => {
       FORM.removeEventListener('submit', onSubmit)
       draggable[0]?.kill()
-      HIT.removeEventListener('pointerdown', dismissHint)
     }
   }, [])
 
@@ -165,6 +177,7 @@ export default function ThemeToggle() {
     <>
       <form ref={formRef} className="toggle-form">
         <button
+          type="button"
           aria-pressed="false"
           className="toggle-btn"
           onClick={() => formRef.current?.requestSubmit()}

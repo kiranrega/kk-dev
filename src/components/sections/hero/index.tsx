@@ -8,6 +8,7 @@ import { SocialLinks } from "./social-links";
 import { HeroTitle } from "./hero-title";
 import { VisitorCounter } from "@/components/features/visitor-counter";
 import { CornerPluses } from "@/components/layout/plus";
+import { HeroBanner } from "@/components/features/hero-banner";
 import { Check, Copy, ArrowDownRight, MapPin, Clock } from "lucide-react";
 
 export function HeroSection() {
@@ -57,9 +58,7 @@ export function HeroSection() {
 
   return (
     <section id="overview" className="scroll-mt-24 w-full">
-      <div className="relative min-h-[70px] w-full border-x border-edge screen-line-before screen-line-after page-dots sm:min-h-[110px]">
-        <CornerPluses bottom />
-      </div>
+      <HeroBanner />
 
       <div className="relative flex border-x border-edge screen-line-after">
         <CornerPluses bottom />
