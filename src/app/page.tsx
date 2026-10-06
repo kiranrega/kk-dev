@@ -18,7 +18,7 @@ export default function Home() {
     <main className="relative min-h-screen w-full max-w-full overflow-x-clip bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
       <RevealOnScroll />
       {/* <FloatingTOC /> */}
-      <OnekoCat />
+      {/* <OnekoCat /> */}
       <ThemeToggle />
 
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-2 pt-2 sm:px-4">
