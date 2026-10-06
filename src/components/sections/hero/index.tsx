@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import CipherText from "@/components/features/CipherText";
 import { SocialLinks } from "./social-links";
@@ -10,11 +9,11 @@ import { VisitorCounter } from "@/components/features/visitor-counter";
 import { CornerPluses } from "@/components/layout/plus";
 import { HeroBanner } from "@/components/features/hero-banner";
 import { Check, Copy, ArrowDownRight, MapPin, Clock } from "lucide-react";
+import { Mascot } from "page-mascot";
 
 export function HeroSection() {
   const [copied, setCopied] = useState(false);
   const [localTime, setLocalTime] = useState<string | null>(null);
-  const [showInitials, setShowInitials] = useState(false);
 
   useEffect(() => {
     const format = new Intl.DateTimeFormat("en-US", {
@@ -36,26 +35,6 @@ export function HeroSection() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  useEffect(() => {
-    const toggleProfileWithKey = (event: KeyboardEvent) => {
-      const target = event.target as HTMLElement | null;
-      if (
-        event.key.toLowerCase() !== "p" ||
-        event.ctrlKey ||
-        event.metaKey ||
-        event.altKey ||
-        target?.closest("input, textarea, select, [contenteditable='true']")
-      ) {
-        return;
-      }
-
-      setShowInitials((current) => !current);
-    };
-
-    window.addEventListener("keydown", toggleProfileWithKey);
-    return () => window.removeEventListener("keydown", toggleProfileWithKey);
-  }, []);
-
   return (
     <section id="overview" className="scroll-mt-24 w-full">
       <HeroBanner />
@@ -64,34 +43,15 @@ export function HeroSection() {
         <CornerPluses bottom />
 
         <div className="w-[35%] shrink-0 p-2 sm:w-auto sm:p-5">
-          <button
-            type="button"
-            onClick={() => setShowInitials((current) => !current)}
-            className="relative aspect-square h-auto w-full overflow-hidden rounded-[12px] border border-border p-[4px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground sm:size-32"
-            aria-label="Toggle profile image"
-            title="Toggle profile image (P)"
-          >
-            <div className="relative aspect-square overflow-hidden rounded-[8px] bg-background">
-              <span
-                aria-hidden
-                className={`absolute inset-0 grid place-items-center bg-foreground font-pixel text-3xl font-black text-background transition-all duration-300 ${
-                  showInitials ? "scale-100 opacity-100" : "scale-95 opacity-0"
-                }`}
-              >
-                KR
-              </span>
-              <Image
-                src={siteConfig.ogImage}
-                alt={siteConfig.name}
-                fill
-                sizes="128px"
-                priority
-                className={`object-cover bg-background transition-all duration-300 ${
-                  showInitials ? "scale-105 opacity-0" : "scale-100 opacity-100"
-                }`}
-              />
-            </div>
-          </button>
+          <div className="relative aspect-square h-auto w-full sm:size-32">
+            <Mascot
+              directions="/mascots/kiran-directions.webp"
+              reactions="/mascots/kiran-reactions.webp"
+              size={128}
+              label="Kiran mascot"
+              className="!h-full !w-full overflow-hidden rounded-[12px] border border-border bg-background p-[4px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+            />
+          </div>
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col justify-center gap-1 py-3 pl-2 sm:pl-4">
