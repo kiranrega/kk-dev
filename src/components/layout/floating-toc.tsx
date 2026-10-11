@@ -1,101 +1,141 @@
 "use client";
 
-import { Home, Layers, Briefcase, FolderGit2, ChevronUp, ChevronDown } from "lucide-react";
+import { useEffect, useRef } from "react";
 import { useActiveSection } from "@/hooks/use-active-section";
-import { useScrollProgress } from "@/hooks/use-scroll-progress";
-// import { BallPit } from "@/components/features/ball-pit";
 
 const sections = [
-  { id: "overview", label: "Home", icon: Home },
-  { id: "stack", label: "Stack", icon: Layers },
-  { id: "experience", label: "Experience", icon: Briefcase },
-  { id: "projects", label: "Projects", icon: FolderGit2 },
+  { id: "overview", label: "Home" },
+  { id: "stack", label: "Stack" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
 ];
+const sectionIds = sections.map((section) => section.id);
 
-function ScrollProgress() {
-  const { progress, atTop } = useScrollProgress();
+function SlidingDot({
+  activeIndex,
+  direction,
+}: {
+  activeIndex: number;
+  direction: "vertical" | "horizontal";
+}) {
+  const dotRef = useRef<HTMLSpanElement>(null);
+  const previousIndex = useRef(activeIndex);
 
-  const circumference = 2 * Math.PI * 14;
-  const strokeDashoffset = circumference * (1 - progress);
+  useEffect(() => {
+    const dot = dotRef.current;
+    if (!dot || previousIndex.current === activeIndex) return;
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const from =
+      direction === "vertical"
+        ? `translateY(${previousIndex.current * 2.125}rem)`
+        : `translateX(${previousIndex.current * 100}%)`;
+    const to =
+      direction === "vertical"
+        ? `translateY(${activeIndex * 2.125}rem)`
+        : `translateX(${activeIndex * 100}%)`;
+
+    previousIndex.current = activeIndex;
+
+    if (prefersReducedMotion) return;
+
+    const animation = dot.animate(
+      [{ transform: from }, { transform: to }],
+      {
+        duration: 500,
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "forwards",
+      }
+    );
+
+    return () => animation.cancel();
+  }, [activeIndex, direction]);
+
+  const transform =
+    direction === "vertical"
+      ? `translateY(${activeIndex * 2.125}rem)`
+      : `translateX(${activeIndex * 100}%)`;
 
   return (
-    <button
-      onClick={() =>
-        window.scrollTo({
-          top: atTop ? document.documentElement.scrollHeight : 0,
-          behavior: "smooth",
-        })
-      }
-      className="relative flex items-center justify-center w-11 h-11 shrink-0"
-      aria-label={atTop ? "Scroll to bottom" : "Scroll to top"}
+    <span
+      ref={dotRef}
+      aria-hidden="true"
+      className={`sidebar-menu-dot pointer-events-none absolute top-0 flex h-8 items-center text-foreground ${
+        direction === "vertical" ? "left-0 w-7 justify-center" : "left-0 w-1/4"
+      }`}
+      style={{ transform }}
     >
-      <svg className="absolute inset-0 -rotate-90" width="44" height="44" viewBox="0 0 44 44">
-        <circle
-          cx="22"
-          cy="22"
-          r="14"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          className="text-neutral-200 dark:text-neutral-800"
-        />
-        <circle
-          cx="22"
-          cy="22"
-          r="14"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-          className="text-neutral-900 dark:text-white transition-[stroke-dashoffset] duration-150"
-        />
-      </svg>
-      {atTop ? (
-        <ChevronDown size={14} className="text-neutral-900 dark:text-white" />
-      ) : (
-        <ChevronUp size={14} className="text-neutral-900 dark:text-white" />
-      )}
-    </button>
+      <span className={`size-1.5 rounded-full bg-current ${direction === "horizontal" ? "ml-[0.6875rem]" : ""}`} />
+    </span>
+  );
+}
+
+function SectionLink({
+  section,
+  active,
+}: {
+  section: (typeof sections)[number];
+  active: boolean;
+}) {
+  return (
+    <a
+      href={`#${section.id}`}
+      aria-current={active ? "location" : undefined}
+      className={`inline-flex h-8 items-center whitespace-nowrap rounded-sm pl-7 pr-2.5 font-mono font-bold text-xs transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+        active
+          ? "text-foreground"
+          : "text-muted-foreground hover:bg-foreground/5 hover:text-foreground"
+      }`}
+    >
+      <span>{section.label}</span>
+    </a>
   );
 }
 
 export function FloatingTOC() {
-  const sectionIds = sections.map((s) => s.id);
   const activeSection = useActiveSection(sectionIds);
-
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: "smooth" });
-  };
+  const activeIndex = Math.max(0, sectionIds.indexOf(activeSection));
 
   return (
-    <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden lg:block">
-      <div className="flex items-center gap-1 h-11 pl-2 pr-1 rounded-2xl bg-white/90 dark:bg-neutral-950/90 backdrop-blur-xl border border-neutral-200 dark:border-neutral-800 shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
-        <ScrollProgress />
-        <div className="w-[1px] h-5 bg-neutral-200 dark:bg-neutral-800 mx-1" />
-        {sections.map((section) => {
-          const Icon = section.icon;
-          const isActive = activeSection === section.id;
-          return (
-            <button
-              key={section.id}
-              onClick={() => scrollToSection(section.id)}
-              className={`flex items-center gap-2 h-full px-3 rounded-xl transition-all duration-200 ${
-                isActive
-                  ? "bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white"
-                  : "text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
-              }`}
-            >
-              <Icon size={16} strokeWidth={2} />
-              <span className="text-sm font-medium">{section.label}</span>
-            </button>
-          );
-        })}
-        <div className="w-[1px] h-5 bg-neutral-200 dark:bg-neutral-800 mx-1" />
-        {/* <BallPit /> */}
-      </div>
-    </div>
+    <>
+      <aside className="pointer-events-none fixed left-4 top-1/2 z-30 hidden -translate-y-1/2 xl:left-[calc(50%_-_37rem)] xl:block">
+        <nav
+          aria-label="Section navigation"
+          className="sidebar-menu-enter pointer-events-auto w-44 rounded-md border border-border/70 bg-card/80 p-1.5 shadow-sm backdrop-blur-xl"
+        >
+          <p className="px-2.5 pb-1.5 pt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+            Navigate
+          </p>
+          <div className="relative flex flex-col gap-0.5">
+            <SlidingDot activeIndex={activeIndex} direction="vertical" />
+            {sections.map((section, index) => (
+              <SectionLink
+                key={section.id}
+                section={section}
+                active={activeIndex === index}
+              />
+            ))}
+          </div>
+        </nav>
+      </aside>
+
+      <nav
+        aria-label="Section navigation"
+        className="sidebar-menu-enter -mx-2 mb-3 overflow-x-auto px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden xl:hidden"
+      >
+        <div className="min-w-[28rem] rounded-md border border-border/70 bg-card/80 p-1 backdrop-blur-xl">
+          <div className="relative grid grid-cols-4">
+            <SlidingDot activeIndex={activeIndex} direction="horizontal" />
+            {sections.map((section, index) => (
+              <SectionLink
+                key={section.id}
+                section={section}
+                active={activeIndex === index}
+              />
+            ))}
+          </div>
+        </div>
+      </nav>
+    </>
   );
 }

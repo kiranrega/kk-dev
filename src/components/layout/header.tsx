@@ -1,29 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { navItems } from "@/config/site";
-// import { ActiveNav } from "@/components/layout/active-nav";
-// import { CatSummoner } from "@/components/features/cat-summoner";
 import { CornerPluses } from "./plus";
 
-const moreItems = navItems.filter(
-  (item) => item.href === "#stack" || item.href === "#experience"
-);
 const searchItems = navItems.map((item) => ({
   ...item,
   label: item.href === "#overview" ? "Home" : item.label,
 }));
 
 export function Header() {
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const openSearch = () => {
     setSearchTerm("");
-    setIsMoreOpen(false);
     setIsSearchOpen(true);
   };
 
@@ -69,43 +62,6 @@ export function Header() {
         </a>
 
         <div className="ml-auto flex items-center gap-5">
-          <nav className="hidden items-center gap-5 font-mono text-sm sm:flex" aria-label="Primary navigation">
-            <a href="#overview" className="text-foreground transition-colors hover:text-muted-foreground">
-              Home
-            </a>
-            <a href="#projects" className="text-muted-foreground transition-colors hover:text-foreground">
-              Projects
-            </a>
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setIsMoreOpen((open) => !open)}
-                className="inline-flex items-center gap-1 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
-                aria-expanded={isMoreOpen}
-                aria-controls="more-navigation"
-              >
-                More
-                <ChevronDown size={14} aria-hidden />
-              </button>
-              {isMoreOpen ? (
-                <div
-                  id="more-navigation"
-                  className="absolute left-1/2 top-full z-50 mt-3 w-36 -translate-x-1/2 border border-border bg-background p-1 shadow-lg"
-                >
-                  {moreItems.map((item) => (
-                    <a
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setIsMoreOpen(false)}
-                      className="block px-3 py-2 text-muted-foreground transition-colors hover:bg-muted/10 hover:text-foreground"
-                    >
-                      {item.label}
-                    </a>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          </nav>
           <button
             type="button"
             onClick={openSearch}

@@ -20,7 +20,7 @@ export function SkillsFilter() {
       <div
         role="group"
         aria-label="Filter skills by category"
-        className="flex flex-wrap gap-1 rounded-md border border-border bg-muted/10 p-1"
+        className="inline-flex max-w-full font-bold flex-wrap items-center justify-start gap-1 rounded-md border border-border bg-card/70 p-1"
       >
         {filters.map((filter) => {
           const selected = filter === activeFilter;
@@ -31,10 +31,10 @@ export function SkillsFilter() {
               type="button"
               aria-pressed={selected}
               onClick={() => setActiveFilter(filter)}
-              className={`min-h-9 rounded-sm px-3 font-mono text-xs transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
+              className={`inline-flex min-h-9 items-center justify-center whitespace-nowrap rounded-sm px-3 font-mono text-xs transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
                 selected
                   ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:bg-muted/30 hover:text-foreground"
+                  : "text-muted-foreground hover:bg-foreground/10 hover:text-foreground"
               }`}
             >
               {filter}

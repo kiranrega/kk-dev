@@ -10,9 +10,17 @@ export const siteConfig = {
     github: "https://github.com/kiranrega",
     linkedin: "https://linkedin.com/in/kiranrega",
     twitter: "https://twitter.com/kiranrega",
+    // Set your resume's public download URL here (or use NEXT_PUBLIC_RESUME_URL).
     resume:
       process.env.NEXT_PUBLIC_RESUME_URL ||
       "https://drive.google.com/uc?export=download&id=1VEj5j4SiNtpHRgQyJi5TsgLyBczkfX45",
+  },
+  resume: {
+    // Optional embed URL. Google Drive previews are derived from links.resume automatically.
+    previewUrl: process.env.NEXT_PUBLIC_RESUME_PREVIEW_URL || "https://drive.google.com/file/d/1SWvBtiuWhx6qds0ug9cMhGGJEKkJwEm-/view?usp=sharing",
+    fileName: "Kiran_Kumar_Rega_Resume.pdf",
+    description:
+      "A closer look at my experience, technical skills, and the products I've helped bring to life.",
   },
   location: "Hyderabad, India",
   timezone: "Asia/Kolkata",

@@ -1,4 +1,11 @@
 import type { NextConfig } from "next";
+import { siteConfig } from "./src/config/site";
+import { getResumePreviewUrl } from "./src/lib/resume";
+
+const resumePreviewUrl = getResumePreviewUrl(siteConfig.links.resume, siteConfig.resume.previewUrl);
+const resumeFrameOrigin = resumePreviewUrl
+  ? new URL(resumePreviewUrl, siteConfig.url).origin
+  : "";
 
 const nextConfig: NextConfig = {
   turbopack: {
@@ -11,7 +18,7 @@ const nextConfig: NextConfig = {
         {
           key: "Content-Security-Policy",
           value:
-            "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com https://api.counterapi.dev; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline';",
+            `default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://static.cloudflareinsights.com; connect-src 'self' https://cloudflareinsights.com https://api.counterapi.dev; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline'; frame-src 'self' ${resumeFrameOrigin};`,
         },
       ],
     },

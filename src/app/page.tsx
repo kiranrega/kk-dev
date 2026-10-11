@@ -1,6 +1,6 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-// import { FloatingTOC } from "@/components/layout/floating-toc";
+import { FloatingTOC } from "@/components/layout/floating-toc";
 import { RevealOnScroll } from "@/components/features/reveal-on-scroll";
 import OnekoCat from "@/components/features/cat-summoner/oneko/OnekoCat";
 import ThemeToggle from "@/components/features/theme-toggle";
@@ -17,12 +17,12 @@ export default function Home() {
   return (
     <main className="relative min-h-screen w-full max-w-full overflow-x-clip bg-background text-foreground font-sans selection:bg-foreground selection:text-background">
       <RevealOnScroll />
-      {/* <FloatingTOC /> */}
       {/* <OnekoCat /> */}
       <ThemeToggle />
 
       <div className="relative z-10 mx-auto min-h-screen w-full max-w-3xl px-2 pt-2 sm:px-4">
         <Header />
+        <FloatingTOC />
 
         <HeroSection />
         <Hatch />
