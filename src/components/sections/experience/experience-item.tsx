@@ -1,6 +1,6 @@
 "use client";
 
-import { TechChip } from "@/components/features/skill-icons";
+import { SkillBadge } from "@/components/features/skill-icons";
 import { GSAPScrubText } from "@/components/features/gsap-scrub-text";
 import type { Experience } from "@/types";
 import { Building2, Calendar, MapPin } from "lucide-react";
@@ -68,7 +68,7 @@ export function ExperienceItem({
         {/* Tech Chips */}
         <div className="mt-4 pt-3 border-t border-border/40 flex flex-wrap gap-1.5">
           {job.tech.map((t: string) => (
-            <TechChip key={t} name={t} />
+            <SkillBadge key={t} name={t} />
           ))}
         </div>
       </div>

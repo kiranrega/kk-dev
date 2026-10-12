@@ -1,7 +1,7 @@
 "use client";
 
 import { ExternalLink } from "lucide-react";
-import { TechChip } from "@/components/features/skill-icons";
+import { SkillBadge } from "@/components/features/skill-icons";
 import { GSAPScrubText } from "@/components/features/gsap-scrub-text";
 import type { Project } from "@/types";
 
@@ -78,7 +78,7 @@ export function ProjectCard({
 
       <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-border/40">
         {project.tech.map((tech) => (
-          <TechChip key={tech} name={tech} />
+          <SkillBadge key={tech} name={tech} />
         ))}
         <span className="text-[10px] font-mono text-muted uppercase tracking-wider ml-auto">
           {project.type}

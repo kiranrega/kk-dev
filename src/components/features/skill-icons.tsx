@@ -679,9 +679,9 @@ export function SkillBadge({ name }: { name: string }) {
   const IconComponent = entry?.component;
 
   return (
-    <span className="skill-chip inline-flex min-h-9 items-center gap-2 rounded-md border border-border bg-card px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground">
+    <span className="skill-chip group inline-flex min-h-9 items-center gap-2 rounded-md border border-border bg-card px-3 py-1.5 font-medium font-mono text-xs text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground">
       {IconComponent ? (
-        <span aria-hidden="true" className="skill-chip-icon inline-flex size-4 shrink-0 items-center justify-center grayscale">
+        <span aria-hidden="true" className="skill-chip-icon inline-flex size-4 shrink-0 items-center justify-center grayscale transition-[filter] duration-200 group-hover:grayscale-0">
           <IconComponent />
         </span>
       ) : (

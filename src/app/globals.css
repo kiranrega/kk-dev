@@ -631,6 +631,57 @@ html {
   text-decoration: underline;
 }
 
+/* ── Handwritten footer signature ── */
+.signature-name {
+  position: relative;
+  display: inline-block;
+  color: var(--foreground);
+  font-family: var(--font-caveat), "Caveat", cursive;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  line-height: 1;
+  clip-path: inset(0 100% 0 0);
+  animation: signature-write 1.6s cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
+}
+
+.signature-name::after {
+  position: absolute;
+  right: -0.08em;
+  bottom: -0.22em;
+  left: 0.08em;
+  height: 0.11em;
+  content: "";
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.7;
+  transform: rotate(-2deg) scaleX(0);
+  transform-origin: left center;
+  animation: signature-underline 480ms cubic-bezier(0.22, 1, 0.36, 1) 1.55s both;
+}
+
+@keyframes signature-write {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes signature-underline {
+  from { transform: rotate(-2deg) scaleX(0); }
+  to { transform: rotate(-2deg) scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signature-name {
+    clip-path: none;
+    animation: none;
+  }
+
+  .signature-name::after {
+    transform: rotate(-2deg) scaleX(1);
+    animation: none;
+  }
+}
+
 /* ── Icon container (profile card) ── */
 .icon-container {
   display: flex;

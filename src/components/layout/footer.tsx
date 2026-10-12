@@ -7,7 +7,9 @@ export function Footer() {
       <div className="flex flex-col gap-4 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
         <div>
           <span>Designed & Developed by </span>
-          <span className="font-semibold text-foreground">Kiran Kumar Rega</span>
+          <span className="signature-name" aria-label="Kiran Kumar Rega">
+            Kiran Kumar Rega
+          </span>
         </div>
         <span>&copy; {new Date().getFullYear()} All rights reserved.</span>
       </div>
