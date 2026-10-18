@@ -385,6 +385,13 @@ html {
 }
 
 .toggle-form:focus-within { animation-play-state: paused; }
+.toggle-form:hover { animation-play-state: paused; }
+.toggle-btn:hover .bulb__bulb {
+  stroke-width: 7;
+}
+.toggle-btn:hover .bulb__filament {
+  opacity: 1;
+}
 .toggle-compact-icon { display: none; }
 
 /* SVG scene: bulb + cord */

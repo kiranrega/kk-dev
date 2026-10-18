@@ -75,38 +75,69 @@
 
 
 'use client'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { Draggable } from 'gsap/Draggable'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/hooks/use-theme'
-gsap.registerPlugin(Draggable)
+gsap.registerPlugin(Draggable, useGSAP)
 
 export default function ThemeToggle() {
   const formRef = useRef<HTMLFormElement | null>(null)
   const draggedRef = useRef(false)
   const { isDark, toggleTheme } = useTheme()
 
-  useEffect(() => {
+  useGSAP((_context, contextSafe) => {
     const FORM = formRef.current
     if (!FORM) return
 
     const TOGGLE = FORM.querySelector<HTMLButtonElement>('button')
-    const HIT    = FORM.querySelector<HTMLElement>('.grab-handle')
+    const HIT    = FORM.querySelector<SVGCircleElement>('.toggle-scene__hit-spot')
     const DUMMY_CORD = FORM.querySelector<SVGLineElement>('.toggle-scene__dummy-cord line')
-    if (!TOGGLE || !HIT || !DUMMY_CORD) return
+    const SCENE = FORM.querySelector<SVGSVGElement>('.toggle-scene')
+    if (!TOGGLE || !HIT || !DUMMY_CORD || !SCENE) return
 
     let startX = 0, startY = 0
     const PROXY = document.createElement('div')
     const ENDX  = Number(DUMMY_CORD.getAttribute('x2'))
     const ENDY  = Number(DUMMY_CORD.getAttribute('y2'))
-    const RESET = () => gsap.set(PROXY, { x: ENDX, y: ENDY })
+    const cordEnd = { x: ENDX, y: ENDY }
+    let startCordX = ENDX, startCordY = ENDY
+    let screenToSvg: DOMMatrix | null = null
+    const originalPlayState = FORM.style.animationPlayState
+    const RESET = () => {
+      gsap.set(PROXY, { x: 0, y: 0 })
+      FORM.style.animationPlayState = originalPlayState
+    }
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    let returnTween: gsap.core.Tween | null = null
     RESET()
 
+    // Keep the visible cord and its grab target on the same animated point.
+    const renderCord = () => {
+      DUMMY_CORD.setAttribute('x2', String(cordEnd.x))
+      DUMMY_CORD.setAttribute('y2', String(cordEnd.y))
+      HIT.setAttribute('cx', String(cordEnd.x))
+      HIT.setAttribute('cy', String(cordEnd.y))
+    }
+    renderCord()
+
+    const settleCord = () => {
+      returnTween?.kill()
+      cordEnd.x = ENDX
+      cordEnd.y = ENDY
+      renderCord()
+      RESET()
+    }
+    reducedMotion.addEventListener('change', settleCord)
+
+    const toggleAudio = new Audio('/sound/click-003.mp3')
+    toggleAudio.preload = 'auto'
+    toggleAudio.volume = 0.7
     const playToggleSound = () => {
-      const audio = new Audio('/sound/click-003.mp3')
-      audio.volume = 0.7
-      void audio.play().catch(() => {})
+      toggleAudio.currentTime = 0
+      void toggleAudio.play().catch(() => {})
     }
 
     const onSubmit = (e: Event) => {
@@ -119,43 +150,65 @@ export default function ThemeToggle() {
     }
     FORM.addEventListener('submit', onSubmit)
 
+    const releaseCord = contextSafe!((travelled: number) => {
+      returnTween?.kill()
+      returnTween = gsap.to(cordEnd, {
+        x: ENDX,
+        y: ENDY,
+        duration: reducedMotion.matches ? 0 : 0.8,
+        ease: 'elastic.out(1, 0.45)',
+        overwrite: true,
+        onUpdate: renderCord,
+        onComplete: RESET,
+      })
+      if (travelled > 50) {
+        playToggleSound()
+        // Keep the cord live while it springs back instead of snapshotting it.
+        toggleTheme()
+      }
+    })
+
     const draggable = Draggable.create(PROXY, {
       trigger: HIT,
       type: 'x,y',
-      onPress(e: { x: number; y: number })   { startX = e.x; startY = e.y },
+      onPress() {
+        returnTween?.kill()
+        FORM.style.animationPlayState = 'paused'
+        startCordX = cordEnd.x
+        startCordY = cordEnd.y
+        screenToSvg = SCENE.getScreenCTM()?.inverse() ?? null
+        startX = this.pointerX
+        startY = this.pointerY
+      },
       onDragStart() {
         draggedRef.current = true
         document.documentElement.style.cursor = 'grabbing'
       },
       onDrag() {
-        const ratio = 1 / ((FORM.offsetWidth * 0.65) / 134)
-        gsap.set(DUMMY_CORD, {
-          attr: {
-            x2: this.startX + (this.x - this.startX) * ratio,
-            y2: this.startY + (this.y - this.startY) * ratio,
-          },
-        })
+        if (!screenToSvg) return
+        const dx = this.pointerX - startX
+        const dy = this.pointerY - startY
+        cordEnd.x = startCordX + screenToSvg.a * dx + screenToSvg.c * dy
+        cordEnd.y = startCordY + screenToSvg.b * dx + screenToSvg.d * dy
+        renderCord()
       },
-      onRelease(e: { x: number; y: number }) {
+      onRelease() {
         document.documentElement.style.cursor = 'unset'
-        const travelled = Math.hypot(Math.abs(e.x - startX), Math.abs(e.y - startY))
-        const shouldToggle = travelled > 50
-        if (shouldToggle) {
-          playToggleSound()
-        }
-        gsap.to(DUMMY_CORD, {
-          attr: { x2: ENDX, y2: ENDY },
-          duration: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.1,
-          onComplete: () => { if (shouldToggle) FORM.requestSubmit(); RESET() },
-        })
+        const travelled = Math.hypot(this.pointerX - startX, this.pointerY - startY)
+        releaseCord(travelled)
       },
     })
 
     return () => {
       FORM.removeEventListener('submit', onSubmit)
+      reducedMotion.removeEventListener('change', settleCord)
+      returnTween?.kill()
+      toggleAudio.pause()
       draggable[0]?.kill()
+      FORM.style.animationPlayState = originalPlayState
+      document.documentElement.style.cursor = ''
     }
-  }, [toggleTheme])
+  }, { scope: formRef, dependencies: [toggleTheme], revertOnUpdate: true })
 
   return (
     <>
@@ -191,7 +244,7 @@ export default function ThemeToggle() {
               </g>
               <circle
                 className="toggle-scene__hit-spot"
-                cx="98.7255" cy="380.5405" r="60"
+                cx="98" cy="380" r="78"
                 fill="transparent"
               />
             </g>
@@ -224,7 +277,7 @@ export default function ThemeToggle() {
             </g>
           </svg>
 
-          <div className="grab-handle" />
+          {/* Previous fixed HTML grab area: <div className="grab-handle" /> */}
         </button>
       </form>
 

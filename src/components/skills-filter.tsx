@@ -1,15 +1,24 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
-import { stackGroups } from "@/config/skills";
+import { flushSync } from "react-dom";
+import gsap from "gsap";
+import { Flip } from "gsap/Flip";
+import { useGSAP } from "@gsap/react";
+import { allSkills, stackGroups } from "@/config/skills";
 import { SkillBadge } from "@/components/features/skill-icons";
 import styles from "./skills-filter.module.css";
 
 const filters = ["All", ...stackGroups.map((group) => group.title)] as const;
 type Filter = (typeof filters)[number];
 
+gsap.registerPlugin(Flip, useGSAP);
+
 export function SkillsFilter() {
   const [activeFilter, setActiveFilter] = useState<Filter>("All");
+  const rootRef = useRef<HTMLDivElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<gsap.core.Timeline | null>(null);
   const filterBarRef = useRef<HTMLDivElement>(null);
   const indicatorRef = useRef<HTMLSpanElement>(null);
   const buttonRefs = useRef<Partial<Record<Filter, HTMLButtonElement>>>({});
@@ -17,7 +26,62 @@ export function SkillsFilter() {
     activeFilter === "All"
       ? stackGroups
       : stackGroups.filter((group) => group.title === activeFilter);
-  const visibleSkills = visibleGroups.flatMap((group) => group.items);
+  const visibleSkills = new Set(visibleGroups.flatMap((group) => group.items));
+
+  const { contextSafe } = useGSAP(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const finishAnimation = () => {
+      animationRef.current?.progress(1).kill();
+      animationRef.current = null;
+    };
+    reducedMotion.addEventListener("change", finishAnimation);
+    window.addEventListener("resize", finishAnimation);
+    return () => {
+      finishAnimation();
+      reducedMotion.removeEventListener("change", finishAnimation);
+      window.removeEventListener("resize", finishAnimation);
+    };
+  }, { scope: rootRef });
+
+  const selectFilter = (filter: Filter) => {
+    contextSafe(() => {
+      const list = skillsRef.current;
+      if (!list || filter === activeFilter) return;
+
+      // Finish an interrupted transition before measuring the next layout.
+      animationRef.current?.progress(1).kill();
+      animationRef.current = null;
+      const items = Array.from(list.querySelectorAll<HTMLElement>("[data-skill]"));
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const state = reducedMotion ? null : Flip.getState(items);
+      const previousHeight = list.offsetHeight;
+
+      // Flip needs the committed React layout before it measures final positions.
+      flushSync(() => setActiveFilter(filter));
+      if (!state) return;
+      const nextHeight = list.offsetHeight;
+
+      const animation = Flip.from(state, {
+        duration: 0.45,
+        ease: "power2.inOut",
+        absolute: true,
+        scale: true,
+        onComplete: () => list.style.removeProperty("height"),
+        onEnter: (elements) => gsap.fromTo(elements,
+          { opacity: 0, scale: 0.96 },
+          { opacity: 1, scale: 1, duration: 0.28, stagger: 0.015, clearProps: "opacity" },
+        ),
+        onLeave: (elements) => gsap.to(elements, { opacity: 0, duration: 0.16 }),
+      });
+      // Keep the next section from jumping while the badges reflow.
+      animation.fromTo(list, { height: previousHeight }, {
+        height: nextHeight,
+        duration: 0.45,
+        ease: "power2.inOut",
+      }, 0);
+      animationRef.current = animation;
+    })();
+  };
 
   useLayoutEffect(() => {
     const filterBar = filterBarRef.current;
@@ -42,7 +106,7 @@ export function SkillsFilter() {
   }, [activeFilter]);
 
   return (
-    <div>
+    <div ref={rootRef}>
       <div
         ref={filterBarRef}
         role="group"
@@ -65,7 +129,7 @@ export function SkillsFilter() {
               }}
               type="button"
               aria-pressed={selected}
-              onClick={() => setActiveFilter(filter)}
+              onClick={() => selectFilter(filter)}
               className={`relative z-10 inline-flex min-h-9 items-center justify-center whitespace-nowrap rounded-sm px-3 font-mono text-xs transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground ${
                 selected
                   ? "text-background"
@@ -79,15 +143,18 @@ export function SkillsFilter() {
       </div>
 
       <div
+        ref={skillsRef}
         aria-label={`${activeFilter} skills`}
         aria-live="polite"
-        className="mt-5 flex min-h-24 flex-wrap content-start gap-2"
+        className="relative mt-5 flex min-h-24 flex-wrap content-start items-start gap-2"
       >
-        {visibleSkills.map((skill, index) => (
+        {allSkills.map((skill) => (
           <span
-            key={`${activeFilter}-${skill}`}
-            className="skill-chip-enter inline-flex"
-            style={{ animationDelay: `${index * 35}ms` }}
+            key={skill}
+            data-skill={skill}
+            data-flip-id={`skill-${skill}`}
+            aria-hidden={!visibleSkills.has(skill)}
+            style={{ display: visibleSkills.has(skill) ? "inline-flex" : "none" }}
           >
             <SkillBadge name={skill} />
           </span>
