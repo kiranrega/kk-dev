@@ -13,7 +13,7 @@ export function Footer() {
         </div>
         <span>&copy; {new Date().getFullYear()} All rights reserved.</span>
       </div>
-      <div className="mt-3 text-center font-mono text-xs text-muted sm:text-left">
+      <div className="mt-3 text-center font-mono text-xs text-muted-foreground sm:text-left">
         Hyderabad, India
       </div>
     </footer>

@@ -2,15 +2,20 @@ export function Card({
   children,
   className,
   style,
+  as: Component = "div",
+  variant = "default",
 }: {
   children: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
+  as?: "div" | "article";
+  variant?: "default" | "project" | "experience" | "profile";
 }) {
   return (
-    <div
+    <Component
+      data-variant={variant}
       className={[
-        "bg-card p-5 shadow-sm transition-all duration-200",
+        "portfolio-card",
         className,
       ]
         .filter(Boolean)
@@ -18,6 +23,6 @@ export function Card({
       style={style}
     >
       {children}
-    </div>
+    </Component>
   );
 }

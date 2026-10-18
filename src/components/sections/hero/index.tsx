@@ -64,7 +64,7 @@ export function HeroSection() {
           </div>
 
           <div className="flex items-center gap-2 pt-2 pb-1">
-            <h1 className="font-pixel text-xl font-black leading-none sm:text-3xl">
+            <h1 className="type-hero">
               <CipherText text={siteConfig.name} trigger="mount" speed={12} className="inline-block" />
             </h1>
           </div>
@@ -75,8 +75,8 @@ export function HeroSection() {
 
           <span className="mt-1 flex min-h-4 items-center gap-1.5 font-mono text-xs text-muted-foreground">
             <span className="relative flex h-1.5 w-1.5 shrink-0">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-green-500" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-success" />
             </span>
             <span>Available · Open to Senior Full-Stack / MERN roles</span>
           </span>
@@ -84,7 +84,7 @@ export function HeroSection() {
       </div>
 
       <div className="relative border-x border-edge screen-line-after px-4 py-5 sm:px-5">
-        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        <p className="type-body max-w-2xl">
           One of 2 engineers behind Catapult — 30,000+ users at{" "}
           <a
             href="https://www.intouchcx.com/"

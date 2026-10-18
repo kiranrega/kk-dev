@@ -29,21 +29,25 @@ export function GSAPScrubText({
       const words = containerRef.current.querySelectorAll(".gsap-scrub-word");
       if (!words.length) return;
 
-      gsap.fromTo(
-        words,
-        { opacity: 0.15 },
-        {
-          opacity: 1,
-          stagger: 0.1,
-          ease: "none",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 85%",
-            end: "bottom 55%",
-            scrub: 0.5,
+      const media = gsap.matchMedia();
+      media.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.fromTo(
+          words,
+          { opacity: 0.15 },
+          {
+            opacity: 1,
+            stagger: 0.1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 85%",
+              end: "bottom 55%",
+              scrub: 0.5,
+            },
           },
-        }
-      );
+        );
+      });
+      return () => media.revert();
     },
     { scope: containerRef }
   );

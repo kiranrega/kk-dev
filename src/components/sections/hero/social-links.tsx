@@ -91,29 +91,24 @@ export function SocialLinks() {
           href={social.href}
           target={social.href.startsWith("mailto") ? "_self" : "_blank"}
           rel="noopener noreferrer"
-          className={`
-            group relative flex items-center gap-2 px-3 py-2 rounded-xl
-            text-muted-foreground transition-all duration-300 ease-out
-            ${social.color} ${social.bg}
-            hover:scale-110 hover:shadow-lg
-          `}
+          className="icon-button group relative gap-2 px-3"
           aria-label={social.label}
         >
-          <span className="transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
+          <span aria-hidden="true">
             {social.icon}
           </span>
           <span
             className={`
             absolute -top-9 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg
             text-xs font-medium whitespace-nowrap
-            bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900
+            bg-foreground text-background
             shadow-lg pointer-events-none
             transition-all duration-200 ease-out
-            opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
+            opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0
           `}
           >
             {social.label}
-            <span className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 rotate-45 bg-neutral-900 dark:bg-neutral-100" />
+            <span className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 rotate-45 bg-foreground" />
           </span>
         </a>
       ))}

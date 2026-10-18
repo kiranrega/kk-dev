@@ -9,6 +9,7 @@ import {
   Mars,
 } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { Card } from "@/components/layout/card";
 import { CopyButton } from "@/components/ui/copy-button";
 import { useLocalTime } from "@/hooks/use-local-time";
 
@@ -25,10 +26,10 @@ function InfoItem({ icon, label, value, href, copyable, colSpan }: InfoRow) {
   const content = (
     <span className="panel-row">
       <span className="icon-container">{icon}</span>
-      <span className="text-balance flex-1">{value}</span>
+      <span className="min-w-0 flex-1 break-words">{value}</span>
       {copyable && (
-        <span className="opacity-0 transition-opacity ease-out group-hover:opacity-100 -translate-x-3 translate-y-px">
-          <CopyButton text={value} />
+        <span className="copy-control shrink-0">
+          <CopyButton text={value} label={label} />
         </span>
       )}
     </span>
@@ -91,10 +92,12 @@ export function ProfileInfoCard() {
   ];
 
   return (
-    <div className="panel-body w-full font-mono text-sm">
-      {rows.map((row, i) => (
-        <InfoItem key={i} {...row} />
-      ))}
-    </div>
+    <Card variant="profile">
+      <div className="panel-body w-full font-mono text-sm">
+        {rows.map((row, i) => (
+          <InfoItem key={i} {...row} />
+        ))}
+      </div>
+    </Card>
   );
 }

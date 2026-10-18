@@ -1,26 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Copy, Check } from "lucide-react";
 
-export function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
+export function CopyButton({ text, label = "value" }: { text: string; label?: string }) {
+  const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (timer.current) clearTimeout(timer.current);
+  }, []);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (timer.current) clearTimeout(timer.current);
+    try {
+      await navigator.clipboard.writeText(text);
+      setStatus("copied");
+    } catch {
+      setStatus("error");
+    }
+    timer.current = setTimeout(() => setStatus("idle"), 2000);
   };
 
   return (
-    <button
-      onClick={handleCopy}
-      className="inline-flex items-center justify-center border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 hover:bg-muted hover:text-foreground size-6 rounded-md border-none text-muted-foreground [&_svg:not([class*='size-'])]:size-4"
-      aria-label="Copy"
-    >
-      <span style={{ opacity: 1, filter: "blur(0px)", transform: "none" }}>
-        {copied ? <Check size={14} /> : <Copy size={14} />}
+    <>
+      <button
+        type="button"
+        onClick={handleCopy}
+        className="icon-button"
+        aria-label={`Copy ${label}`}
+        title={status === "error" ? "Copy failed. Select and copy the text." : `Copy ${label}`}
+      >
+        {status === "copied" ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}
+      </button>
+      <span role="status" className="sr-only">
+        {status === "copied" ? `${label} copied` : status === "error" ? "Copy failed. Select and copy the text." : ""}
       </span>
-    </button>
+    </>
   );
 }

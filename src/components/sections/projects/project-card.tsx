@@ -1,5 +1,6 @@
 "use client";
 
+import { Card } from "@/components/layout/card";
 import { ExternalLink } from "lucide-react";
 import { SkillBadge } from "@/components/features/skill-icons";
 import { GSAPScrubText } from "@/components/features/gsap-scrub-text";
@@ -13,16 +14,18 @@ export function ProjectCard({
   index: number;
 }) {
   return (
-    <article
-      className="group relative rounded-2xl bg-neutral-100/40 dark:bg-neutral-900/40 border border-neutral-200/80 dark:border-neutral-800/80 p-5 sm:p-6 transition-all duration-500 ease-out hover:-translate-y-1.5 hover:border-neutral-400 dark:hover:border-neutral-600 hover:shadow-xl dark:hover:shadow-black/30 group-hover:scale-[1.01]"
+    <Card
+      as="article"
+      variant="project"
+      className="group relative"
       style={{ "--reveal-index": index } as React.CSSProperties}
     >
-      <div className="flex items-start justify-between gap-4 mb-2">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
         <div className="flex flex-wrap items-center gap-2.5 min-w-0">
-          <h3 className="text-base sm:text-lg font-bold text-foreground group-hover:text-primary transition-colors">
+          <h3 className="type-card-title">
             {project.name}
           </h3>
-          <span className="text-xs text-muted-foreground font-mono px-2 py-0.5 rounded-md bg-neutral-200/50 dark:bg-neutral-800/50 border border-neutral-300/50 dark:border-neutral-700/50 shrink-0">
+          <span className="type-meta px-2 py-0.5 rounded-md bg-muted border border-border">
             {project.role}
           </span>
         </div>
@@ -33,7 +36,7 @@ export function ProjectCard({
               href={project.githubUrl}
               target="_blank"
               rel="noreferrer"
-              className="p-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 text-muted-foreground hover:text-foreground hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 transition-all"
+              className="icon-button"
               aria-label={`${project.name} GitHub`}
             >
               <svg
@@ -55,7 +58,7 @@ export function ProjectCard({
               href={project.liveUrl}
               target="_blank"
               rel="noreferrer"
-              className="p-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 text-muted-foreground hover:text-foreground hover:bg-neutral-200/50 dark:hover:bg-neutral-800/50 transition-all"
+              className="icon-button"
               aria-label={`${project.name} live demo`}
             >
               <ExternalLink size={15} />
@@ -65,14 +68,14 @@ export function ProjectCard({
       </div>
 
       {project.keyResult && (
-        <p className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold mb-3 flex items-center gap-1.5">
-          <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        <p className="text-xs font-mono text-success font-semibold mb-3 flex items-center gap-1.5">
+          <span className="size-1.5 rounded-full bg-success animate-pulse" />
           {project.keyResult}
         </p>
       )}
 
       {/* GSAP Word-by-Word Scroll Opacity Scrubbing */}
-      <GSAPScrubText className="text-xs sm:text-sm leading-relaxed text-neutral-700 dark:text-neutral-300 mb-4">
+      <GSAPScrubText className="type-body mb-4">
         {project.description}
       </GSAPScrubText>
 
@@ -80,10 +83,10 @@ export function ProjectCard({
         {project.tech.map((tech) => (
           <SkillBadge key={tech} name={tech} />
         ))}
-        <span className="text-[10px] font-mono text-muted uppercase tracking-wider ml-auto">
+        <span className="type-meta uppercase tracking-wider ml-auto">
           {project.type}
         </span>
       </div>
-    </article>
+    </Card>
   );
 }

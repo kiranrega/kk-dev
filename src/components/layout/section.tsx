@@ -30,7 +30,7 @@ export function Section({
 
       <header className="screen-line-after px-4 py-3 sm:px-5">
         <div className="flex flex-wrap items-center gap-3">
-          <h2 className="section-label font-pixel text-xl font-semibold leading-none sm:text-3xl">
+          <h2 className="section-label">
             {title}
           </h2>
           {typeof count === "number" ? (
@@ -40,14 +40,14 @@ export function Section({
           ) : null}
         </div>
         {subtitle ? (
-          <p className="mt-2 font-mono text-[11px] uppercase tracking-widest text-muted-foreground">
+          <p className="type-meta mt-2 uppercase tracking-widest">
             {subtitle}
           </p>
         ) : null}
       </header>
 
       {pinned && description ? (
-        <p className="px-4 pt-4 font-sans text-sm leading-relaxed text-muted-foreground sm:px-5">
+        <p className="type-body px-4 pt-4 sm:px-5">
           {description}
         </p>
       ) : null}

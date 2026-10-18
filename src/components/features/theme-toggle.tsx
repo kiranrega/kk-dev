@@ -78,16 +78,16 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { Draggable } from 'gsap/Draggable'
+import { Moon, Sun } from 'lucide-react'
+import { useTheme } from '@/hooks/use-theme'
 gsap.registerPlugin(Draggable)
 
 export default function ThemeToggle() {
   const formRef = useRef<HTMLFormElement | null>(null)
+  const draggedRef = useRef(false)
+  const { isDark, toggleTheme } = useTheme()
 
   useEffect(() => {
-    const saved = localStorage.getItem('theme') || 'dark'
-    document.documentElement.classList.toggle('dark', saved === 'dark')
-    document.documentElement.style.colorScheme = saved
-
     const FORM = formRef.current
     if (!FORM) return
 
@@ -95,7 +95,6 @@ export default function ThemeToggle() {
     const HIT    = FORM.querySelector<HTMLElement>('.grab-handle')
     const DUMMY_CORD = FORM.querySelector<SVGLineElement>('.toggle-scene__dummy-cord line')
     if (!TOGGLE || !HIT || !DUMMY_CORD) return
-    TOGGLE.setAttribute('aria-pressed', String(saved === 'light'))
 
     let startX = 0, startY = 0
     const PROXY = document.createElement('div')
@@ -104,35 +103,18 @@ export default function ThemeToggle() {
     const RESET = () => gsap.set(PROXY, { x: ENDX, y: ENDY })
     RESET()
 
-    let skipNextSubmitSound = false
     const playToggleSound = () => {
-      // Play during the user gesture; the transition callback may run after
-      // the browser's user-activation window has expired.
       const audio = new Audio('/sound/click-003.mp3')
       audio.volume = 0.7
       void audio.play().catch(() => {})
     }
 
-    const toggle = () => {
-      const isLight = TOGGLE.getAttribute('aria-pressed') === 'false'
-      TOGGLE.setAttribute('aria-pressed', String(isLight))
-      const next = isLight ? 'light' : 'dark'
-      document.documentElement.classList.toggle('dark', next === 'dark')
-      document.documentElement.style.colorScheme = next
-      localStorage.setItem('theme', next)
-    }
-
     const onSubmit = (e: Event) => {
       e.preventDefault()
-      if (skipNextSubmitSound) {
-        skipNextSubmitSound = false
+      if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.startViewTransition(toggleTheme)
       } else {
-        playToggleSound()
-      }
-      if (document.startViewTransition) {
-        document.startViewTransition(toggle)
-      } else {
-        toggle()
+        toggleTheme()
       }
     }
     FORM.addEventListener('submit', onSubmit)
@@ -141,7 +123,10 @@ export default function ThemeToggle() {
       trigger: HIT,
       type: 'x,y',
       onPress(e: { x: number; y: number })   { startX = e.x; startY = e.y },
-      onDragStart()     { document.documentElement.style.cursor = 'grabbing' },
+      onDragStart() {
+        draggedRef.current = true
+        document.documentElement.style.cursor = 'grabbing'
+      },
       onDrag() {
         const ratio = 1 / ((FORM.offsetWidth * 0.65) / 134)
         gsap.set(DUMMY_CORD, {
@@ -156,12 +141,11 @@ export default function ThemeToggle() {
         const travelled = Math.hypot(Math.abs(e.x - startX), Math.abs(e.y - startY))
         const shouldToggle = travelled > 50
         if (shouldToggle) {
-          skipNextSubmitSound = true
           playToggleSound()
         }
         gsap.to(DUMMY_CORD, {
           attr: { x2: ENDX, y2: ENDY },
-          duration: 0.1,
+          duration: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.1,
           onComplete: () => { if (shouldToggle) FORM.requestSubmit(); RESET() },
         })
       },
@@ -171,18 +155,27 @@ export default function ThemeToggle() {
       FORM.removeEventListener('submit', onSubmit)
       draggable[0]?.kill()
     }
-  }, [])
+  }, [toggleTheme])
 
   return (
     <>
       <form ref={formRef} className="toggle-form">
         <button
           type="button"
-          aria-pressed="false"
+          aria-pressed={!isDark}
+          title={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
           className="toggle-btn"
-          onClick={() => formRef.current?.requestSubmit()}
+          onPointerDown={() => { draggedRef.current = false }}
+          onClick={(event) => {
+            // A drag release can also synthesize a click on the containing button.
+            if (event.detail > 0 && draggedRef.current) return
+            formRef.current?.requestSubmit()
+          }}
         >
-          <span className="sr-only">Toggle theme</span>
+          <span className="sr-only">Light theme</span>
+          <span className="toggle-compact-icon" aria-hidden="true">
+            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+          </span>
 
           {/* ── Bulb SVG ── */}
           <svg

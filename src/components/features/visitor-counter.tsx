@@ -18,7 +18,7 @@ export function VisitorCounter() {
   if (views === null) return null;
 
   return (
-    <span className="inline-flex items-center gap-1.5 text-xs text-muted font-mono">
+    <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground font-mono">
       <svg
         width="12"
         height="12"

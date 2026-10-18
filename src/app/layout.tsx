@@ -4,6 +4,8 @@ import { GeistMono } from "geist/font/mono";
 import { GeistPixelGrid, GeistPixelSquare } from "geist/font/pixel";
 import { Caveat } from "next/font/google";
 import { CloudflareAnalytics } from "@/components/features/cloudflare-analytics";
+import { ClickSound } from "@/components/features/click-sound";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
 const caveat = Caveat({
@@ -83,12 +85,13 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `document.documentElement.classList.toggle('dark', (localStorage.getItem('theme') || 'dark') === 'dark');`,
+            __html: THEME_INIT_SCRIPT,
           }}
         />
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <CloudflareAnalytics />
+        <ClickSound />
         {children}
       </body>
     </html>
