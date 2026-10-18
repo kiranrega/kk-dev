@@ -29,6 +29,8 @@ const SLEEP_VELOCITY = 26; // px/s
 const BALL_RESTITUTION = 0.9; // ball-ball bounce multiplier (<=1 for stable energy)
 const STEPS_PER_SECOND = 120;
 const FIXED_DT = 1 / STEPS_PER_SECOND;
+const FIXED_STEP_MS = FIXED_DT * 1000;
+const MAX_STEPS_PER_CALL = 8;
 
 let nextId = 1;
 
@@ -114,7 +116,7 @@ function resolveBallCollision(a: Ball, b: Ball) {
   const minDist = a.r + b.r;
   if (distSq >= minDist * minDist) return;
 
-  let dist = Math.sqrt(distSq);
+  const dist = Math.sqrt(distSq);
   let nx = 0;
   let ny = 0;
   if (dist === 0) {
@@ -142,7 +144,7 @@ function resolveBallCollision(a: Ball, b: Ball) {
   const relDot = relVx * nx + relVy * ny;
   if (relDot > 0) return; // already separating
 
-  const impulse = -relDot * BALL_RESTITUTION * 0.5;
+  const impulse = -relDot * (1 + BALL_RESTITUTION) * 0.5;
   a.vx -= impulse * nx;
   a.vy -= impulse * ny;
   b.vx += impulse * nx;
@@ -156,8 +158,9 @@ export function stepSimulation(
   height: number,
   accumulatedMs: number
 ): number {
-  let acc = accumulatedMs;
-  while (acc >= FIXED_DT * 1000) {
+  let acc = Math.max(0, accumulatedMs);
+  let steps = 0;
+  while (acc >= FIXED_STEP_MS && steps < MAX_STEPS_PER_CALL) {
     for (const ball of balls) {
       if (ball.asleep) continue;
 
@@ -200,7 +203,11 @@ export function stepSimulation(
       }
     }
 
-    acc -= FIXED_DT * 1000;
+    acc -= FIXED_STEP_MS;
+    steps += 1;
   }
-  return acc;
+
+  // Drop excessive backlog after a suspended/backgrounded tab so one frame
+  // cannot spend seconds catching up on stale physics.
+  return steps === MAX_STEPS_PER_CALL ? Math.min(acc, FIXED_STEP_MS - Number.EPSILON) : acc;
 }
