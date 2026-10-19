@@ -59,7 +59,9 @@
   --line: color-mix(in oklab, var(--border) 64%, var(--background));
   --edge: var(--line);
   --pattern-foreground: color-mix(in oklab, var(--palette-gray-400) 60%, transparent);
-  --font-family-sans: var(--font-geist-sans), system-ui, sans-serif;
+  /* Previous body role: var(--font-geist-sans), system-ui, sans-serif. */
+  --font-family-sans: var(--font-recursive), system-ui, sans-serif;
+  --font-family-mono: var(--font-recursive), var(--font-geist-mono), monospace;
   --font-family-display: var(--font-geist-pixel-grid), var(--font-geist-mono), monospace;
   --font-family-pixel: var(--font-family-display);
   --cord: #555;
@@ -111,10 +113,10 @@
   --color-success: var(--success);
   --color-surface-hover: var(--surface-hover);
   --color-border-hover: var(--border-hover);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-family-sans);
   --font-display: var(--font-geist-pixel-grid);
   --font-pixel: var(--font-geist-pixel-grid), var(--font-geist-mono), monospace;
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-family-mono);
   --font-serif: var(--font-ibm-plex-serif), "IBM Plex Serif", serif;
 }
 
@@ -139,7 +141,7 @@
 }
 
 .type-meta {
-  font-family: var(--font-geist-mono), monospace;
+  font-family: var(--font-family-mono);
   font-size: var(--font-size-meta);
   line-height: 1.5;
   color: var(--muted-foreground);

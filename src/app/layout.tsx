@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
+// Previous body font: import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { GeistPixelGrid, GeistPixelSquare } from "geist/font/pixel";
-import { Caveat } from "next/font/google";
+import { Caveat, Recursive } from "next/font/google";
 import { CloudflareAnalytics } from "@/components/features/cloudflare-analytics";
 import { ClickSound } from "@/components/features/click-sound";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
+
+const recursive = Recursive({
+  variable: "--font-recursive",
+  subsets: ["latin"],
+  axes: ["CASL", "MONO"],
+  display: "swap",
+});
 
 const caveat = Caveat({
   variable: "--font-caveat",
@@ -80,7 +87,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelGrid.variable} ${GeistPixelSquare.variable} ${caveat.variable} h-full antialiased`}
+      className={`${recursive.variable} ${GeistMono.variable} ${GeistPixelGrid.variable} ${GeistPixelSquare.variable} ${caveat.variable} h-full antialiased`}
     >
       <head>
         <script

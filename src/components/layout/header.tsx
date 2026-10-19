@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { navItems } from "@/config/site";
+import { BallPit } from "@/components/features/ball-pit";
 import { CornerPluses } from "./plus";
 
 const searchItems = navItems.map((item) => ({
@@ -62,6 +63,7 @@ export function Header() {
         </a>
 
         <div className="ml-auto flex items-center gap-5">
+          <BallPit />
           <button
             type="button"
             onClick={openSearch}
