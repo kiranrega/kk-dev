@@ -45,8 +45,8 @@ export function HeroSection() {
         <div className="w-[35%] shrink-0 p-2 sm:w-auto sm:p-5">
           <div className="relative aspect-square h-auto w-full sm:size-32">
             <Mascot
-              directions="/mascots/kiran-directions.webp"
-              reactions="/mascots/kiran-reactions.webp"
+              directions="/mascots/kiran-directions-optimized.webp"
+              reactions="/mascots/kiran-reactions-optimized.webp"
               size={128}
               label="Kiran mascot"
               className="!h-full !w-full overflow-hidden rounded-[12px] border border-border bg-background p-[4px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"

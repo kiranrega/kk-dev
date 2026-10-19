@@ -91,9 +91,11 @@ export function SkillsFilter() {
     if (!filterBar || !indicator || !activeButton) return;
 
     const moveIndicator = () => {
-      indicator.style.width = `${activeButton.offsetWidth}px`;
-      indicator.style.height = `${activeButton.offsetHeight}px`;
-      indicator.style.transform = `translate3d(${activeButton.offsetLeft}px, ${activeButton.offsetTop}px, 0)`;
+      // Read the layout once before changing styles to avoid repeated reflows.
+      const { offsetWidth, offsetHeight, offsetLeft, offsetTop } = activeButton;
+      indicator.style.width = `${offsetWidth}px`;
+      indicator.style.height = `${offsetHeight}px`;
+      indicator.style.transform = `translate3d(${offsetLeft}px, ${offsetTop}px, 0)`;
       indicator.style.opacity = "1";
     };
 

@@ -43,7 +43,8 @@ export function HeroBanner() {
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let animationFrame = 0;
-    let running = !reducedMotion.matches;
+    let running = false;
+    let inView = false;
     let width = 0;
     let height = 0;
     let devicePixelRatio = 1;
@@ -95,22 +96,29 @@ export function HeroBanner() {
       resetPetal(petal, true);
       petals.push(petal);
     }
-    render();
-
-    const handleMotionPreference = () => {
-      running = !reducedMotion.matches;
+    const updatePlayback = () => {
+      running = inView && !document.hidden && !reducedMotion.matches;
       cancelAnimationFrame(animationFrame);
-      if (running) render();
+      if (running) animationFrame = requestAnimationFrame(render);
+      else context.clearRect(0, 0, width, height);
     };
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      updatePlayback();
+    });
+    visibilityObserver.observe(container);
     const observer = new ResizeObserver(resize);
     observer.observe(container);
-    reducedMotion.addEventListener("change", handleMotionPreference);
+    reducedMotion.addEventListener("change", updatePlayback);
+    document.addEventListener("visibilitychange", updatePlayback);
 
     return () => {
       running = false;
       cancelAnimationFrame(animationFrame);
       observer.disconnect();
-      reducedMotion.removeEventListener("change", handleMotionPreference);
+      visibilityObserver.disconnect();
+      reducedMotion.removeEventListener("change", updatePlayback);
+      document.removeEventListener("visibilitychange", updatePlayback);
     };
   }, []);
 
@@ -123,8 +131,10 @@ export function HeroBanner() {
         src="/assets/cover.png"
         alt="Illustration of a quiet forest waterfall"
         fill
-        priority
-        sizes="(max-width: 768px) 100vw, 768px"
+        loading="eager"
+        fetchPriority="high"
+        quality={60}
+        sizes="(max-width: 639px) calc(100vw - 18px), (max-width: 767px) calc(100vw - 34px), 734px"
         className="object-cover"
       />
       <canvas

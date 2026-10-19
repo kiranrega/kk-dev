@@ -1,12 +1,30 @@
 import type { Metadata } from "next";
 // Previous body font: import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import { GeistPixelGrid, GeistPixelSquare } from "geist/font/pixel";
+import localFont from "next/font/local";
 import { Caveat, Recursive } from "next/font/google";
 import { CloudflareAnalytics } from "@/components/features/cloudflare-analytics";
 import { ClickSound } from "@/components/features/click-sound";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import "./globals.css";
+
+// Import only the faces used by the page. The geist/font/pixel barrel creates
+// preload links for every pixel variant, including the unused ones.
+const geistPixelGrid = localFont({
+  src: "../../node_modules/geist/dist/fonts/geist-pixel/GeistPixel-Grid.woff2",
+  variable: "--font-geist-pixel-grid",
+  weight: "500",
+  display: "swap",
+  adjustFontFallback: false,
+});
+
+const geistMono = localFont({
+  src: "../../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
+});
 
 const recursive = Recursive({
   variable: "--font-recursive",
@@ -20,6 +38,7 @@ const caveat = Caveat({
   subsets: ["latin"],
   weight: ["600", "700"],
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -87,7 +106,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${recursive.variable} ${GeistMono.variable} ${GeistPixelGrid.variable} ${GeistPixelSquare.variable} ${caveat.variable} h-full antialiased`}
+      className={`${recursive.variable} ${geistMono.variable} ${geistPixelGrid.variable} ${caveat.variable} h-full antialiased`}
     >
       <head>
         <script
